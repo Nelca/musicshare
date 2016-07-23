@@ -31,7 +31,7 @@ class FavoriteController extends Controller
     {
         $this->validate($request, [
 	    'name' => 'required|max:255',
-	    'url' => 'url',
+	    'url' => 'required|url',
 	]);
 
 	$request->user()->favorites()->create([
