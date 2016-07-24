@@ -31,3 +31,9 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 Route::get('/favorites', 'FavoriteController@index');
 Route::post('/favorite', 'FavoriteController@store');
 Route::delete('/favorite/{favorite}', 'FavoriteController@destroy');
+
+Route::get('/playlists', 'PlaylistController@index');
+Route::post('/playlist', 'PlaylistController@store');
+Route::delete('/playlist/{playlist}', 'PlaylistController@destroy');
+
+
