@@ -32,7 +32,7 @@ class PlaylistController extends Controller
 	    'name' => 'required|max:255',
 	]);
 
-	$reques->user()->playlists()->create([
+	$request->user()->playlists()->create([
 	    'name' => $request->name,
 	]);
 

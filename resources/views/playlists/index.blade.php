@@ -24,15 +24,6 @@
                                 <input type="text" name="name" id="playlist-name" class="form-control" value="{{ old('playlist') }}">
                             </div>
                         </div>
-
-                        <div class="form-group">
-                            <label for="favorie-url" class="col-sm-3 control-label">URL</label>
-
-                            <div class="col-sm-6">
-                                <input type="text" name="url" id="playlist-url" class="form-control" value="{{ old('playlist') }}">
-                            </div>
-                        </div>
-
                         <!-- Add Playlist Button -->
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-sm-6">
@@ -56,15 +47,12 @@
                         <table class="table table-striped playlist-table">
                             <thead>
                                 <th>Playlist</th>
-                                <th>URL</th>
                                 <th>&nbsp;</th>
                             </thead>
                             <tbody>
                                 @foreach ($playlists as $playlist)
                                     <tr>
                                         <td class="table-text"><div>{{ $playlist->name }}</div></td>
-                                        <td class="table-text"><div>{{ $playlist->url }}</div></td>
-
                                         <!-- Playlist Delete Button -->
                                         <td>
                                             <form action="{{url('playlist/' . $playlist->id)}}" method="POST">
