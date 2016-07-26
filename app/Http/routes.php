@@ -28,12 +28,17 @@ Route::post('/register', 'Auth\AuthController@postRegister');
 Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 
-Route::get('/favorites', 'FavoriteController@index');
-Route::post('/favorite', 'FavoriteController@store');
-Route::delete('/favorite/{favorite}', 'FavoriteController@destroy');
+Route::group(['middleware' => 'auth'], function(){
+    Route::get('/favorites', 'FavoriteController@index');
+    Route::post('/favorite', 'FavoriteController@store');
+    Route::delete('/favorite/{favorite}', 'FavoriteController@destroy');
 
-Route::get('/playlists', 'PlaylistController@index');
-Route::post('/playlist', 'PlaylistController@store');
-Route::delete('/playlist/{playlist}', 'PlaylistController@destroy');
+    Route::get('/playlists', 'PlaylistController@index');
+    Route::post('/playlist', 'PlaylistController@store');
+    Route::delete('/playlist/{playlist}', 'PlaylistController@destroy');
 
+    Route::get('/songs', 'SongController@index');
+    Route::post('/song', 'SongController@store');
+    Route::delete('/song/{song}', 'SongController@destroy');
+});
 
