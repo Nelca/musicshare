@@ -48,6 +48,7 @@
                             <thead>
                                 <th>Playlist</th>
                                 <th>&nbsp;</th>
+                                <th>&nbsp;</th>
                             </thead>
                             <tbody>
                                 @foreach ($playlists as $playlist)
@@ -64,6 +65,17 @@
                                                 </button>
                                             </form>
                                         </td>
+					 <td>
+                                            <form action="{{url('playlist/' . $playlist->id . '/songs')}}" method="POST">
+                                                {{ csrf_field() }}
+                                                {{ method_field('GET') }}
+
+                                                <button type="submit" id="view-playlist-songs-{{ $playlist->id }}" class="btn">
+                                                    <i class="fa fa-btn"></i>View Songs
+                                                </button>
+                                            </form>
+                                        </td>
+
                                     </tr>
                                 @endforeach
                             </tbody>

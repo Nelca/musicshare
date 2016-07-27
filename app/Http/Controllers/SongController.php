@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Song;
+use App\Playlist;
 use App\Repositories\SongRepository;
 
 class SongController extends Controller
@@ -18,20 +19,20 @@ class SongController extends Controller
 	$this->songs = $songs;
     }
 
-    public function index(Request $request)
+    public function index(Request $request, $playlist)
     {
         return view('songs.index', [
-	    'songs' => $this->songs->forPlaylist($request->playlist()),
+	    'songs' => $this->songs->forPlaylist($playlist),
 	]);
     }
 
-    public function sotre(Request $request)
+    public function store(Request $request)
     {
         $this->validate($request, [
 	    'name' => 'required|max:255',
 	]);
 
-	$request->playlist()->songs()->create([
+	$request->playlist->songs()->create([
 	    'name' => $request->name,
 	]);
 

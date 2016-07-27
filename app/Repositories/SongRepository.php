@@ -13,9 +13,9 @@ class SongRepository
      *
      * @return Collection
      */
-    public function forPlaylist(Playlist $playlist)
+    public function forPlaylist($playlist)
     {
-        return Song::where('playlist_id', $playlist->id)
+        return Song::where('playlist_id', $playlist)
                     ->orderBy('created_at', 'asc')
                     ->get();
     }
