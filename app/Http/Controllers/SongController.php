@@ -23,6 +23,7 @@ class SongController extends Controller
     {
         return view('songs.index', [
 	    'songs' => $this->songs->forPlaylist($playlist),
+	    'playlist' => $playlist,
 	]);
     }
 
@@ -32,10 +33,22 @@ class SongController extends Controller
 	    'name' => 'required|max:255',
 	]);
 
-	$request->playlist->songs()->create([
-	    'name' => $request->name,
-	]);
+	$playlist = $request->playlist;
 
-	return redirect('/songs');
+	$song = new Song;
+	$song->name = $request->name;
+	$song->playlist_id = $playlist;
+	$song->save();
+
+	return redirect('/playlist/'. $playlist . '/songs');
+    }
+
+    public function destroy(Request $request, Song $song)
+    {
+        $this->authorize('destroy', $song);
+
+	$song->delete();
+
+	return redirect('/playlist/'. $request->playlist . '/songs');
     }
 }

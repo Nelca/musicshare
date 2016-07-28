@@ -32,6 +32,7 @@
                                 </button>
                             </div>
                         </div>
+			<input type="hidden" name="playlist" value="{{ $playlist }}">
                     </form>
                 </div>
             </div>
@@ -62,6 +63,7 @@
                                                 <button type="submit" id="delete-song-{{ $song->id }}" class="btn btn-danger">
                                                     <i class="fa fa-btn fa-trash"></i>Delete
                                                 </button>
+			                        <input type="hidden" name="playlist" value="{{ $playlist }}">
                                             </form>
                                         </td>
                                     </tr>

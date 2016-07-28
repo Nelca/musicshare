@@ -6,6 +6,9 @@ use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use App\Favorite;
 use App\Policies\FavoritePolicy;
+use App\Song;
+use App\Policies\SongPolicy;
+
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -16,6 +19,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         Favorite::class => FavoritePolicy::class,
+        Song::class => SongPolicy::class,
     ];
 
     /**
