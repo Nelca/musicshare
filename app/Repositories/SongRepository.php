@@ -2,14 +2,12 @@
 
 namespace App\Repositories;
 
-use App\User;
 use App\Playlist;
 use App\Song;
 
 class SongRepository
 {
     /**
-     * Get all of the tasks for a given user.
      *
      * @return Collection
      */

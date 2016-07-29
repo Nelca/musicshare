@@ -38,7 +38,13 @@
         <div class="container">
             <div class="content">
                 <div class="title">Laravel 5</div>
-		<a href="/favorites">view my favorites</a>
+		<div>
+                    <a href="/favorites">view my favorites</a>
+		</div>
+		<div>
+		    <a href="/playlists">view playlists</a>
+		</div>
+		<div>
             </div>
         </div>
     </body>

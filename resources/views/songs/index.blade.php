@@ -19,9 +19,16 @@
                         <!-- Song Name -->
                         <div class="form-group">
                             <label for="favorie-name" class="col-sm-3 control-label">Song</label>
-
                             <div class="col-sm-6">
-                                <input type="text" name="name" id="song-name" class="form-control" value="{{ old('song') }}">
+                                <input type="text" name="name" id="song-name" class="form-control" value="{{ old('name') }}">
+                            </div>
+                        </div>
+
+                        <!-- Song URL -->
+                        <div class="form-group">
+                            <label for="favorie-name" class="col-sm-3 control-label">URL</label>
+                            <div class="col-sm-6">
+                                <input type="text" name="url" id="song-url" class="form-control" value="{{ old('url') }}">
                             </div>
                         </div>
                         <!-- Add Song Button -->
@@ -48,12 +55,14 @@
                         <table class="table table-striped song-table">
                             <thead>
                                 <th>Song</th>
+                                <th>URL</th>
                                 <th>&nbsp;</th>
                             </thead>
                             <tbody>
                                 @foreach ($songs as $song)
                                     <tr>
                                         <td class="table-text"><div>{{ $song->name }}</div></td>
+                                        <td class="table-text"><div>{{ $song->url }}</div></td>
                                         <!-- Song Delete Button -->
                                         <td>
                                             <form action="{{url('song/' . $song->id)}}" method="POST">

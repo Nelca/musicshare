@@ -31,13 +31,16 @@ class SongController extends Controller
     {
         $this->validate($request, [
 	    'name' => 'required|max:255',
+	    'url' => 'required|url',
+
 	]);
 
 	$playlist = $request->playlist;
 
 	$song = new Song;
-	$song->name = $request->name;
 	$song->playlist_id = $playlist;
+	$song->name = $request->name;
+	$song->url = $request->url;
 	$song->save();
 
 	return redirect('/playlist/'. $playlist . '/songs');
@@ -45,10 +48,7 @@ class SongController extends Controller
 
     public function destroy(Request $request, Song $song)
     {
-        $this->authorize('destroy', $song);
-
 	$song->delete();
-
 	return redirect('/playlist/'. $request->playlist . '/songs');
     }
 }
