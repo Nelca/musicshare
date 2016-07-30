@@ -51,4 +51,11 @@ class SongController extends Controller
 	$song->delete();
 	return redirect('/playlist/'. $request->playlist . '/songs');
     }
+
+    public function like(Request $request, Song $song)
+    {
+        $this->songs->updateLike($song, $request->like);
+
+	return redirect('/playlist/'. $request->playlist . '/songs');
+    }
 }

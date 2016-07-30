@@ -54,6 +54,7 @@
                     <div class="panel-body">
                         <table class="table table-striped song-table">
                             <thead>
+			        <th>サムネイル</th>
                                 <th>Song</th>
                                 <th>URL</th>
                                 <th>&nbsp;</th>
@@ -61,8 +62,12 @@
                             <tbody>
                                 @foreach ($songs as $song)
                                     <tr>
+				        <td></td>
                                         <td class="table-text"><div>{{ $song->name }}</div></td>
-                                        <td class="table-text"><div>{{ $song->url }}</div></td>
+                                        <td class="table-text">
+					    <div><a href="{{ $song->url }}" target="_blank">link</a></div>
+					</td>
+
                                         <!-- Song Delete Button -->
                                         <td>
                                             <form action="{{url('song/' . $song->id)}}" method="POST">
