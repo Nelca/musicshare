@@ -62,7 +62,9 @@
                             <tbody>
                                 @foreach ($songs as $song)
                                     <tr>
-				        <td></td>
+				        <td>
+					    <img src="http://i.ytimg.com/vi/{{ $song->song_key }}/default.jpg">
+					</td>
                                         <td class="table-text"><div>{{ $song->name }}</div></td>
                                         <td class="table-text">
 					    <div><a href="{{ $song->url }}" target="_blank">link</a></div>

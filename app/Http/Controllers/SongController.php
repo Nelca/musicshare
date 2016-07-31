@@ -36,11 +36,18 @@ class SongController extends Controller
 	]);
 
 	$playlist = $request->playlist;
+	$url = $request->url;
+
+	// urlからkey取得
+	$url_query_str = parse_url($url, PHP_URL_QUERY);
+	parse_str($url_query_str, $url_querys);
+	$song_key = $url_querys['v'];
 
 	$song = new Song;
 	$song->playlist_id = $playlist;
 	$song->name = $request->name;
-	$song->url = $request->url;
+	$song->url = $url;
+	$song->song_key = $song_key;
 	$song->save();
 
 	return redirect('/playlist/'. $playlist . '/songs');
