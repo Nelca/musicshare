@@ -40,5 +40,6 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/playlist/{playist}/songs', 'SongController@index');
     Route::post('/song', 'SongController@store');
     Route::delete('/song/{song}', 'SongController@destroy');
+    Route::put('/song/{song}/like', 'SongController@like');
 });
 

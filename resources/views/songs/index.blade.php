@@ -70,6 +70,19 @@
 					    <div><a href="{{ $song->url }}" target="_blank">link</a></div>
 					</td>
 
+                                        <!-- Song Like Button -->
+                                        <td>
+                                            <form action="{{url('song/' . $song->id) . '/like'}}" method="POST">
+                                                {{ csrf_field() }}
+                                                {{ method_field('PUT') }}
+
+                                                <button type="submit" id="like-song-{{ $song->id }}" class="btn">
+                                                    <i class="fa fa-btn fa-trash"></i>Like
+                                                </button>
+			                        <input type="hidden" name="playlist" value="{{ $playlist }}">
+                                            </form>
+                                        </td>
+
                                         <!-- Song Delete Button -->
                                         <td>
                                             <form action="{{url('song/' . $song->id)}}" method="POST">

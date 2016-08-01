@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Song;
 use App\Playlist;
+use App\Evaluate;
 use App\Repositories\SongRepository;
 
 class SongController extends Controller
@@ -35,22 +36,22 @@ class SongController extends Controller
 
 	]);
 
-	$playlist = $request->playlist;
+	$playlist_id = $request->playlist;
 	$url = $request->url;
 
 	// urlからkey取得
 	$url_query_str = parse_url($url, PHP_URL_QUERY);
 	parse_str($url_query_str, $url_querys);
-	$song_key = $url_querys['v'];
 
 	$song = new Song;
-	$song->playlist_id = $playlist;
 	$song->name = $request->name;
 	$song->url = $url;
-	$song->song_key = $song_key;
-	$song->save();
+	$song->song_key = $url_querys['v'];
 
-	return redirect('/playlist/'. $playlist . '/songs');
+	$playlist = Playlist::find($playlist_id);
+	$playlist->songs()->save($song);
+
+	return redirect('/playlist/'. $playlist_id . '/songs');
     }
 
     public function destroy(Request $request, Song $song)
@@ -61,8 +62,10 @@ class SongController extends Controller
 
     public function like(Request $request, Song $song)
     {
-        $this->songs->updateLike($song, $request->like);
-
+        $like = new Evaluate;
+	$like->user_id = $request->user()->id;
+	$like->evaluation = 1;
+        $song->evaluates()->save($like);
 	return redirect('/playlist/'. $request->playlist . '/songs');
     }
 }

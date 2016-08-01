@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Database\Eloquent\Relations\Relation;
+use App\Playlist;
+use App\Song;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,6 +17,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+	Relation::morphMap([
+	    Playlist::class,
+	    Song::class,
+	]);
     }
 
     /**

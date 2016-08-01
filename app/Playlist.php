@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\User;
 use App\Song;
+use App\Evaluate;
 
 class Playlist extends Model
 {
@@ -19,5 +20,10 @@ class Playlist extends Model
     public function songs()
     {
         return $this->hasMany(Song::class);
+    }
+
+    public function evaluates()
+    {
+        return $this->morphMany('Evaluate', 'evaluatable');
     }
 }
