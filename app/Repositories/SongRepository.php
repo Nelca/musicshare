@@ -13,7 +13,8 @@ class SongRepository
      */
     public function forPlaylist($playlist)
     {
-        return Song::where('playlist_id', $playlist)
+        return Song::with('evaluates')
+	            ->where('playlist_id', $playlist)
                     ->orderBy('created_at', 'asc')
                     ->get();
     }

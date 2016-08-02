@@ -48,7 +48,7 @@
             @if (count($songs) > 0)
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Current Songs
+                        Songs
                     </div>
 
                     <div class="panel-body">
@@ -57,6 +57,8 @@
 			        <th>サムネイル</th>
                                 <th>Song</th>
                                 <th>URL</th>
+                                <th>&nbsp;</th>
+                                <th style="width: 80px;">&nbsp;</th>
                                 <th>&nbsp;</th>
                             </thead>
                             <tbody>
@@ -77,10 +79,13 @@
                                                 {{ method_field('PUT') }}
 
                                                 <button type="submit" id="like-song-{{ $song->id }}" class="btn">
-                                                    <i class="fa fa-btn fa-trash"></i>Like
+                                                    Like
                                                 </button>
 			                        <input type="hidden" name="playlist" value="{{ $playlist }}">
                                             </form>
+                                        </td>
+                                        <td class="table-text">
+					   <div>{{ count($song->evaluates)}} Like!!</div>
                                         </td>
 
                                         <!-- Song Delete Button -->
