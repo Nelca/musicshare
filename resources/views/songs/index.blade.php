@@ -74,15 +74,18 @@
 
                                         <!-- Song Like Button -->
                                         <td>
-                                            <form action="{{url('song/' . $song->id) . '/like'}}" method="POST">
-                                                {{ csrf_field() }}
-                                                {{ method_field('PUT') }}
-
-                                                <button type="submit" id="like-song-{{ $song->id }}" class="btn">
-                                                    Like
-                                                </button>
-			                        <input type="hidden" name="playlist" value="{{ $playlist }}">
-                                            </form>
+					    @can('like', $song)
+                                                <form action="{{url('song/' . $song->id) . '/like'}}" method="POST">
+                                                    {{ csrf_field() }}
+                                                    {{ method_field('PUT') }}
+                                                    <button type="submit" id="like-song-{{ $song->id }}" class="btn">
+                                                        Like
+                                                    </button>
+			                            <input type="hidden" name="playlist" value="{{ $playlist }}">
+                                                </form>
+					    @else
+					        <div>Liked</div>
+					    @endcan
                                         </td>
                                         <td class="table-text">
 					   <div>{{ count($song->evaluates)}} Like!!</div>
