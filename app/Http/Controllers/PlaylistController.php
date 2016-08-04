@@ -22,6 +22,14 @@ class PlaylistController extends Controller
     public function index(Request $request)
     {
         return view('playlists.index', [
+	    'playlists' => $this->playlists->all($request->user()),
+	]);
+    }
+
+
+    public function myPlaylists(Request $request)
+    {
+        return view('playlists.index', [
 	    'playlists' => $this->playlists->forUser($request->user()),
 	]);
     }
@@ -39,3 +47,4 @@ class PlaylistController extends Controller
 	return redirect('/playlists');
     }
 }
+

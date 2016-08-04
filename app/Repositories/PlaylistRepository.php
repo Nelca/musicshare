@@ -8,7 +8,19 @@ use App\Playlist;
 class PlaylistRepository
 {
     /**
-     * Get all of the tasks for a given user.
+     * Get all of the playlists.
+     *
+     * @param  User  $user
+     * @return Collection
+     */
+    public function all(User $user)
+    {
+        return Playlist::orderBy('created_at', 'asc')
+                    ->get();
+    }
+
+    /**
+     * Get all of the playlists for a given user.
      *
      * @param  User  $user
      * @return Collection

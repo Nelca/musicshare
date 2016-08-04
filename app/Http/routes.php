@@ -34,6 +34,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::delete('/favorite/{favorite}', 'FavoriteController@destroy');
 
     Route::get('/playlists', 'PlaylistController@index');
+    Route::get('/my-playlists', 'PlaylistController@myPlaylists');
     Route::post('/playlist', 'PlaylistController@store');
     Route::delete('/playlist/{playlist}', 'PlaylistController@destroy');
 
