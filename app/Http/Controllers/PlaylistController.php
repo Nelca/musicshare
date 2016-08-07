@@ -46,5 +46,12 @@ class PlaylistController extends Controller
 
 	return redirect('/playlists');
     }
+
+    public function destroy(Request $request, Playlist $playlist)
+    {
+	$playlist->delete();
+
+	return redirect('/playlists');
+    }
 }
 
