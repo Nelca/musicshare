@@ -16,7 +16,7 @@ class PlaylistRepository
     public function all(User $user)
     {
         return Playlist::orderBy('created_at', 'asc')
-                    ->get();
+                    ->paginate(5);
     }
 
     /**
@@ -29,6 +29,6 @@ class PlaylistRepository
     {
         return Playlist::where('user_id', $user->id)
                     ->orderBy('created_at', 'asc')
-                    ->get();
+                    ->paginate(5);
     }
 }

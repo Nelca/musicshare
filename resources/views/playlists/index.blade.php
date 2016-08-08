@@ -42,6 +42,7 @@
                     <div class="panel-heading">
                         Current Playlists
                     </div>
+		    {!! $playlists->render() !!}
 
                     <div class="panel-body">
                         <table class="table table-striped playlist-table">
@@ -81,6 +82,7 @@
                             </tbody>
                         </table>
                     </div>
+		    {!! $playlists->render() !!}
                 </div>
             @endif
         </div>
