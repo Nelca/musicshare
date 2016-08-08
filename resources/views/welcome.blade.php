@@ -32,20 +32,25 @@
             .title {
                 font-size: 96px;
             }
+	    .menu {
+	        font-size: 30px;
+		font-weight: bold;
+		margin: 10px;
+	    }
         </style>
     </head>
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">Laravel 5</div>
-			<div>
-			    <a href="/playlists">view playlists</a>
+                <div class="title">MusicShare</div>
+			<div class="menu">
+			    <a href="/playlists">playlists</a>
 			</div>
-			<div>
-			    <a href="/my-playlists">view my playlists</a>
+			<div class="menu">
+			    <a href="/my-playlists">my lists</a>
 			</div>
-			<div>
-                    		<a href="/favorites">view my favorites</a>
+			<div class="menu">
+                    		<a href="/favorites">favorites</a>
 			</div>
 		<div>
             </div>
