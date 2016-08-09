@@ -7,6 +7,7 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Socialite;
 
 class AuthController extends Controller
 {
@@ -68,5 +69,18 @@ class AuthController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    public function redirectToProvider()
+    {
+        //return Socialite::driver('github')->redirect();
+        return 'check';
+    }
+
+    public function handleProviderCallBack()
+    {
+        $user = Socialite::driver('github')->user();
+
+	return $user->getEmail();
     }
 }

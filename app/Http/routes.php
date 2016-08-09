@@ -44,3 +44,5 @@ Route::group(['middleware' => 'auth'], function(){
     Route::put('/song/{song}/like', 'SongController@like');
 });
 
+Route::get('auth/github', 'Auth\AuthController@redirectToProvider');
+Route::get('/github/callback', 'Auth\AuthController@handleProviderCallback');
