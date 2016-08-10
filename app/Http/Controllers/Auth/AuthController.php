@@ -73,8 +73,7 @@ class AuthController extends Controller
 
     public function redirectToProvider()
     {
-        //return Socialite::driver('github')->redirect();
-        return 'check';
+        return Socialite::driver('github')->redirect();
     }
 
     public function handleProviderCallBack()

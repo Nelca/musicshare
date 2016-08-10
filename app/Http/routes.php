@@ -46,3 +46,5 @@ Route::group(['middleware' => 'auth'], function(){
 
 Route::get('auth/github', 'Auth\AuthController@redirectToProvider');
 Route::get('/github/callback', 'Auth\AuthController@handleProviderCallback');
+Route::get('auth/twitter', 'TwitterController@twitterLogin');
+Route::get('/twitter/callback', 'TwitterController@twitterCallback');
