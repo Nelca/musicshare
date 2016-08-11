@@ -44,7 +44,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::put('/song/{song}/like', 'SongController@like');
 });
 
-Route::get('auth/github', 'Auth\AuthController@redirectToProvider');
-Route::get('/github/callback', 'Auth\AuthController@handleProviderCallback');
-Route::get('auth/twitter', 'TwitterController@twitterLogin');
-Route::get('/twitter/callback', 'TwitterController@twitterCallback');
+Route::get('/auth/github', 'Auth\SocialLoginController@githubLogin');
+Route::get('/github/callback', 'Auth\SocialLoginController@githubCallback');
+Route::get('/auth/twitter', 'Auth\SocialLoginController@twitterLogin');
+Route::get('/twitter/callback', 'Auth\SocialLoginController@twitterCallback');

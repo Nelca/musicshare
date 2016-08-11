@@ -70,16 +70,4 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
-
-    public function redirectToProvider()
-    {
-        return Socialite::driver('github')->redirect();
-    }
-
-    public function handleProviderCallBack()
-    {
-        $user = Socialite::driver('github')->user();
-
-	return $user->getEmail();
-    }
 }
