@@ -7,19 +7,15 @@
                 <div class="panel-heading">
                     New Playlist
                 </div>
-
                 <div class="panel-body">
                     <!-- Display Validation Errors -->
                     @include('common.errors')
-
                     <!-- New Task Form -->
                     <form action="{{ url('playlist') }}" method="POST" class="form-horizontal">
                         {{ csrf_field() }}
-
                         <!-- Playlist Name -->
                         <div class="form-group">
                             <label for="favorie-name" class="col-sm-3 control-label">Playlist</label>
-
                             <div class="col-sm-6">
                                 <input type="text" name="name" id="playlist-name" class="form-control" value="{{ old('playlist') }}">
                             </div>
@@ -43,47 +39,48 @@
                         Current Playlists
                     </div>
 		    {!! $playlists->render() !!}
-
                     <div class="panel-body">
                         <table class="table table-striped playlist-table">
                             <thead>
                                 <th>Playlist</th>
-                                <th>&nbsp;</th>
                                 <th>&nbsp;</th>
                             </thead>
                             <tbody>
                                 @foreach ($playlists as $playlist)
                                     <tr>
                                         <td class="table-text"><div>{{ $playlist->name }}</div></td>
-                                        <!-- Playlist Delete Button -->
+					<td>
+					    <span class="fa fa-user">{{ $playlist->user->name}}</span>
+					</td>
+                                        <!-- Playlist Buttons -->
                                         <td>
-                                            <form action="{{url('playlist/' . $playlist->id)}}" method="POST">
-                                                {{ csrf_field() }}
-                                                {{ method_field('DELETE') }}
-
-                                                <button type="submit" id="delete-playlist-{{ $playlist->id }}" class="btn btn-danger">
-                                                    <i class="fa fa-btn fa-trash"></i>Delete
-                                                </button>
-                                            </form>
+					    <div class="row">
+						    <div class="col-xs-12 col-md-6">
+							<form action="{{url('playlist/' . $playlist->id . '/songs')}}" method="POST">
+							    {{ csrf_field() }}
+							    {{ method_field('GET') }}
+							    <button type="submit" id="view-playlist-songs-{{ $playlist->id }}" class="btn btn-primary">
+								<i class="fa fa-btn fa-music"></i>View Songs
+							    </button>
+							</form>
+						    </div>
+						    <div class="col-xs-12 col-md-6">
+							<form action="{{url('playlist/' . $playlist->id)}}" method="POST">
+							    {{ csrf_field() }}
+							    {{ method_field('DELETE') }}
+							    <button type="submit" id="delete-playlist-{{ $playlist->id }}" class="btn btn-warning fa fa-btn fa-trash">
+							    </button>
+							</form>
+						    </div>
+					    </div>
                                         </td>
-					 <td>
-                                            <form action="{{url('playlist/' . $playlist->id . '/songs')}}" method="POST">
-                                                {{ csrf_field() }}
-                                                {{ method_field('GET') }}
-
-                                                <button type="submit" id="view-playlist-songs-{{ $playlist->id }}" class="btn">
-                                                    <i class="fa fa-btn"></i>View Songs
-                                                </button>
-                                            </form>
-                                        </td>
-
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
 		    {!! $playlists->render() !!}
-                </div>
+		</div>
             @endif
         </div>
     </div>
