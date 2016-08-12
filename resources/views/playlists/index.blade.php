@@ -50,7 +50,7 @@
                                     <tr>
                                         <td class="table-text"><div>{{ $playlist->name }}</div></td>
 					<td>
-					    <span class="fa fa-user">{{ $playlist->user->name}}</span>
+					    <a href="{{url('user/' . $playlist->user->id )}}"><span class="fa fa-user">{{ $playlist->user->name}}</span></a>
 					</td>
                                         <!-- Playlist Buttons -->
                                         <td>

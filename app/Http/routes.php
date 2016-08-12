@@ -42,6 +42,8 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('/song', 'SongController@store');
     Route::delete('/song/{song}', 'SongController@destroy');
     Route::put('/song/{song}/like', 'SongController@like');
+
+    Route::get('/user/{user}', 'UserController@index');
 });
 
 Route::get('/auth/github', 'Auth\SocialLoginController@githubLogin');

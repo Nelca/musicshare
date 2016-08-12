@@ -46,7 +46,11 @@ class SongController extends Controller
 	$song = new Song;
 	$song->name = $request->name;
 	$song->url = $url;
-	$song->song_key = $url_querys['v'];
+	$song_key = "";
+	if (isset($url_querys['v'])) {
+	    $song_key = $url_querys['v'];
+	}
+	$song->song_key =  $song_key;
 
 	$playlist = Playlist::find($playlist_id);
 	$playlist->songs()->save($song);
