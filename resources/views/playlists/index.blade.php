@@ -43,6 +43,7 @@
                         <table class="table table-striped playlist-table">
                             <thead>
                                 <th>Playlist</th>
+                                <th>Author</th>
                                 <th>&nbsp;</th>
                             </thead>
                             <tbody>
