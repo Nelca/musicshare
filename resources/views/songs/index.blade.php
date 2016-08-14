@@ -39,7 +39,7 @@
                                 </button>
                             </div>
                         </div>
-			<input type="hidden" name="playlist" value="{{ $playlist }}">
+			<input type="hidden" name="playlist_id" value="{{ $playlist->id }}">
                     </form>
                 </div>
             </div>
@@ -48,7 +48,7 @@
             @if (count($songs) > 0)
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Songs
+                       {{ $playlist->name }} 
                     </div>
 
                     <div class="panel-body">
@@ -81,7 +81,7 @@
                                                     <button type="submit" id="like-song-{{ $song->id }}" class="btn fa fa-star">
                                                         Like
                                                     </button>
-			                            <input type="hidden" name="playlist" value="{{ $playlist }}">
+			                            <input type="hidden" name="playlist_id" value="{{ $playlist->id }}">
                                                 </form>
 					    @else
 					        <div>Liked</div>
@@ -99,7 +99,7 @@
 
                                                 <button type="submit" id="delete-song-{{ $song->id }}" class="btn btn-warning fa fa-btn fa-trash">
                                                 </button>
-			                        <input type="hidden" name="playlist" value="{{ $playlist }}">
+			                        <input type="hidden" name="playlist_id" value="{{ $playlist->id }}">
                                             </form>
                                         </td>
                                     </tr>

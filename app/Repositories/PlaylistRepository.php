@@ -31,4 +31,9 @@ class PlaylistRepository
                     ->orderBy('created_at', 'asc')
                     ->paginate(5);
     }
+
+    public function currentPlaylist($id)
+    {
+        return Playlist::where('id', $id)->get();
+    }
 }

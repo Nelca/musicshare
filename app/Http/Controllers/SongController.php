@@ -8,23 +8,26 @@ use App\Song;
 use App\Playlist;
 use App\Evaluate;
 use App\Repositories\SongRepository;
+use App\Repositories\PlaylistRepository;
 
 class SongController extends Controller
 {
     //
     protected $songs;
 
-    public function __construct(SongRepository $songs)
+    public function __construct(SongRepository $songs, PlaylistRepository $playlists)
     {
         $this->middleware('auth');
 	$this->songs = $songs;
+	$this->playlists = $playlists;
     }
 
-    public function index(Request $request, $playlist)
+    public function index(Request $request, $playlist_id)
     {
+        $playlist = $this->playlists->currentPlaylist($playlist_id);
         return view('songs.index', [
-	    'songs' => $this->songs->forPlaylist($playlist),
-	    'playlist' => $playlist,
+	    'songs' => $this->songs->forPlaylist($playlist_id),
+	    'playlist' => $playlist[0],
 	]);
     }
 
@@ -33,10 +36,9 @@ class SongController extends Controller
         $this->validate($request, [
 	    'name' => 'required|max:255',
 	    'url' => 'required|url',
-
 	]);
 
-	$playlist_id = $request->playlist;
+	$playlist_id = $request->playlist_id;
 	$url = $request->url;
 
 	// urlからkey取得
@@ -61,7 +63,7 @@ class SongController extends Controller
     public function destroy(Request $request, Song $song)
     {
 	$song->delete();
-	return redirect('/playlist/'. $request->playlist . '/songs');
+	return redirect('/playlist/'. $request->playlist_id . '/songs');
     }
 
     public function like(Request $request, Song $song)
@@ -70,6 +72,6 @@ class SongController extends Controller
 	$like->user_id = $request->user()->id;
 	$like->evaluation = 1;
         $song->evaluates()->save($like);
-	return redirect('/playlist/'. $request->playlist . '/songs');
+	return redirect('/playlist/'. $request->playlist_id . '/songs');
     }
 }
