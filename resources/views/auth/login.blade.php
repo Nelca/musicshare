@@ -5,6 +5,17 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
+                <div class="panel-heading">SNS Login</div>
+                <div class="panel-body">
+		    <div class="col-md-6 col-md-offset-4">
+                        <a type="button" class="btn btn-primary" href="/auth/twitter">
+                            <i class="fa fa-btn fa-twitter-square"></i>Twitter Login
+                        </a>
+	                <a type="button" class="btn btn-primary" href="/auth/github">
+                            <i class="fa fa-btn fa-github-square"></i>Github Login
+                        </a>
+		    </div>
+		</div>
                 <div class="panel-heading">Login</div>
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
@@ -53,7 +64,7 @@
                                 <button type="submit" class="btn btn-primary">
                                     <i class="fa fa-btn fa-sign-in"></i>Login
                                 </button>
-
+                                
                                 <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
                             </div>
                         </div>
