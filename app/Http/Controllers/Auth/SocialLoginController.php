@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Http\Requests;
 use Socialite;
+use App\User;
 
 class SocialLoginController extends Controller
 {
@@ -19,9 +21,18 @@ class SocialLoginController extends Controller
 
     public function githubCallback()
     {
-        $user = Socialite::driver('github')->user();
+        $github_user = Socialite::driver('github')->user();
+        $user = new User;
+        $user->name = $github_user->name;
+        $user->email = $github_user->email;
 
-	return 'github OK';
+	Auth::login($user);
+
+	if (Auth::check()) {
+            return view('welcome');
+	}
+
+        return 'github login error. sometihg went wlong.';
     }
 
     public function twitterLogin()
