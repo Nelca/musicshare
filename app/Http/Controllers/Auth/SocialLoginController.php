@@ -22,17 +22,14 @@ class SocialLoginController extends Controller
     public function githubCallback()
     {
         $github_user = Socialite::driver('github')->user();
-        $user = new User;
-        $user->name = $github_user->name;
-        $user->email = $github_user->email;
+        $user = User::where('email', $github_user->email)->first();
 
 	Auth::login($user);
-
-	if (Auth::check()) {
+	if ( Auth::check() ) {
             return view('welcome');
 	}
 
-        return 'github login error. sometihg went wlong.';
+        return 'github login error. sometihg went wlong.' .  $user->email;
     }
 
     public function twitterLogin()
@@ -42,8 +39,14 @@ class SocialLoginController extends Controller
 
     public function twitterCallback()
     {
-        $user = Socialite::driver('twitter')->user();
+        $twitter_user = Socialite::driver('twitter')->user();
+        $user = User::where('name', $twitter_user->nickname)->first();
 
-	return 'twitter OK';
+	Auth::login($user);
+	if ( Auth::check() ) {
+            return view('welcome');
+	}
+
+        return 'twitter login error. sometihg went wlong.' .  $user->email;
     }
 }
