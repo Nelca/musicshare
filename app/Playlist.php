@@ -24,6 +24,6 @@ class Playlist extends Model
 
     public function evaluates()
     {
-        return $this->morphMany('Evaluate', 'evaluatable');
+        return $this->morphMany(Evaluate::class, 'evaluatable');
     }
 }

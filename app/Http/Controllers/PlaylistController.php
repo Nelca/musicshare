@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Playlist;
+use App\Evaluate;
 use App\Repositories\PlaylistRepository;
 
 class PlaylistController extends Controller
@@ -51,6 +52,16 @@ class PlaylistController extends Controller
     {
 	$playlist->delete();
 
+	return redirect('/playlists');
+    }
+
+    public function like(Request $request, $playlist_id)
+    {
+        $playlist = Playlist::where('id', $playlist_id)->first();
+        $like = new Evaluate;
+	$like->user_id = $request->user()->id;
+	$like->evaluation = 1;
+        $playlist->evaluates()->save($like);
 	return redirect('/playlists');
     }
 }

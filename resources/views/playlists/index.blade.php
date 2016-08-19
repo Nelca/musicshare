@@ -56,7 +56,7 @@
                                         <!-- Playlist Buttons -->
                                         <td>
 					    <div class="row">
-						    <div class="col-xs-12 col-md-6">
+						    <div class="col-xs-12 col-md-4">
 							<form action="{{url('playlist/' . $playlist->id . '/songs')}}" method="POST">
 							    {{ csrf_field() }}
 							    {{ method_field('GET') }}
@@ -65,7 +65,19 @@
 							    </button>
 							</form>
 						    </div>
-						    <div class="col-xs-12 col-md-6">
+						    <div class="col-xs-12 col-md-4">
+					                @can('like', $playlist)
+							    <form action="{{url('playlist/' . $playlist->id . '/like')}}" method="POST">
+							        {{ csrf_field() }}
+		        					{{ method_field('PUT') }}
+			        				<button type="submit" id="like-playlist-{{ $playlist->id }}" class="btn  fa fa-star">Like</button>
+				         		    </form>
+							@else
+							    <span>Liked</span>
+							@endcan
+							<span>{{ count($playlist->evaluates) }}<span class="fa fa-star"></span></span>
+						    </div>
+						    <div class="col-xs-12 col-md-4">
 							<form action="{{url('playlist/' . $playlist->id)}}" method="POST">
 							    {{ csrf_field() }}
 							    {{ method_field('DELETE') }}

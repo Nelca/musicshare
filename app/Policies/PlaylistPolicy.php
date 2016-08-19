@@ -24,4 +24,16 @@ class PlaylistPolicy
     {
         return $user->id == $playlist->user_id;
     }
+
+    public function like(User $user, Playlist $playlist)
+    {
+        $isLikable = true;
+        $evaluates = $playlist->evaluates;
+        foreach ($evaluates as $key => $evaluate) {
+	    if ($user->id == $evaluate->user_id) {
+	        $isLikable = false; 
+	    }
+        } 
+        return $isLikable; 
+    }
 }
