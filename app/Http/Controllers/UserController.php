@@ -19,12 +19,11 @@ class UserController extends Controller
 	$this->playlists = $playlists;
     }
 
-    public function index(Request $request)
+    public function index(Request $request, User $user)
     {
-        $user = $this->users->forUser($request->user);
         return view('users.index', [
 	    'user' => $user,
-	    'playlists' => $this->playlists->forUser($user),
+	    'playlists' => $user->playlists,
 	]);
     }
 

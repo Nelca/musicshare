@@ -20,7 +20,6 @@
                     <div class="panel-heading">
                         {{ $user->name }} Playlists
                     </div>
-		    {!! $playlists->render() !!}
                     <div class="panel-body">
                         <table class="table table-striped playlist-table">
                             <thead>
@@ -58,7 +57,6 @@
                             </tbody>
                         </table>
                     </div>
-		    {!! $playlists->render() !!}
 		</div>
             @endif
         </div>

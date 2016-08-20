@@ -23,11 +23,10 @@ class SongController extends Controller
 	$this->playlists = $playlists;
     }
 
-    public function index(Request $request, $playlist_id)
+    public function index(Request $request, Playlist $playlist)
     {
-        $playlist = $this->playlists->currentPlaylist($playlist_id)->first();
         return view('songs.index', [
-	    'songs' => $this->songs->forPlaylist($playlist_id),
+	    'songs' => $playlist->songs,
 	    'playlist' => $playlist,
 	]);
     }

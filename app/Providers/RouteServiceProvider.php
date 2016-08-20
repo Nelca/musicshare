@@ -25,6 +25,9 @@ class RouteServiceProvider extends ServiceProvider
     public function boot(Router $router)
     {
         $router->model('favorite', 'App\Favorite');
+        $router->model('playlist', 'App\Playlist');
+        $router->model('song', 'App\Song');
+        $router->model('user', 'App\User');
         parent::boot($router);
     }
 

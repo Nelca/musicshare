@@ -23,12 +23,18 @@ Route::post('auth/login', 'Auth\AuthController@postLogin');
 Route::get('/logout', 'Auth\AuthController@getLogout');
 Route::get('auth/logout', 'Auth\AuthController@getLogout');
 
+Route::get('/auth/github', 'Auth\SocialLoginController@githubLogin');
+Route::get('/github/callback', 'Auth\SocialLoginController@githubCallback');
+Route::get('/auth/twitter', 'Auth\SocialLoginController@twitterLogin');
+Route::get('/twitter/callback', 'Auth\SocialLoginController@twitterCallback');
+
 Route::get('/register', 'Auth\AuthController@getRegister');
 Route::post('/register', 'Auth\AuthController@postRegister');
 Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 Route::group(['middleware' => 'auth'], function(){
+
     Route::get('/favorites', 'FavoriteController@index');
     Route::post('/favorite', 'FavoriteController@store');
     Route::delete('/favorite/{favorite}', 'FavoriteController@destroy');
@@ -36,10 +42,10 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/playlists', 'PlaylistController@index');
     Route::get('/my-playlists', 'PlaylistController@myPlaylists');
     Route::post('/playlist', 'PlaylistController@store');
-    Route::put('/playlist/{paylist}/like', 'PlaylistController@like');
+    Route::put('/playlist/{playlist}/like', 'PlaylistController@like');
     Route::delete('/playlist/{playlist}', 'PlaylistController@destroy');
 
-    Route::get('/playlist/{playist}/songs', 'SongController@index');
+    Route::get('/playlist/{playlist}/songs', 'SongController@index');
     Route::post('/song', 'SongController@store');
     Route::delete('/song/{song}', 'SongController@destroy');
     Route::put('/song/{song}/like', 'SongController@like');
@@ -47,7 +53,3 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/user/{user}', 'UserController@index');
 });
 
-Route::get('/auth/github', 'Auth\SocialLoginController@githubLogin');
-Route::get('/github/callback', 'Auth\SocialLoginController@githubCallback');
-Route::get('/auth/twitter', 'Auth\SocialLoginController@twitterLogin');
-Route::get('/twitter/callback', 'Auth\SocialLoginController@twitterCallback');

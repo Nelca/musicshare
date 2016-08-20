@@ -55,9 +55,8 @@ class PlaylistController extends Controller
 	return redirect('/playlists');
     }
 
-    public function like(Request $request, $playlist_id)
+    public function like(Request $request, Playlist $playlist)
     {
-        $playlist = Playlist::where('id', $playlist_id)->first();
         $like = new Evaluate;
 	$like->user_id = $request->user()->id;
 	$like->evaluation = 1;
