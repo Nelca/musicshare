@@ -27,4 +27,12 @@ class UserController extends Controller
 	]);
     }
 
+    public function userList (Request $request)
+    {
+        return view('users.list', [
+	    'users' => User::all(),
+	]);
+
+    }
+
 }

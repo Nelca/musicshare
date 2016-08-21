@@ -51,5 +51,6 @@ Route::group(['middleware' => 'auth'], function(){
     Route::put('/song/{song}/like', 'SongController@like');
 
     Route::get('/user/{user}', 'UserController@index');
+    Route::get('/users', 'UserController@userList');
 });
 

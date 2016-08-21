@@ -46,6 +46,7 @@
                     <li><a href="{{ url('/playlists') }}">Playlists</a></li>
                     <li><a href="{{ url('/my-playlists') }}">My Lists</a></li>
                     <li><a href="{{ url('/favorites') }}">Favorites</a></li>
+                    <li><a href="{{ url('/users') }}">Users</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
