@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Laravel Quickstart - Intermediate</title>
+    <title>MusicShare</title>
     <!-- Fonts -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'>
@@ -36,17 +36,17 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                   MusicShare 
+                   MusicShare ♪
                 </a>
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/playlists') }}">Playlists</a></li>
-                    <li><a href="{{ url('/my-playlists') }}">My Lists</a></li>
-                    <li><a href="{{ url('/favorites') }}">Favorites</a></li>
-                    <li><a href="{{ url('/users') }}">Users</a></li>
+                    <li><a href="{{ url('/playlists') }}"><i class="fa fa-list-ul" aria-hidden="true"></i> Playlists</a></li>
+                    <li><a href="{{ url('/my-playlists') }}"><i class="fa fa-list-ul" aria-hidden="true"></i> My Lists</a></li>
+                    <li><a href="{{ url('/favorites') }}"><i class="fa fa-heart" aria-hidden="true"></i> Favorites</a></li>
+                    <li><a href="{{ url('/users') }}"><i class="fa fa-user" aria-hidden="true"></i> Users</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
