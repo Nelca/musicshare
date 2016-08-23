@@ -55,6 +55,13 @@ class PlaylistController extends Controller
 	return redirect('/playlists');
     }
 
+    public function update (Request $request, Playlist $playlist)
+    {
+        $playlist->name = $request->name;
+	$playlist->save();
+	return redirect('/playlists');
+    }
+
     public function like(Request $request, Playlist $playlist)
     {
         $like = new Evaluate;

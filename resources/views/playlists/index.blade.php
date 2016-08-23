@@ -56,7 +56,7 @@
                                         <!-- Playlist Buttons -->
                                         <td>
 					    <div class="row">
-						    <div class="col-xs-12 col-md-4">
+						    <div class="col-xs-12 col-md-3">
 							<form action="{{url('playlist/' . $playlist->id . '/songs')}}" method="POST">
 							    {{ csrf_field() }}
 							    {{ method_field('GET') }}
@@ -65,7 +65,7 @@
 							    </button>
 							</form>
 						    </div>
-						    <div class="col-xs-12 col-md-4">
+						    <div class="col-xs-12 col-md-2">
 					                @can('like', $playlist)
 							    <form action="{{url('playlist/' . $playlist->id . '/like')}}" method="POST">
 							        {{ csrf_field() }}
@@ -77,11 +77,20 @@
 							@endcan
 							<span>{{ count($playlist->evaluates) }}<span class="fa fa-star"></span></span>
 						    </div>
-						    <div class="col-xs-12 col-md-4">
+						    <div class="col-xs-12 col-md-1">
 							<form action="{{url('playlist/' . $playlist->id)}}" method="POST">
 							    {{ csrf_field() }}
 							    {{ method_field('DELETE') }}
 							    <button type="submit" id="delete-playlist-{{ $playlist->id }}" class="btn btn-warning fa fa-btn fa-trash">
+							    </button>
+							</form>
+						    </div>
+						    <div class="col-xs-12 col-md-6">
+							<form action="{{url('playlist/' . $playlist->id)}}" method="POST">
+							    {{ csrf_field() }}
+							    {{ method_field('PUT') }}
+							    <input type="text" name="name" placeholder="update list name">
+							    <button type="submit" id="update-playlist-{{ $playlist->id }}" class="btn fa fa-btn fa-pencil">
 							    </button>
 							</form>
 						    </div>
