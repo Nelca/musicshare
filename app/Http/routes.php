@@ -55,3 +55,6 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/users', 'UserController@userList');
 });
 
+Route::group(['prefix' => 'api'], function(){
+    Route::get('/playlists', 'PlaylistController@apiIndex');
+});

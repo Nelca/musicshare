@@ -27,6 +27,14 @@ class PlaylistController extends Controller
 	]);
     }
 
+    public function apiIndex(Request $request)
+    {
+	return response()->json([
+	    'playlists' => $this->playlists->all($request->user()),
+	]);
+    }
+
+
 
     public function myPlaylists(Request $request)
     {
