@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Playlist;
 use App\Evaluate;
 use App\Repositories\PlaylistRepository;
 
-class PlaylistController extends Controller
+class PlaylistController extends \App\Http\Controllers\Controller
 {
     //
     protected $playlists;
@@ -26,6 +25,15 @@ class PlaylistController extends Controller
 	    'playlists' => $this->playlists->all($request->user()),
 	]);
     }
+
+    public function apiIndex(Request $request)
+    {
+	return response()->json([
+	    'playlists' => $this->playlists->all($request->user()),
+	]);
+    }
+
+
 
     public function myPlaylists(Request $request)
     {
