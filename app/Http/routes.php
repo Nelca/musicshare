@@ -57,4 +57,6 @@ Route::group(['middleware' => 'auth'], function(){
 
 Route::group(['prefix' => 'api', 'namespace' => 'Api'], function(){
     Route::get('/playlists', 'PlaylistController@apiIndex');
+    //Route::post('/playlist', 'PlaylistController@store');
+    Route::get('/playlist', 'PlaylistController@store');
 });

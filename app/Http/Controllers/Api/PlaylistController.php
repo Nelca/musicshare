@@ -52,7 +52,7 @@ class PlaylistController extends \App\Http\Controllers\Controller
 	    'name' => $request->name,
 	]);
 
-	return redirect('/playlists');
+	return response('playlist stored');
     }
 
     public function destroy(Request $request, Playlist $playlist)
