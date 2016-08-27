@@ -15,14 +15,13 @@ class PlaylistController extends \App\Http\Controllers\Controller
 
     public function __construct(PlaylistRepository $playlists)
     {
-        $this->middleware('auth');
 	$this->playlists = $playlists;
     }
 
     public function index(Request $request)
     {
         return view('playlists.index', [
-	    'playlists' => $this->playlists->all($request->user()),
+	    'playlists' => $this->playlists->all(),
 	]);
     }
 

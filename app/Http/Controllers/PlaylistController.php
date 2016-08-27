@@ -23,7 +23,7 @@ class PlaylistController extends Controller
     public function index(Request $request)
     {
         return view('playlists.index', [
-	    'playlists' => $this->playlists->all($request->user()),
+	    'playlists' => $this->playlists->all(),
 	]);
     }
 

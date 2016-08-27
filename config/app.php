@@ -157,6 +157,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
 	Laravel\Socialite\SocialiteServiceProvider::class,
+	Alaouy\Youtube\YoutubeServiceProvider::class,
     ],
 
     /*
@@ -204,7 +205,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
 	'Socialite' => Laravel\Socialite\Facades\Socialite::class,
-
+	'Youtube' => Alaouy\Youtube\Facades\Youtube::class,
     ],
 
 ];

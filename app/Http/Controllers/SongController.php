@@ -10,6 +10,7 @@ use App\Evaluate;
 use App\Repositories\SongRepository;
 use App\Repositories\PlaylistRepository;
 use Config;
+use Youtube;
 
 class SongController extends Controller
 {
@@ -49,11 +50,8 @@ class SongController extends Controller
 	    $song_key = $url_querys['v'];
 	}
 
-	$youtube_json = file_get_contents(Config::get('const.youtube_api_url_pre') . $song_key . Config::get('const.youtube_api_url_param') . env('YOUTUBE_API_KEY') . Config::get('const.youtube_api_url_suf'));
-
-        $youtube_props = json_decode($youtube_json);
-
-	$song_name = $youtube_props->items[0]->snippet->title;
+	$song_data = Youtube::getVideoInfo($song_key);
+	$song_name = $song_data->snippet->title;
 
 	$song = new Song;
 	$song->url = $url;

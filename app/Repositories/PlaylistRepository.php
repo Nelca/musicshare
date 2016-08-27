@@ -8,12 +8,11 @@ use App\Playlist;
 class PlaylistRepository
 {
     /**
-     * Get all of the playlists.
+     * Get all of playlists.
      *
-     * @param  User  $user
      * @return Collection
      */
-    public function all(User $user)
+    public function all()
     {
         return Playlist::orderBy('created_at', 'asc')
                     ->paginate(5);
