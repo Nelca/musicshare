@@ -9,7 +9,6 @@ use App\Playlist;
 use App\Evaluate;
 use App\Repositories\SongRepository;
 use App\Repositories\PlaylistRepository;
-use Config;
 use Youtube;
 
 class SongController extends Controller

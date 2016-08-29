@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Favorite;
 use App\Repositories\FavoriteRepository;
+use Youtube;
 
 class FavoriteController extends Controller
 {
@@ -30,12 +31,28 @@ class FavoriteController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-	    'name' => 'required|max:255',
+	    'name' => 'max:255',
 	    'url' => 'required|url',
 	]);
+	
+	if ($request->name) {
+	    $song_name = $request->name;
+	} else {
+	    $url = $request->url;
+            // urlからkey取得
+	    $url_query_str = parse_url($url, PHP_URL_QUERY);
+	    parse_str($url_query_str, $url_querys);
+            $song_key = "";
+	    if (isset($url_querys['v'])) {
+	        $song_key = $url_querys['v'];
+	    }
+
+	    $song_data = Youtube::getVideoInfo($song_key);
+	    $song_name = $song_data->snippet->title;
+	}
 
 	$request->user()->favorites()->create([
-	    'name' => $request->name,
+	    'name' => $song_name,
 	    'url' => $request->url,
 	]);
 
