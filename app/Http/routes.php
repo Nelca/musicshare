@@ -27,6 +27,8 @@ Route::get('/auth/github', 'Auth\SocialLoginController@githubLogin');
 Route::get('/github/callback', 'Auth\SocialLoginController@githubCallback');
 Route::get('/auth/twitter', 'Auth\SocialLoginController@twitterLogin');
 Route::get('/twitter/callback', 'Auth\SocialLoginController@twitterCallback');
+Route::get('/auth/google', 'Auth\SocialLoginController@googleLogin');
+Route::get('/google/callback', 'Auth\SocialLoginController@googleCallback');
 
 Route::get('/register', 'Auth\AuthController@getRegister');
 Route::post('/register', 'Auth\AuthController@postRegister');

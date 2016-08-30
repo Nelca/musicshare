@@ -14,6 +14,9 @@
 	                <a type="button" class="btn btn-primary" href="/auth/github">
                             <i class="fa fa-btn fa-github-square"></i>Github Login
                         </a>
+			<!--<a type="button" class="btn btn-primary" href="/auth/google">
+                            <i class="fa fa-btn fa-youtube-square"></i>Google Login
+                        </a>-->
 		    </div>
 		</div>
                 <div class="panel-heading">Login</div>
