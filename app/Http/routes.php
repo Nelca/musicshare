@@ -63,4 +63,6 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api'], function(){
     Route::get('/playlist', 'PlaylistController@store');
     //Route::post('/song', 'SongController@store');
     Route::get('/song', 'SongController@store');
+    //Route::post('/favorite', 'FavoriteController@store');
+    Route::get('/favorite', 'FavoriteController@store');
 });
