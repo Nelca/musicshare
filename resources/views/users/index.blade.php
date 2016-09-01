@@ -18,7 +18,7 @@
             @if (count($playlists) > 0)
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        {{ $user->name }} Playlists
+                        <i class="fa fa-list-ul" aria-hidden="true"></i>  {{ $user->name }} Playlists
                     </div>
                     <div class="panel-body">
                         <table class="table table-striped playlist-table">
@@ -47,6 +47,51 @@
 							    {{ csrf_field() }}
 							    {{ method_field('DELETE') }}
 							    <button type="submit" id="delete-playlist-{{ $playlist->id }}" class="btn btn-warning fa fa-btn fa-trash">
+							    </button>
+							</form>
+						    </div>
+					    </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+		</div>
+            @endif
+           <!-- Current Favorite -->
+            @if (count($favorites) > 0)
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <i class="fa fa-heart" aria-hidden="true"></i>  {{ $user->name }} Favorites
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-striped favorite-table">
+                            <thead>
+                                <th>Favorite</th>
+                                <th>&nbsp;</th>
+                            </thead>
+                            <tbody>
+                                @foreach ($favorites as $favorite)
+                                    <tr>
+                                        <td class="table-text"><div>{{ $favorite->name }}</div></td>
+                                        <!-- Favorite Buttons -->
+                                        <td>
+					    <div class="row">
+						    <div class="col-xs-12 col-md-6">
+							<form action="{{url('favorite/' . $favorite->id . '/songs')}}" method="POST">
+							    {{ csrf_field() }}
+							    {{ method_field('GET') }}
+							    <button type="submit" id="view-favorite-songs-{{ $favorite->id }}" class="btn btn-primary">
+								<i class="fa fa-btn fa-music"></i>View Songs
+							    </button>
+							</form>
+						    </div>
+						    <div class="col-xs-12 col-md-6">
+							<form action="{{url('favorite/' . $favorite->id)}}" method="POST">
+							    {{ csrf_field() }}
+							    {{ method_field('DELETE') }}
+							    <button type="submit" id="delete-favorite-{{ $favorite->id }}" class="btn btn-warning fa fa-btn fa-trash">
 							    </button>
 							</form>
 						    </div>

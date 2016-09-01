@@ -63,9 +63,8 @@
                                 @foreach ($favorites as $favorite)
                                     <tr>
                                         <td class="table-text"><div>{{ $favorite->name }}</div></td>
-                                        <td class="table-text"><div>{{ $favorite->url }}</div></td>
-
-                                        <!-- Favorite Delete Button -->
+                                        <td class="table-text"><div><a class="fa fa-youtube-play" href="{{ $favorite->url }}" target="_blank">youtube</a></div></td>
+					                                            <!-- Favorite Delete Button -->
                                         <td>
                                             <form action="{{url('favorite/' . $favorite->id)}}" method="POST">
                                                 {{ csrf_field() }}

@@ -24,6 +24,7 @@ class UserController extends Controller
         return view('users.index', [
 	    'user' => $user,
 	    'playlists' => $user->playlists,
+	    'favorites' => $user->favorites,
 	]);
     }
 
