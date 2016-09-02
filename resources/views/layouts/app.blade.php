@@ -46,7 +46,7 @@
                     <li><a href="{{ url('/playlists') }}"><i class="fa fa-list-ul" aria-hidden="true"></i> Playlists</a></li>
                     <li><a href="{{ url('/my-playlists') }}"><i class="fa fa-list-ul" aria-hidden="true"></i> My Lists</a></li>
                     <li><a href="{{ url('/favorites') }}"><i class="fa fa-heart" aria-hidden="true"></i> Favorites</a></li>
-                    <li><a href="{{ url('/users') }}"><i class="fa fa-user" aria-hidden="true"></i> Users</a></li>
+                    <li><a href="{{ url('/users') }}"><i class="fa fa-users" aria-hidden="true"></i> Users</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->

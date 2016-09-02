@@ -11,6 +11,12 @@
 		    <div class="row">
 		        <div class="">
 			    {{ $user->name }}
+			    <form action="{{url('follow/')}}" method="POST">
+			        {{ csrf_field() }}
+				{{ method_field('POST') }}
+				<input type="hidden" name="follow_user_id" value="{{ $user->id }}">
+				<button type="submit" id="delete-playlist-{{ $user->id }}" class="btn btn-info fa fa-btn fa-user-plus"></button>
+			    </form>
 			</div>
 		    </div>
                </div>
