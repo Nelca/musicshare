@@ -36,14 +36,4 @@ class User extends Authenticatable
     {
         return $this->hasMany(Playlist::class);
     }
-
-    public function follow()
-    {
-        return $this->hasManyThrough(User::class, Follow::class, 'user_id', 'follow_user_id');
-    }
-
-    public function follower()
-    {
-        return $this->hasManyThrough(User::class, Follow::class, 'follow_user_id', 'user_id');
-    }
 }
