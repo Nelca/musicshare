@@ -9,8 +9,10 @@
                 </div>
                 <div class="panel-body">
 		    <div class="row">
-		        <div class="">
+		        <div class="col-xs-12 col-md-6">
 			    {{ $user->name }}
+			</div>
+		        <div class="col-xs-12 col-md-6">
 			    <form action="{{url('follow/')}}" method="POST">
 			        {{ csrf_field() }}
 				{{ method_field('POST') }}
@@ -20,6 +22,22 @@
 			</div>
 		    </div>
                </div>
+	       <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <i class="fa fa-users" aria-hidden="true"></i>Follow
+		    </div>
+                    <div class="panel-body">
+		        <div class="row">
+		            <div class="col-xs-12 col-md-6">
+			        <a href="">{{ count($follow) }}  Follow</a>
+                            </div>
+		            <div class="col-xs-12 col-md-6">
+			        <a href="">{{ count($follower) }}  Follower</a>
+                            </div>
+                        </div>
+                    </div>
+		</div>
+
             <!-- Current Playlist -->
             @if (count($playlists) > 0)
                 <div class="panel panel-default">

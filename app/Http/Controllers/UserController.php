@@ -28,8 +28,8 @@ class UserController extends Controller
 	    'user' => $user,
 	    'playlists' => $user->playlists,
 	    'favorites' => $user->favorites,
-	    'follw' => $follow_users,
-	    'follwer' => $follower_users,
+	    'follow' => $follow_users,
+	    'follower' => $follower_users,
 	]);
     }
 
