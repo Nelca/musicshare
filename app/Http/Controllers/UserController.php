@@ -22,8 +22,8 @@ class UserController extends Controller
 
     public function index(Request $request, User $user)
     {
-        $follow_users = $this->getFollowUsers($user->id);
-        $follower_users = $this->getFollowerUsers($user->id);
+        $follow_users = $this->getFollowUserIds($user->id);
+        $follower_users = $this->getFollowerUserIds($user->id);
         return view('users.index', [
 	    'user' => $user,
 	    'playlists' => $user->playlists,
@@ -41,23 +41,21 @@ class UserController extends Controller
 
     }
 
-    public function getFollowUsers ($user_id)
+    public function getFollowUserIds ($user_id)
     {
         $follow_users = DB::table('users as u')
 	                    ->join('follows as f', 'u.id', '=', 'f.follow_user_id')
-			    ->select('u.*')
 			    ->where('f.user_id', '=' , $user_id)
-			    ->get();
+			    ->lists('u.id');
         return $follow_users;
     }
 
-    public function getFollowerUsers ($user_id)
+    public function getFollowerUserIds ($user_id)
     {
         $follower_users = DB::table('users as u')
 	                    ->join('follows as f', 'u.id', '=', 'f.user_id')
-			    ->select('u.*')
 			    ->where('f.follow_user_id', '=' , $user_id)
-			    ->get();
+			    ->lists('u.id');
         return $follower_users;
     }
 
