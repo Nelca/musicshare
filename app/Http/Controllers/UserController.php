@@ -41,6 +41,30 @@ class UserController extends Controller
 
     }
 
+    public function follow  (Request $request, User $user)
+    {
+        $follow_users = DB::table('users as u')
+	                    ->join('follows as f', 'u.id', '=', 'f.follow_user_id')
+			    ->select('u.*')
+			    ->where('f.user_id', '=' , $user->id)
+			    ->get('u.id');
+        return view('users.follow', [
+	    'follows' => $follow_users,
+	]);
+    }
+
+    public function follower  (Request $request, User $user)
+    {
+        $follow_users = DB::table('users as u')
+	                    ->join('follows as f', 'u.id', '=', 'f.user_id')
+			    ->select('u.*')
+			    ->where('f.follow_user_id', '=' , $user->id)
+			    ->get('u.id');
+        return view('users.follow', [
+	    'follows' => $follow_users,
+	]);
+    }
+
     public function getFollowUserIds ($user_id)
     {
         $follow_users = DB::table('users as u')
