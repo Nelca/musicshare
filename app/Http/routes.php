@@ -59,6 +59,8 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/user/{user}/follower', 'UserController@follower');
 
     Route::post('/follow', 'FollowController@follow');
+
+    Route::get('/mypage', 'MyPageController@index');
 });
 
 Route::group(['prefix' => 'api', 'namespace' => 'Api'], function(){
