@@ -14,4 +14,9 @@ class Favorite extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function evaluates()
+    {
+        return $this->morphMany(Evaluate::class, 'evaluatable');
+    }
 }

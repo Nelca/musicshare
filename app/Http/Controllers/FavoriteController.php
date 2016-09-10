@@ -51,10 +51,12 @@ class FavoriteController extends Controller
 	    $song_name = $song_data->snippet->title;
 	}
 
-	$request->user()->favorites()->create([
-	    'name' => $song_name,
-	    'url' => $request->url,
-	]);
+	$create_favorite = new Favorite();
+	$create_favorite->name = $song_name;
+	$create_favorite->url = $request->url;
+	$create_favorite->song_key = $song_key;
+
+	$request->user()->favorites()->save($create_favorite);
 
 	return redirect('/favorites');
     }

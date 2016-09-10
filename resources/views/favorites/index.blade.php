@@ -55,6 +55,7 @@
                     <div class="panel-body">
                         <table class="table table-striped favorite-table">
                             <thead>
+			        <th>サムネイル</th>
                                 <th>Favorite</th>
                                 <th>URL</th>
                                 <th>&nbsp;</th>
@@ -62,6 +63,9 @@
                             <tbody>
                                 @foreach ($favorites as $favorite)
                                     <tr>
+				        <td>
+					    <img src="http://i.ytimg.com/vi/{{ $favorite->song_key }}/default.jpg">
+					</td>
                                         <td class="table-text"><div>{{ $favorite->name }}</div></td>
                                         <td class="table-text"><div><a class="fa fa-youtube-play" href="{{ $favorite->url }}" target="_blank">youtube</a></div></td>
 					                                            <!-- Favorite Delete Button -->
