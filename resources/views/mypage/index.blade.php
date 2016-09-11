@@ -86,6 +86,7 @@
 					    @else
 					        <div>Liked</div>
 					    @endcan
+					    {{ $song->type}}
                                         </td>
                                         <td class="table-text">
                                         </td>
