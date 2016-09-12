@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Favorite;
+use App\Evaluate;
 use App\Repositories\FavoriteRepository;
 use Youtube;
 
@@ -67,6 +68,15 @@ class FavoriteController extends Controller
 
 	$favorite->delete();
 
+	return redirect('/favorites');
+    }
+
+    public function like(Request $request, Favorite $favorite)
+    {
+        $like = new Evaluate;
+	$like->user_id = $request->user()->id;
+	$like->evaluation = 1;
+        $favorite->evaluates()->save($like);
 	return redirect('/favorites');
     }
 }

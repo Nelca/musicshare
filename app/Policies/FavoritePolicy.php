@@ -24,4 +24,16 @@ class FavoritePolicy
     {
         return $user->id === $favorite->user_id;
     }
+
+    public function like(User $user, Favorite $favorite)
+    {
+        $isLikable = true;
+        $evaluates = $favorite->evaluates;
+        foreach ($evaluates as $key => $evaluate) {
+	    if ($user->id == $evaluate->user_id) {
+	        $isLikable = false; 
+	    }
+        } 
+        return $isLikable; 
+    }
 }

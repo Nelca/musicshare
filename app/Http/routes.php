@@ -40,6 +40,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/favorites', 'FavoriteController@index');
     Route::post('/favorite', 'FavoriteController@store');
     Route::delete('/favorite/{favorite}', 'FavoriteController@destroy');
+    Route::put('/favorite/{favorite}/like', 'FavoriteController@like');
 
     Route::get('/playlists', 'PlaylistController@index');
     Route::get('/my-playlists', 'PlaylistController@myPlaylists');

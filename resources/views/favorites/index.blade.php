@@ -59,6 +59,7 @@
                                 <th>Favorite</th>
                                 <th>URL</th>
                                 <th>&nbsp;</th>
+                                <th>&nbsp;</th>
                             </thead>
                             <tbody>
                                 @foreach ($favorites as $favorite)
@@ -68,7 +69,18 @@
 					</td>
                                         <td class="table-text"><div>{{ $favorite->name }}</div></td>
                                         <td class="table-text"><div><a class="fa fa-youtube-play" href="{{ $favorite->url }}" target="_blank">youtube</a></div></td>
-					                                            <!-- Favorite Delete Button -->
+                                        <td>
+					    @can('like', $favorite)
+                                                <form action="{{url('favorite/' . $favorite->id) . '/like'}}" method="POST">
+                                                    {{ csrf_field() }}
+                                                    {{ method_field('PUT') }}
+                                                    <button type="submit" id="like-favorite-{{ $favorite->id }}" class="btn fa fa-star">
+                                                        Like
+                                                    </button>
+                                                </form>
+					    @else
+					        <div>Liked</div>
+					    @endcan
                                         <td>
                                             <form action="{{url('favorite/' . $favorite->id)}}" method="POST">
                                                 {{ csrf_field() }}
