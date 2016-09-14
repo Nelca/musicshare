@@ -41,4 +41,21 @@ class MyPageController extends Controller
 	    'songs' => $songs,
 	]);
     }
+
+    public function likes (Request $request)
+    {
+        $user_id = $request->user()->id;
+	$query = "SELECT s.* ";
+	$query .= " FROM evaluates as e";
+	$query .= " JOIN songs as s ON s.id = e.evaluatable_id";
+	$query .= " WHERE e.user_id = ?";
+	$query .= " AND e.evaluatable_type = ?";
+
+	$songs = DB::select($query, [$user_id, "songs"]);
+        return view('mypage.likes', [
+	    'songs' => $songs,
+	]);
+
+    }
+
 }

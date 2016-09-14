@@ -63,6 +63,7 @@
 
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="{{ url('/mypage') }}"><i class="fa fa-btn fa-home"></i>MyPage</a></li>
+                                <li><a href="{{ url('/mypage/likes') }}"><i class="fa fa-btn fa-star"></i>Likes</a></li>
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
                         </li>

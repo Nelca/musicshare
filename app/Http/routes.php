@@ -62,6 +62,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('/follow', 'FollowController@follow');
 
     Route::get('/mypage', 'MyPageController@index');
+    Route::get('/mypage/likes', 'MyPageController@likes');
 });
 
 Route::group(['prefix' => 'api', 'namespace' => 'Api'], function(){

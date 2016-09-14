@@ -65,7 +65,8 @@
                                 @foreach ($favorites as $favorite)
                                     <tr>
 				        <td>
-					    <img src="http://i.ytimg.com/vi/{{ $favorite->song_key }}/default.jpg">
+					    <!--<img src="http://i.ytimg.com/vi/{{ $favorite->song_key }}/default.jpg">-->
+					    <iframe width="120" height="90" src="https://www.youtube.com/embed/{{ $favorite->song_key }}" frameborder="0" allowfullscreen></iframe>
 					</td>
                                         <td class="table-text"><div>{{ $favorite->name }}</div></td>
                                         <td class="table-text"><div><a class="fa fa-youtube-play" href="{{ $favorite->url }}" target="_blank">youtube</a></div></td>
