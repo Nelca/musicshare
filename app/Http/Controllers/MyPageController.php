@@ -52,10 +52,19 @@ class MyPageController extends Controller
 	$query .= " AND e.evaluatable_type = ?";
 
 	$songs = DB::select($query, [$user_id, "songs"]);
+
+	$p_query = "SELECT p.* ";
+	$p_query .= " FROM evaluates as e";
+	$p_query .= " JOIN playlists as p ON p.id = e.evaluatable_id";
+	$p_query .= " WHERE e.user_id = ?";
+	$p_query .= " AND e.evaluatable_type = ?";
+
+	$playlists = DB::select($p_query, [$user_id, "playlists"]);
+
         return view('mypage.likes', [
 	    'songs' => $songs,
+	    'playlists' => $playlists,
 	]);
-
     }
 
 }
