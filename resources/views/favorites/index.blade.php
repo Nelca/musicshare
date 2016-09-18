@@ -57,7 +57,6 @@
                             <thead>
 			        <th>サムネイル</th>
                                 <th>Favorite</th>
-                                <th>URL</th>
                                 <th>&nbsp;</th>
                                 <th>&nbsp;</th>
                             </thead>
@@ -69,7 +68,6 @@
 					    <iframe width="120" height="90" src="https://www.youtube.com/embed/{{ $favorite->song_key }}" frameborder="0" allowfullscreen></iframe>
 					</td>
                                         <td class="table-text"><div>{{ $favorite->name }}</div></td>
-                                        <td class="table-text"><div><a class="fa fa-youtube-play" href="{{ $favorite->url }}" target="_blank">youtube</a></div></td>
                                         <td>
 					    @can('like', $favorite)
                                                 <form action="{{url('favorite/' . $favorite->id) . '/like'}}" method="POST">
