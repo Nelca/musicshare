@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use DB;
+use App\User;
 
 class MyPageController extends Controller
 {
@@ -13,6 +13,7 @@ class MyPageController extends Controller
     public function index(Request $request)
     {
         $user_id = $request->user()->id;
+	$user = User::find($user_id);
 
 	$query = " SELECT s.id, s.name, s.url, s.song_key, 'song' as type, u.name as user_name, s.updated_at as updated_at ";
 	$query .= " from songs as s ";
@@ -40,9 +41,14 @@ class MyPageController extends Controller
 	$query .= " WHERE f2.user_id = ?)";
 	$query .= " ORDER BY updated_at DESC";
 
+        $follow_users = $this->getFollowUserIds($user_id);
+        $follower_users = $this->getFollowerUserIds($user_id);
 	$songs = DB::select($query, [$user_id, $user_id, $user_id]);
         return view('mypage.index', [
 	    'songs' => $songs,
+	    'follow' => $follow_users,
+	    'follower' => $follower_users,
+	    'user' => $user,
 	]);
     }
 
@@ -69,6 +75,24 @@ class MyPageController extends Controller
 	    'songs' => $songs,
 	    'playlists' => $playlists,
 	]);
+    }
+
+    public function getFollowUserIds ($user_id)
+    {
+        $follow_users = DB::table('users as u')
+	                    ->join('follows as f', 'u.id', '=', 'f.follow_user_id')
+			    ->where('f.user_id', '=' , $user_id)
+			    ->lists('u.id');
+        return $follow_users;
+    }
+
+    public function getFollowerUserIds ($user_id)
+    {
+        $follower_users = DB::table('users as u')
+	                    ->join('follows as f', 'u.id', '=', 'f.user_id')
+			    ->where('f.follow_user_id', '=' , $user_id)
+			    ->lists('u.id');
+        return $follower_users;
     }
 
 }

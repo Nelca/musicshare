@@ -43,6 +43,24 @@
                         </div>
                     </form>
                 </div>
+	       <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <i class="fa fa-users" aria-hidden="true"></i>Follow
+		    </div>
+                    <div class="panel-body">
+		        <div class="row">
+		            <div class="col-xs-12 col-md-6">
+			        <a href="{{ url('user/' . $user->id . '/follow') }}">{{ count($follow) }}  Follow</a>
+                            </div>
+		            <div class="col-xs-12 col-md-6">
+			        <a href="{{ url('user/' . $user->id . '/follower') }}">{{ count($follower) }}  Follower</a>
+                            </div>
+                        </div>
+                    </div>
+		</div>
+
+
+
             </div>
             <!-- Current Song -->
             @if (count($songs) > 0)
