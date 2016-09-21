@@ -29,11 +29,6 @@ class PlaylistTest extends TestCase
     public function testViewSongs()
     {
         $user = factory(User::class)->create();
-
-	//$this->actingAs($user)
-	//     ->visit('/playlists')
-	//     ->press('View Songs')
-	//     ->seePageIs('/playlist/12/songs');
     }
 
     public function testBlankPlaylist()
@@ -44,17 +39,6 @@ class PlaylistTest extends TestCase
 	     ->visit('/playlists')
 	     ->press('Add Playlist')
 	     ->see('name field is required');
-    }
-
-    public function testAddPlaylist()
-    {
-	//$insertPlaylistName = 'unit test';
-
-	//$this->actingAs($user)
-	//     ->visit('/playlists')
-	//     ->type($insertPlaylistName, 'name')
-	//     ->press('Add Playlist')
-	//     ->see($insertPlaylistName);
     }
 
     public function testViewAuthor()
