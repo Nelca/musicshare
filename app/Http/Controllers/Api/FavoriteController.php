@@ -17,7 +17,6 @@ class FavoriteController extends \App\Http\Controllers\Controller
     public function __construct(FavoriteRepository $favorites)
     {
         $this->middleware('auth');
-
 	$this->favorites = $favorites;
     }
 
@@ -46,11 +45,9 @@ class FavoriteController extends \App\Http\Controllers\Controller
 	    if (isset($url_querys['v'])) {
 	        $song_key = $url_querys['v'];
 	    }
-
 	    $song_data = Youtube::getVideoInfo($song_key);
 	    $song_name = $song_data->snippet->title;
 	}
-
 	$request->user()->favorites()->create([
 	    'name' => $song_name,
 	    'url' => $request->url,
@@ -62,7 +59,6 @@ class FavoriteController extends \App\Http\Controllers\Controller
     public function destroy(Request $request, Favorite $favorite)
     {
         $this->authorize('destroy', $favorite);
-
 	$favorite->delete();
 
 	return redirect('/favorites');
