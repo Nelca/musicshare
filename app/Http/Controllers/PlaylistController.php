@@ -16,7 +16,6 @@ class PlaylistController extends Controller
 
     public function __construct(PlaylistRepository $playlists)
     {
-        $this->middleware('auth');
 	$this->playlists = $playlists;
     }
 

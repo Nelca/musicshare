@@ -35,6 +35,13 @@ Route::post('/register', 'Auth\AuthController@postRegister');
 Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 
+Route::get('/playlists', 'PlaylistController@index');
+Route::get('/playlist/{playlist}/songs', 'SongController@index');
+Route::get('/users', 'UserController@userList');
+Route::get('/user/{user}', 'UserController@index');
+Route::get('/user/{user}/follow', 'UserController@follow');
+Route::get('/user/{user}/follower', 'UserController@follower');
+
 Route::group(['middleware' => 'auth'], function(){
 
     Route::get('/favorites', 'FavoriteController@index');
@@ -42,22 +49,15 @@ Route::group(['middleware' => 'auth'], function(){
     Route::delete('/favorite/{favorite}', 'FavoriteController@destroy');
     Route::put('/favorite/{favorite}/like', 'FavoriteController@like');
 
-    Route::get('/playlists', 'PlaylistController@index');
     Route::get('/my-playlists', 'PlaylistController@myPlaylists');
     Route::post('/playlist', 'PlaylistController@store');
     Route::put('/playlist/{playlist}', 'PlaylistController@update');
     Route::put('/playlist/{playlist}/like', 'PlaylistController@like');
     Route::delete('/playlist/{playlist}', 'PlaylistController@destroy');
 
-    Route::get('/playlist/{playlist}/songs', 'SongController@index');
     Route::post('/song', 'SongController@store');
     Route::delete('/song/{song}', 'SongController@destroy');
     Route::put('/song/{song}/like', 'SongController@like');
-
-    Route::get('/user/{user}', 'UserController@index');
-    Route::get('/users', 'UserController@userList');
-    Route::get('/user/{user}/follow', 'UserController@follow');
-    Route::get('/user/{user}/follower', 'UserController@follower');
 
     Route::post('/follow', 'FollowController@follow');
 

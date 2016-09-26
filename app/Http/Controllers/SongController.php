@@ -18,7 +18,6 @@ class SongController extends Controller
 
     public function __construct(SongRepository $songs, PlaylistRepository $playlists)
     {
-        $this->middleware('auth');
 	$this->songs = $songs;
 	$this->playlists = $playlists;
     }
