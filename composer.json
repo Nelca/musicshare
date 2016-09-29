@@ -8,7 +8,8 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
         "laravel/socialite": "^2.0",
-        "alaouy/youtube": "dev-master"
+        "alaouy/youtube": "dev-master",
+        "socialiteproviders/youtube": "^2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

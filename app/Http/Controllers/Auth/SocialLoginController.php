@@ -74,5 +74,29 @@ class SocialLoginController extends Controller
         return 'google login error. sometihg went wlong.';
     }
 
+    public function youtubeLogin()
+    {
+        //return Socialite::driver('youtube')->redirect();
+        //return Socialite::with('youtube')->scopes(['https://www.googleapis.com/auth/youtube.upload'])->redirect();
+        return Socialite::with('youtube')->scopes(['https://www.googleapis.com/auth/youtube'])->redirect();
+    }
+
+    public function youtubeCallback()
+    {
+        $youtube_user = Socialite::driver('youtube')->user();
+	$accessTokenResponseBody = $youtube_user->accessTokenResponseBody;
+	var_dump($accessTokenResponseBody);
+        $user = User::firstOrCreate([
+			   'name' => $youtube_user->nickname,
+		       ]);
+
+	Auth::login($user);
+	if ( Auth::check() ) {
+            return view('mypage.index');
+	}
+
+        return 'youtube login error. sometihg went wlong.';
+    }
+
 }
 
