@@ -76,15 +76,14 @@ class SocialLoginController extends Controller
 
     public function youtubeLogin()
     {
-        return Socialite::with('youtube')->redirect();
-        //return Socialite::with('youtube')->scopes(['https://www.googleapis.com/auth/youtube.upload'])->redirect();
+        //return Socialite::with('youtube')->redirect();
+        return Socialite::with('youtube')->scopes(['https://www.googleapis.com/auth/youtube.upload'])->redirect();
     }
 
     public function youtubeCallback()
     {
         $youtube_user = Socialite::driver('youtube')->user();
 	$accessTokenResponseBody = $youtube_user->accessTokenResponseBody;
-	var_dump($accessTokenResponseBody);
         $user = User::firstOrCreate([
 			   'name' => $youtube_user->nickname,
 		       ]);
