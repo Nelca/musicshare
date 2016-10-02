@@ -83,14 +83,16 @@ class SocialLoginController extends Controller
     public function youtubeCallback()
     {
         $youtube_user = Socialite::driver('youtube')->user();
-	$accessTokenResponseBody = $youtube_user->accessTokenResponseBody;
         $user = User::firstOrCreate([
 			   'name' => $youtube_user->nickname,
 		       ]);
 
 	Auth::login($user);
 	if ( Auth::check() ) {
-            return view('mypage.index');
+	    $user->oauth_token = $youtube_user->token;
+	    $user->save();
+
+	    return redirect('/mypage');
 	}
 
         return 'youtube login error. sometihg went wlong.';
