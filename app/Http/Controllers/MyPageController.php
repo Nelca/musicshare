@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use DB;
 use App\User;
+use Illuminate\Http\Response;
 
 class MyPageController extends Controller
 {
@@ -19,9 +20,13 @@ class MyPageController extends Controller
         $follower_users = $this->getFollowerUserIds($user_id);
 	$songs = $this->getSongs($user_id);
 
-
         $url = "https://www.googleapis.com/youtube/v3/activities?part=id,snippet&mine=true&access_token=" . $user->oauth_token;
 	$json = file_get_contents($url);
+	
+	$jsonResponse = Response::json($json);
+        $convertJson  = $jsonResponse->getData(true);
+	var_dump($convertJson);
+
 
         return view('mypage.index', [
 	    'songs' => $songs,
