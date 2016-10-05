@@ -62,7 +62,35 @@
 
 
             </div>
-            <!-- Current Song -->
+            <!-- youtube activity -->
+            @if (count($youtube_datas) > 0)
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+		        youtube activity
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-striped song-table">
+                            <thead>
+			        <th>サムネイル</th>
+                                <th>Song</th>
+                                <th>URL</th>
+                            </thead>
+                            <tbody>
+                                @foreach ($youtube_datas as $youtube_data)
+                                    <tr>
+				        <td>
+					</td>
+                                        <td class="table-text"><div>{{ $youtube_data->snippet->title }}</div></td>
+                                        <td class="table-text">
+					</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            @endif
+	    <!-- Current Song -->
             @if (count($songs) > 0)
                 <div class="panel panel-default">
                     <div class="panel-heading">

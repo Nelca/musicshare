@@ -20,20 +20,17 @@ class MyPageController extends Controller
         $follower_users = $this->getFollowerUserIds($user_id);
 	$songs = $this->getSongs($user_id);
 
-        $url = "https://www.googleapis.com/youtube/v3/activities?part=id,snippet&mine=true&access_token=" . $user->oauth_token;
+        $url = "https://www.googleapis.com/youtube/v3/activities?part=snippet,contentDetails&mine=true&access_token=" . $user->oauth_token;
 	$json = file_get_contents($url);
-	
-	$jsonResponse = Response::json($json);
-        $convertJson  = $jsonResponse->getData(true);
-	var_dump($convertJson);
-
+	$jsonResponse = json_decode($json);
+	$youtube_activity_list = $jsonResponse->items;
 
         return view('mypage.index', [
 	    'songs' => $songs,
 	    'follow' => $follow_users,
 	    'follower' => $follower_users,
 	    'user' => $user,
-	    'youtube_data' => $json,
+	    'youtube_datas' => $youtube_activity_list,
 	]);
     }
 
