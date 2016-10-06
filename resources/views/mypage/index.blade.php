@@ -79,6 +79,10 @@
                                 @foreach ($youtube_datas as $youtube_data)
                                     <tr>
 				        <td>
+					    @if ($youtube_data->snippet->type == 'like')
+					        
+					        <img src="http://i.ytimg.com/vi/{{ $youtube_data->contentDetails->like->resourceId->videoId }}/default.jpg">
+					    @endif
 					</td>
                                         <td class="table-text"><div>{{ $youtube_data->snippet->title }}</div></td>
                                         <td class="table-text">

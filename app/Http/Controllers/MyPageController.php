@@ -24,7 +24,6 @@ class MyPageController extends Controller
 	$json = file_get_contents($url);
 	$jsonResponse = json_decode($json);
 	$youtube_activity_list = $jsonResponse->items;
-
         return view('mypage.index', [
 	    'songs' => $songs,
 	    'follow' => $follow_users,
