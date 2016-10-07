@@ -19,15 +19,12 @@
                         <!-- Favorie Name -->
                         <div class="form-group">
                             <label for="favorie-name" class="col-sm-3 control-label">Favorite</label>
-
                             <div class="col-sm-6">
                                 <input type="text" name="name" id="favorite-name" class="form-control" value="{{ old('favorite') }}">
                             </div>
                         </div>
-
                         <div class="form-group">
                             <label for="favorie-url" class="col-sm-3 control-label">URL</label>
-
                             <div class="col-sm-6">
                                 <input type="text" name="url" id="favorite-url" class="form-control" value="{{ old('favorite') }}">
                             </div>
@@ -58,9 +55,6 @@
                         </div>
                     </div>
 		</div>
-
-
-
             </div>
             <!-- youtube activity -->
             @if (count($youtube_datas) > 0)
@@ -80,12 +74,19 @@
                                     <tr>
 				        <td>
 					    @if ($youtube_data->snippet->type == 'like')
-					        
 					        <img src="http://i.ytimg.com/vi/{{ $youtube_data->contentDetails->like->resourceId->videoId }}/default.jpg">
+					    @else ($youtube_data->snippet->type == 'playlistItem')
+					        playlistItem
 					    @endif
 					</td>
                                         <td class="table-text"><div>{{ $youtube_data->snippet->title }}</div></td>
                                         <td class="table-text">
+					    @if ($youtube_data->snippet->type == 'like')
+					        <a class="fa fa-youtube-play" href="https://www.youtube.com/watch?v={{ $youtube_data->contentDetails->like->resourceId->videoId }}" target="_blank">youtube</a>
+					    @else ($youtube_data->snippet->type == 'playlistItem')
+					        playlistItem
+					    @endif
+
 					</td>
                                     </tr>
                                 @endforeach

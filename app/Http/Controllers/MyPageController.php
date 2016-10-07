@@ -20,7 +20,7 @@ class MyPageController extends Controller
         $follower_users = $this->getFollowerUserIds($user_id);
 	$songs = $this->getSongs($user_id);
 
-        $url = "https://www.googleapis.com/youtube/v3/activities?part=snippet,contentDetails&mine=true&access_token=" . $user->oauth_token;
+        $url = "https://www.googleapis.com/youtube/v3/activities?part=snippet,contentDetails&mine=true&maxResults=10&access_token=" . $user->oauth_token;
 	$json = file_get_contents($url);
 	$jsonResponse = json_decode($json);
 	$youtube_activity_list = $jsonResponse->items;
