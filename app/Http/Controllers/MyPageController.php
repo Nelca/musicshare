@@ -24,6 +24,11 @@ class MyPageController extends Controller
 	$json = file_get_contents($url);
 	$jsonResponse = json_decode($json);
 	$youtube_activity_list = $jsonResponse->items;
+	foreach ($youtube_activity_list as $key => $y_activiity) {
+	    if ($y_activiity->snippet->type != 'like') {
+	        unset($youtube_activity_list[$key]);
+	    }
+	}
         return view('mypage.index', [
 	    'songs' => $songs,
 	    'follow' => $follow_users,

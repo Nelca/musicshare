@@ -73,20 +73,11 @@
                                 @foreach ($youtube_datas as $youtube_data)
                                     <tr>
 				        <td>
-					    @if ($youtube_data->snippet->type == 'like')
-					        <img src="http://i.ytimg.com/vi/{{ $youtube_data->contentDetails->like->resourceId->videoId }}/default.jpg">
-					    @else ($youtube_data->snippet->type == 'playlistItem')
-					        playlistItem
-					    @endif
+					    <img src="http://i.ytimg.com/vi/{{ $youtube_data->contentDetails->like->resourceId->videoId }}/default.jpg">
 					</td>
                                         <td class="table-text"><div>{{ $youtube_data->snippet->title }}</div></td>
                                         <td class="table-text">
-					    @if ($youtube_data->snippet->type == 'like')
-					        <a class="fa fa-youtube-play" href="https://www.youtube.com/watch?v={{ $youtube_data->contentDetails->like->resourceId->videoId }}" target="_blank">youtube</a>
-					    @else ($youtube_data->snippet->type == 'playlistItem')
-					        playlistItem
-					    @endif
-
+					    <a class="fa fa-youtube-play" href="https://www.youtube.com/watch?v={{ $youtube_data->contentDetails->like->resourceId->videoId }}" target="_blank">youtube</a>
 					</td>
                                     </tr>
                                 @endforeach
