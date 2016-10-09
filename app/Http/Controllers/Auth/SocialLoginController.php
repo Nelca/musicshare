@@ -22,14 +22,14 @@ class SocialLoginController extends Controller
     public function githubCallback()
     {
         $github_user = Socialite::driver('github')->user();
-	$user = User::firstOrCreate([
-	                   'email' => $github_user->email,
-			   'name' => $github_user->nickname,
-		       ]);
-	Auth::login($user);
-	if ( Auth::check() ) {
-	    return redirect('/mypage');
-	}
+        $user = User::firstOrCreate([
+                'email' => $github_user->email,
+                'name' => $github_user->nickname,
+                ]);
+        Auth::login($user);
+        if ( Auth::check() ) {
+            return redirect('/mypage');
+        }
 
         return 'github login error. sometihg went wlong.';
     }
@@ -43,14 +43,14 @@ class SocialLoginController extends Controller
     {
         $twitter_user = Socialite::driver('twitter')->user();
         $user = User::firstOrCreate([
-			   'name' => $twitter_user->nickname,
-		       ]);
+                'name' => $twitter_user->nickname,
+                ]);
 
-	Auth::login($user);
+        Auth::login($user);
 
-	if ( Auth::check() ) {
-	    return redirect('/mypage');
-	}
+        if ( Auth::check() ) {
+            return redirect('/mypage');
+        }
         return 'twitter login error. sometihg went wlong.';
     }
 
@@ -63,13 +63,13 @@ class SocialLoginController extends Controller
     {
         $google_user = Socialite::driver('google')->user();
         $user = User::firstOrCreate([
-			   'name' => $google_user->nickname,
-		       ]);
+                'name' => $google_user->nickname,
+                ]);
 
-	Auth::login($user);
-	if ( Auth::check() ) {
+        Auth::login($user);
+        if ( Auth::check() ) {
             return view('mypage.index');
-	}
+        }
 
         return 'google login error. sometihg went wlong.';
     }
@@ -83,17 +83,19 @@ class SocialLoginController extends Controller
     public function youtubeCallback()
     {
         $youtube_user = Socialite::driver('youtube')->user();
+        var_dump($youtube_user->id);
         $user = User::firstOrCreate([
-			   'name' => $youtube_user->nickname,
-		       ]);
+                'name' => $youtube_user->nickname,
+                ]);
 
-	Auth::login($user);
-	if ( Auth::check() ) {
-	    $user->oauth_token = $youtube_user->token;
-	    $user->save();
+        Auth::login($user);
+        if ( Auth::check() ) {
+            $user->oauth_token = $youtube_user->token;
+            $user->channel_id = $youtube_user->id;
+            $user->save();
 
-	    return redirect('/mypage');
-	}
+            return redirect('/mypage');
+        }
 
         return 'youtube login error. sometihg went wlong.';
     }
