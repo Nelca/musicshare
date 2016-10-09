@@ -14,35 +14,65 @@
 			</div>
 		        <div class="col-xs-12 col-md-6">
 		            @if (Auth::check())
-			        @if (in_array(Auth::user()->id, $follower))
-			            Following
-		                @else
-			            <form action="{{url('follow/')}}" method="POST">
-			                {{ csrf_field() }}
-				        {{ method_field('POST') }}
-				        <input type="hidden" name="follow_user_id" value="{{ $user->id }}">
-				        <button type="submit" id="delete-playlist-{{ $user->id }}" class="btn btn-info fa fa-btn fa-user-plus"></button>
-			            </form>
+                        @if (in_array(Auth::user()->id, $follower))
+                            Following
+                            @else
+                            <form action="{{url('follow/')}}" method="POST">
+                                {{ csrf_field() }}
+                            {{ method_field('POST') }}
+                            <input type="hidden" name="follow_user_id" value="{{ $user->id }}">
+                            <button type="submit" id="delete-playlist-{{ $user->id }}" class="btn btn-info fa fa-btn fa-user-plus"></button>
+                            </form>
+                        @endif
 			        @endif
-			    @endif
-			</div>
+			    </div>
 		    </div>
-               </div>
-	       <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <i class="fa fa-users" aria-hidden="true"></i>Follow
+        </div>
+	    <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-users" aria-hidden="true"></i>Follow
 		    </div>
-                    <div class="panel-body">
+            <div class="panel-body">
 		        <div class="row">
 		            <div class="col-xs-12 col-md-6">
-			        <a href="{{ url('user/' . $user->id . '/follow') }}">{{ count($follow) }}  Follow</a>
-                            </div>
-		            <div class="col-xs-12 col-md-6">
-			        <a href="{{ url('user/' . $user->id . '/follower') }}">{{ count($follower) }}  Follower</a>
-                            </div>
-                        </div>
+		    	        <a href="{{ url('user/' . $user->id . '/follow') }}">{{ count($follow) }}  Follow</a>
                     </div>
-		</div>
+		        <div class="col-xs-12 col-md-6">
+			        <a href="{{ url('user/' . $user->id . '/follower') }}">{{ count($follower) }}  Follower</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- youtube activity -->
+    @if (count($youtube_datas) > 0)
+        <div class="panel panel-default">
+                <div class="panel-heading">
+            youtube activity
+                </div>
+                <div class="panel-body">
+                    <table class="table table-striped song-table">
+                        <thead>
+                <th>サムネイル</th>
+                            <th>Song</th>
+                            <th>URL</th>
+                        </thead>
+                        <tbody>
+                            @foreach ($youtube_datas as $youtube_data)
+                                <tr>
+                    <td>
+                    <img src="http://i.ytimg.com/vi/{{ $youtube_data->contentDetails->like->resourceId->videoId }}/default.jpg">
+                </td>
+                                    <td class="table-text"><div>{{ $youtube_data->snippet->title }}</div></td>
+                                    <td class="table-text">
+                    <a class="fa fa-youtube-play" href="https://www.youtube.com/watch?v={{ $youtube_data->contentDetails->like->resourceId->videoId }}" target="_blank">youtube</a>
+                </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        @endif
 
             <!-- Current Playlist -->
             @if (count($playlists) > 0)

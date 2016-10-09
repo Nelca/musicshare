@@ -9,6 +9,7 @@ use App\User;
 use App\Repositories\UserRepository;
 use App\Repositories\PlaylistRepository;
 use DB;
+use Auth;
 
 class UserController extends Controller
 {
@@ -23,12 +24,30 @@ class UserController extends Controller
     {
         $follow_users = $this->getFollowUserIds($user->id);
         $follower_users = $this->getFollowerUserIds($user->id);
+        $login_user = Auth::user();
+        $url = "https://www.googleapis.com/youtube/v3/activities?";
+        $url .= "part=snippet,contentDetails";
+        $url .= "&channelId=" . $user->channel_id;
+        $url .= "&maxResults=10";
+        $url .= "&access_token=" . $login_user->oauth_token;
+        $json = file_get_contents($url);
+        $jsonResponse = json_decode($json);
+        $youtube_activity_list = $jsonResponse->items;
+
+        // likeのみ
+        foreach ($youtube_activity_list as $key => $y_activiity) {
+            if ($y_activiity->snippet->type != 'like') {
+                unset($youtube_activity_list[$key]);
+            }
+        }
+
         return view('users.index', [
 	    'user' => $user,
 	    'playlists' => $user->playlists,
 	    'favorites' => $user->favorites,
 	    'follow' => $follow_users,
 	    'follower' => $follower_users,
+        'youtube_datas' => $youtube_activity_list,
 	]);
     }
 
