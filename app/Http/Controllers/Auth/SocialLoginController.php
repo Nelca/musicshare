@@ -77,13 +77,13 @@ class SocialLoginController extends Controller
     public function youtubeLogin()
     {
         //return Socialite::with('youtube')->redirect();
-        return Socialite::with('youtube')->scopes(['https://www.googleapis.com/auth/youtube.upload'])->redirect();
+        return Socialite::with('youtube')->scopes(['https://www.googleapis.com/auth/youtube', 'https://www.googleapis.com/auth/youtube.upload'])->redirect();
     }
 
     public function youtubeCallback()
     {
         $youtube_user = Socialite::driver('youtube')->user();
-        var_dump($youtube_user->id);
+        var_dump($youtube_user);
         $user = User::firstOrCreate([
                 'name' => $youtube_user->nickname,
                 ]);
@@ -94,7 +94,7 @@ class SocialLoginController extends Controller
             $user->channel_id = $youtube_user->id;
             $user->save();
 
-            return redirect('/mypage');
+            //return redirect('/mypage');
         }
 
         return 'youtube login error. sometihg went wlong.';
