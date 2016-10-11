@@ -26,7 +26,7 @@ class UserController extends Controller
         $follower_users = $this->getFollowerUserIds($user->id);
         $youtube_activity_list = array();
         $login_user = Auth::user();
-        if ($login_user && $login_user->oauth_token) {
+        if ($login_user && $login_user->oauth_token && $user->channel_id) {
             $url = "https://www.googleapis.com/youtube/v3/activities?";
             $url .= "part=snippet,contentDetails";
             $url .= "&channelId=" . $user->channel_id;
