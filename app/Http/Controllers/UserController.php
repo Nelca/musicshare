@@ -70,6 +70,7 @@ class UserController extends Controller
 			    ->get('u.id');
         return view('users.follow', [
 	    'follows' => $follow_users,
+	    'is_follow' => true,
 	]);
     }
 
@@ -82,6 +83,7 @@ class UserController extends Controller
 			    ->get('u.id');
         return view('users.follow', [
 	    'follows' => $follow_users,
+	    'is_follow' => false,
 	]);
     }
 
