@@ -15,13 +15,18 @@
 		        <div class="col-xs-12 col-md-6">
 		            @if (Auth::check())
                         @if (in_array(Auth::user()->id, $follower))
-                            Following
-                            @else
+                            <form action="{{url('unfollow/')}}" method="POST">
+                                {{ csrf_field() }}
+                                {{ method_field('POST') }}
+                                <input type="hidden" name="follow_user_id" value="{{ $user->id }}">
+                                <button type="submit" id="delete-playlist-{{ $user->id }}" class="btn btn-info fa fa-btn fa-user-times"></button>
+                            </form>
+                        @else
                             <form action="{{url('follow/')}}" method="POST">
                                 {{ csrf_field() }}
-                            {{ method_field('POST') }}
-                            <input type="hidden" name="follow_user_id" value="{{ $user->id }}">
-                            <button type="submit" id="delete-playlist-{{ $user->id }}" class="btn btn-info fa fa-btn fa-user-plus"></button>
+                                {{ method_field('POST') }}
+                                <input type="hidden" name="follow_user_id" value="{{ $user->id }}">
+                                <button type="submit" id="delete-playlist-{{ $user->id }}" class="btn fa fa-btn fa-user-plus"></button>
                             </form>
                         @endif
 			        @endif

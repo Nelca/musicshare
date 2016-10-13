@@ -62,6 +62,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::put('/song/{song}/like', 'SongController@like');
 
     Route::post('/follow', 'FollowController@follow');
+    Route::post('/unfollow', 'FollowController@unfollow');
 
     Route::get('/mypage', 'MyPageController@index');
     Route::get('/mypage/likes', 'MyPageController@likes');
