@@ -72,22 +72,29 @@
 					    <a class="fa fa-youtube-play" href="{{ $song->url }}" target="_blank">youtube</a>
 					</td>
 
-                                        <!-- Song Like Button -->
-                                        <td>
-					    @can('like', $song)
-                                                <form action="{{url('song/' . $song->id) . '/like'}}" method="POST">
-                                                    {{ csrf_field() }}
-                                                    {{ method_field('PUT') }}
-                                                    <button type="submit" id="like-song-{{ $song->id }}" class="btn fa fa-star">
-                                                        Like
-                                                    </button>
-			                            <input type="hidden" name="playlist_id" value="{{ $playlist->id }}">
-                                                </form>
-					    @else
-					        <div>Liked</div>
-					    @endcan
-                                        </td>
-                                        <td class="table-text">
+                    <!-- Song Like Button -->
+                    <td>
+                        @can('like', $song)
+                            <form action="{{url('song/' . $song->id) . '/like'}}" method="POST">
+                                {{ csrf_field() }}
+                                {{ method_field('PUT') }}
+                                <button type="submit" id="like-song-{{ $song->id }}" class="btn fa fa-star">
+                                    Like
+                                </button>
+                                <input type="hidden" name="playlist_id" value="{{ $playlist->id }}">
+                            </form>
+                        @else
+                            <form action="{{url('song/' . $song->id) . '/unlike'}}" method="POST">
+                                {{ csrf_field() }}
+                                {{ method_field('PUT') }}
+                                <button type="submit" id="like-song-{{ $song->id }}" class="btn fa fa-star">
+                                    unLike
+                                </button>
+                                <input type="hidden" name="playlist_id" value="{{ $playlist->id }}">
+                            </form>
+                        @endcan
+                    </td>
+                    <td class="table-text">
 					   <div>{{ count($song->evaluates)}}<span class="fa fa-star"></span></div>
                                         </td>
 
