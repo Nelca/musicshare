@@ -16,57 +16,57 @@ class PlaylistController extends Controller
 
     public function __construct(PlaylistRepository $playlists)
     {
-	$this->playlists = $playlists;
+        $this->playlists = $playlists;
     }
 
     public function index(Request $request)
     {
         return view('playlists.index', [
-	    'playlists' => $this->playlists->all(),
-	]);
+                'playlists' => $this->playlists->all(),
+                ]);
     }
 
     public function myPlaylists(Request $request)
     {
         return view('playlists.index', [
-	    'playlists' => $this->playlists->forUser($request->user()),
-	]);
+                'playlists' => $this->playlists->forUser($request->user()),
+                ]);
     }
 
     public function store(Request $request)
     {
         $this->validate($request, [
-	    'name' => 'required|max:255',
-	]);
+                'name' => 'required|max:255',
+                ]);
 
-	$request->user()->playlists()->create([
-	    'name' => $request->name,
-	]);
+        $request->user()->playlists()->create([
+                'name' => $request->name,
+                ]);
 
-	return redirect('/playlists');
+        return redirect('/playlists');
     }
 
     public function destroy(Request $request, Playlist $playlist)
     {
-	$playlist->delete();
+        $playlist->delete();
 
-	return redirect('/playlists');
+        return redirect('/playlists');
     }
 
     public function update (Request $request, Playlist $playlist)
     {
         $playlist->name = $request->name;
-	$playlist->save();
-	return redirect('/playlists');
+        $playlist->save();
+        return redirect('/playlists');
     }
 
     public function like(Request $request, Playlist $playlist)
     {
         $like = new Evaluate;
-	$like->user_id = $request->user()->id;
-	$like->evaluation = 1;
+        $like->user_id = $request->user()->id;
+        $like->evaluation = 1;
         $playlist->evaluates()->save($like);
-	return redirect('/playlists');
+        return redirect('/playlists');
     }
 }
 

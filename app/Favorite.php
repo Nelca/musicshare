@@ -2,8 +2,9 @@
 
 namespace App;
 
-use App\User;
 use Illuminate\Database\Eloquent\Model;
+use App\User;
+use App\Evaluate;
 
 class Favorite extends Model
 {

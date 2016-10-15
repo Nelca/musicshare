@@ -9,7 +9,6 @@ use App\Evaluate;
 class Song extends Model
 {
     //
-
     protected $fillable = ['name'];
 
     public function playlist()

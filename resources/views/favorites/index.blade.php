@@ -69,7 +69,7 @@
 					</td>
                                         <td class="table-text"><div>{{ $favorite->name }}</div></td>
                                         <td>
-					    @can('like', $favorite)
+                                        @can('like', $favorite)
                                                 <form action="{{url('favorite/' . $favorite->id) . '/like'}}" method="POST">
                                                     {{ csrf_field() }}
                                                     {{ method_field('PUT') }}
@@ -77,9 +77,15 @@
                                                         Like
                                                     </button>
                                                 </form>
-					    @else
-					        <div>Liked</div>
-					    @endcan
+                                        @else
+                                            <form action="{{url('favorite/' . $favorite->id) . '/unlike'}}" method="POST">
+                                                {{ csrf_field() }}
+                                                {{ method_field('PUT') }}
+                                                <button type="submit" id="like-favorite-{{ $favorite->id }}" class="btn fa fa-star">
+                                                    UnLike
+                                                </button>
+                                            </form>
+                                        @endcan
                                         <td>
                                             <form action="{{url('favorite/' . $favorite->id)}}" method="POST">
                                                 {{ csrf_field() }}

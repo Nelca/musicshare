@@ -18,7 +18,7 @@ class FavoriteController extends Controller
     public function __construct(FavoriteRepository $favorites)
     {
         $this->middleware('auth');
-        $this->fivorites = $favorites;
+        $this->favorites = $favorites;
     }
 
     public function index(Request $request)
@@ -64,18 +64,29 @@ class FavoriteController extends Controller
     public function destroy(Request $request, Favorite $favorite)
     {
         $this->authorize('destroy', $favorite);
+        $favorite->delete();
 
-	$favorite->delete();
-
-	return redirect('/favorites');
+        return redirect('/favorites');
     }
 
     public function like(Request $request, Favorite $favorite)
     {
         $like = new Evaluate;
-	$like->user_id = $request->user()->id;
-	$like->evaluation = 1;
+        $like->user_id = $request->user()->id;
+        $like->evaluation = 1;
         $favorite->evaluates()->save($like);
-	return redirect('/favorites');
+        return redirect('/favorites');
     }
+
+    public function unLike(Request $request, Favorite $favorite)
+    {
+        $like = Evaluate::where('user_id', $request->user()->id)
+                        //->where('evaluatable_type', 'favorites')
+                        ->where('evaluatable_type', 'App\Favorite')
+                        ->where('evaluatable_id', $favorite->id)
+                        ->get()->first();
+        $like->delete();
+        return redirect('/favorites');
+    }
+
 }
