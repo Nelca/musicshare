@@ -11,12 +11,12 @@
                 <a type="button" class="btn btn-primary" href="/auth/youtube">
                     <i class="fa fa-btn fa-youtube-square"></i>Youtube Login
                 </a>
-                <a type="button" class="btn btn-primary" href="/auth/twitter">
+                <!--<a type="button" class="btn btn-primary" href="/auth/twitter">
                     <i class="fa fa-btn fa-twitter-square"></i>Twitter Login
                 </a>
                 <a type="button" class="btn btn-primary" href="/auth/github">
                     <i class="fa fa-btn fa-github-square"></i>Github Login
-                </a>
+                </a>-->
 		    </div>
 		</div>
                 <div class="panel-heading">Login</div>

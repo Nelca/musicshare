@@ -36,11 +36,11 @@ class MyPageController extends Controller
             }
         }
         return view('mypage.index', [
-                'songs' => $songs,
-                'follow' => $follow_users,
-                'follower' => $follower_users,
-                'user' => $user,
-                'youtube_datas' => $youtube_activity_list,
+                    'songs' => $songs,
+                    'follow' => $follow_users,
+                    'follower' => $follower_users,
+                    'user' => $user,
+                    'youtube_datas' => $youtube_activity_list,
                 ]);
     }
 
