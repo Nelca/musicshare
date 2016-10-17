@@ -18,7 +18,7 @@ class MyPageController extends Controller
 
         $follow_users = $this->getFollowUserIds($user_id);
         $follower_users = $this->getFollowerUserIds($user_id);
-        $songs = $this->getSongs($user_id);
+        $songs = $this->getSongs($user);
 
         $youtube_activity_list = array();
         if ($user->oauth_token) {
@@ -87,8 +87,9 @@ class MyPageController extends Controller
         return $follower_users;
     }
 
-    public function getSongs ($user_id)
+    public function getSongs ($user)
     {
+        $user_id = $user->id;
         $query = " SELECT s.id, s.name, s.url, s.song_key, 'song' as type, u.name as user_name, s.updated_at as updated_at ";
         $query .= " from songs as s ";
         $query .= " inner join playlists as p ON s.playlist_id = p.id ";
@@ -117,6 +118,29 @@ class MyPageController extends Controller
 
         $songs = DB::select($query, [$user_id, $user_id, $user_id]);
 
+        $youtube_activity_list = array();
+        if ($user->oauth_token) {
+            $url = "https://www.googleapis.com/youtube/v3/activities?part=snippet,contentDetails&mine=true&maxResults=10&access_token=" . $user->oauth_token;
+            $json = file_get_contents($url);
+            $jsonResponse = json_decode($json);
+            $youtube_activity_list = $jsonResponse->items;
+
+            // likeのみ
+            foreach ($youtube_activity_list as $key => $y_activiity) {
+                if ($y_activiity->snippet->type != 'like') {
+                    unset($youtube_activity_list[$key]);
+                } else {
+                    $y_activitys = new \stdClass();
+                    $y_activitys->id = $y_activiity->id;
+                    $y_activitys->name = $y_activiity->snippet->title;
+                    $y_activitys->url = "https://www.youtube.com/watch?v=" . $y_activiity->contentDetails->like->resourceId->videoId;
+                    $y_activitys->song_key = $y_activiity->contentDetails->like->resourceId->videoId;
+                    $y_activitys->type = "youtube_acivity";
+                    $y_activitys->user_name = $user->name;
+                    array_push($songs, $y_activitys);
+                }
+            }
+        }
         return $songs;
     }
 
