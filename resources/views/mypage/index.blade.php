@@ -7,13 +7,12 @@
                 <div class="panel-heading">
                     New Song
                 </div>
-
                 <div class="panel-body">
                     <!-- Display Validation Errors -->
                     @include('common.errors')
 
                     <!-- New Favorite Form -->
-		    <form action="{{ url('favorite') }}" method="POST" class="form-horizontal">
+                    <form action="{{ url('favorite') }}" method="POST" class="form-horizontal">
                         {{ csrf_field() }}
 
                         <!-- Favorie Name -->
@@ -41,10 +40,10 @@
                     </form>
                 </div>
 	       <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <i class="fa fa-users" aria-hidden="true"></i>Follow
-		    </div>
-                    <div class="panel-body">
+           <div class="panel-heading">
+               <i class="fa fa-users" aria-hidden="true"></i>Follow
+           </div>
+           <div class="panel-body">
 		        <div class="row">
 		            <div class="col-xs-12 col-md-6">
 			        <a href="{{ url('user/' . $user->id . '/follow') }}">{{ count($follow) }}  Follow</a>
@@ -56,37 +55,7 @@
                     </div>
 		</div>
             </div>
-            <!-- youtube activity -->
-            @if (count($youtube_datas) > 0)
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-		        youtube activity
-                    </div>
-                    <div class="panel-body">
-                        <table class="table table-striped song-table">
-                            <thead>
-			        <th>サムネイル</th>
-                                <th>Song</th>
-                                <th>URL</th>
-                            </thead>
-                            <tbody>
-                                @foreach ($youtube_datas as $youtube_data)
-                                    <tr>
-				        <td>
-					    <img src="http://i.ytimg.com/vi/{{ $youtube_data->contentDetails->like->resourceId->videoId }}/default.jpg">
-					</td>
-                                        <td class="table-text"><div>{{ $youtube_data->snippet->title }}</div></td>
-                                        <td class="table-text">
-					    <a class="fa fa-youtube-play" href="https://www.youtube.com/watch?v={{ $youtube_data->contentDetails->like->resourceId->videoId }}" target="_blank">youtube</a>
-					</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            @endif
-	    <!-- Current Song -->
+            	    <!-- Current Song -->
             @if (count($songs) > 0)
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -96,7 +65,7 @@
                     <div class="panel-body">
                         <table class="table table-striped song-table">
                             <thead>
-			        <th>サムネイル</th>
+                                <th>サムネイル</th>
                                 <th>Song</th>
                                 <th>User</th>
                                 <th>URL</th>
@@ -127,7 +96,7 @@
                                                     <button type="submit" id="like-song-{{ $song->id }}" class="btn fa fa-star">
                                                         Like
                                                     </button>
-			                            <input type="hidden" name="playlist_id" value="{{ $playlist->id }}">
+                                                    <input type="hidden" name="playlist_id" value="{{ $playlist->id }}">
                                                 </form>
 					    @else
 					        <div>Liked</div>
@@ -147,6 +116,36 @@
                                             </form>
                                         </td>
                                     </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            @endif
+            <!-- youtube activity -->
+            @if (count($youtube_datas) > 0)
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        youtube activity
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-striped song-table">
+                            <thead>
+                                <th>サムネイル</th>
+                                <th>Song</th>
+                                <th>URL</th>
+                            </thead>
+                            <tbody>
+                                @foreach ($youtube_datas as $youtube_data)
+                                <tr>
+                                    <td>
+                                        <img src="http://i.ytimg.com/vi/{{ $youtube_data->contentDetails->like->resourceId->videoId }}/default.jpg">
+                                    </td>
+                                    <td class="table-text"><div>{{ $youtube_data->snippet->title }}</div></td>
+                                    <td class="table-text">
+                                        <a class="fa fa-youtube-play" href="https://www.youtube.com/watch?v={{ $youtube_data->contentDetails->like->resourceId->videoId }}" target="_blank">youtube</a>
+                                    </td>
+                                </tr>
                                 @endforeach
                             </tbody>
                         </table>
