@@ -77,7 +77,7 @@
                                 @foreach ($songs as $song)
                                     <tr>
 				        <td>
-					    <img src="http://i.ytimg.com/vi/{{ $song->song_key }}/default.jpg">
+					    <iframe width="120" height="90" src="https://www.youtube.com/embed/{{ $song->song_key }}" frameborder="0" allowfullscreen></iframe>
 					</td>
                                         <td class="table-text"><div>{{ $song->name }}</div></td>
                                         <td class="table-text">
