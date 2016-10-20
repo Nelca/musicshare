@@ -66,22 +66,26 @@
 							</form>
 						    </div>
 						    <div class="col-xs-12 col-md-2">
-					                @can('like', $playlist)
-							    <form action="{{url('playlist/' . $playlist->id . '/like')}}" method="POST">
-							        {{ csrf_field() }}
-		        					{{ method_field('PUT') }}
-			        				<button type="submit" id="like-playlist-{{ $playlist->id }}" class="btn  fa fa-star">Like</button>
-				         		    </form>
-							@else
-							    <span>Liked</span>
-							@endcan
+                                @can('like', $playlist)
+                                    <form action="{{url('playlist/' . $playlist->id . '/like')}}" method="POST">
+                                        {{ csrf_field() }}
+                                        {{ method_field('PUT') }}
+                                        <button type="submit" id="like-playlist-{{ $playlist->id }}" class="btn fa fa-star">Like</button>
+                                    </form>
+                                @else
+                                    <form action="{{url('playlist/' . $playlist->id . '/unlike')}}" method="POST">
+                                        {{ csrf_field() }}
+                                        {{ method_field('PUT') }}
+                                        <button type="submit" id="like-playlist-{{ $playlist->id }}" class="btn btn-warning fa fa-star">Liked</button>
+                                    </form>
+                                @endcan
 							<span>{{ count($playlist->evaluates) }}<span class="fa fa-star"></span></span>
 						    </div>
 						    <div class="col-xs-12 col-md-1">
 							<form action="{{url('playlist/' . $playlist->id)}}" method="POST">
 							    {{ csrf_field() }}
 							    {{ method_field('DELETE') }}
-							    <button type="submit" id="delete-playlist-{{ $playlist->id }}" class="btn btn-warning fa fa-btn fa-trash">
+							    <button type="submit" id="delete-playlist-{{ $playlist->id }}" class="btn fa fa-btn fa-trash">
 							    </button>
 							</form>
 						    </div>

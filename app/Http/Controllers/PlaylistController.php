@@ -68,5 +68,16 @@ class PlaylistController extends Controller
         $playlist->evaluates()->save($like);
         return redirect('/playlists');
     }
+
+    public function unLike(Request $request, Playlist $playlist)
+    {
+        $like = Evaluate::where('user_id', $request->user()->id)
+                        ->where('evaluatable_type', 'playlists')
+                        ->where('evaluatable_id', $playlist->id)
+                        ->get()->first();
+        $like->delete();
+        return redirect('/playlists');
+    }
+
 }
 
