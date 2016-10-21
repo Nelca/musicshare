@@ -65,7 +65,7 @@
                                 @foreach ($songs as $song)
                                     <tr>
 				        <td>
-					    <img src="http://i.ytimg.com/vi/{{ $song->song_key }}/default.jpg">
+					    <iframe width="120" height="90" src="https://www.youtube.com/embed/{{ $song->song_key }}" frameborder="0" allowfullscreen></iframe>
 					</td>
                                         <td class="table-text"><div>{{ $song->name }}</div></td>
                                         <td class="table-text">
@@ -79,7 +79,6 @@
                                 {{ csrf_field() }}
                                 {{ method_field('PUT') }}
                                 <button type="submit" id="like-song-{{ $song->id }}" class="btn fa fa-star">
-                                    Like
                                 </button>
                                 <input type="hidden" name="playlist_id" value="{{ $playlist->id }}">
                             </form>
@@ -87,8 +86,7 @@
                             <form action="{{url('song/' . $song->id) . '/unlike'}}" method="POST">
                                 {{ csrf_field() }}
                                 {{ method_field('PUT') }}
-                                <button type="submit" id="like-song-{{ $song->id }}" class="btn fa fa-star">
-                                    unLike
+                                <button type="submit" id="like-song-{{ $song->id }}" class="btn btn-warning fa fa-star">
                                 </button>
                                 <input type="hidden" name="playlist_id" value="{{ $playlist->id }}">
                             </form>
@@ -104,7 +102,7 @@
                                                 {{ csrf_field() }}
                                                 {{ method_field('DELETE') }}
 
-                                                <button type="submit" id="delete-song-{{ $song->id }}" class="btn btn-warning fa fa-btn fa-trash">
+                                                <button type="submit" id="delete-song-{{ $song->id }}" class="btn fa fa-btn fa-trash">
                                                 </button>
 			                        <input type="hidden" name="playlist_id" value="{{ $playlist->id }}">
                                             </form>
