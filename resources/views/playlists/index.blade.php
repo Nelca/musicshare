@@ -70,13 +70,13 @@
                                     <form action="{{url('playlist/' . $playlist->id . '/like')}}" method="POST">
                                         {{ csrf_field() }}
                                         {{ method_field('PUT') }}
-                                        <button type="submit" id="like-playlist-{{ $playlist->id }}" class="btn fa fa-star">Like</button>
+                                        <button type="submit" id="like-playlist-{{ $playlist->id }}" class="btn fa fa-star"></button>
                                     </form>
                                 @else
                                     <form action="{{url('playlist/' . $playlist->id . '/unlike')}}" method="POST">
                                         {{ csrf_field() }}
                                         {{ method_field('PUT') }}
-                                        <button type="submit" id="like-playlist-{{ $playlist->id }}" class="btn btn-warning fa fa-star">Liked</button>
+                                        <button type="submit" id="like-playlist-{{ $playlist->id }}" class="btn btn-warning fa fa-star"></button>
                                     </form>
                                 @endcan
 							<span>{{ count($playlist->evaluates) }}<span class="fa fa-star"></span></span>
