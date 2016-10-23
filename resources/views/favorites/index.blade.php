@@ -87,8 +87,7 @@
                                                 {{ csrf_field() }}
                                                 {{ method_field('DELETE') }}
 
-                                                <button type="submit" id="delete-favorite-{{ $favorite->id }}" class="btn btn-danger">
-                                                    <i class="fa fa-btn fa-trash"></i>Delete
+                                                <button type="submit" id="delete-favorite-{{ $favorite->id }}" class="btn fa fa-btn fa-trash">
                                                 </button>
                                             </form>
                                         </td>

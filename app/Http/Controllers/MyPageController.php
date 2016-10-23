@@ -55,9 +55,10 @@ class MyPageController extends Controller
 
         $songs = DB::select($query, [$user_id, "songs"]);
 
-        $p_query = "SELECT p.* ";
+        $p_query = "SELECT p.*, u.id as user_id, u.name as user_name ";
         $p_query .= " FROM evaluates as e";
         $p_query .= " JOIN playlists as p ON p.id = e.evaluatable_id";
+        $p_query .= " JOIN users as u ON p.user_id = u.id";
         $p_query .= " WHERE e.user_id = ?";
         $p_query .= " AND e.evaluatable_type = ?";
 

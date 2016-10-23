@@ -12,7 +12,7 @@
                     <div class="panel-body">
                         <table class="table table-striped song-table">
                             <thead>
-			        <th>サムネイル</th>
+                                <th>サムネイル</th>
                                 <th>Song</th>
                                 <th>URL</th>
                                 <th>&nbsp;</th>
@@ -22,28 +22,27 @@
                             <tbody>
                                 @foreach ($songs as $song)
                                     <tr>
-				        <td>
-					    <img src="http://i.ytimg.com/vi/{{ $song->song_key }}/default.jpg">
-					</td>
+                                        <td>
+                                            <img src="http://i.ytimg.com/vi/{{ $song->song_key }}/default.jpg">
+                                        </td>
                                         <td class="table-text"><div>{{ $song->name }}</div></td>
                                         <td class="table-text">
-					    <a class="fa fa-youtube-play" href="{{ $song->url }}" target="_blank">youtube</a>
-					</td>
-
+                                            <a class="fa fa-youtube-play" href="{{ $song->url }}" target="_blank">youtube</a>
+                                        </td>
                                         <!-- Song Like Button -->
                                         <td>
-					    @can('like', $song)
+                                            @can('like', $song)
                                                 <form action="{{url('song/' . $song->id) . '/like'}}" method="POST">
                                                     {{ csrf_field() }}
                                                     {{ method_field('PUT') }}
                                                     <button type="submit" id="like-song-{{ $song->id }}" class="btn fa fa-star">
                                                         Like
                                                     </button>
-			                            <input type="hidden" name="playlist_id" value="{{ $playlist->id }}">
+                                                    <input type="hidden" name="playlist_id" value="{{ $playlist->id }}">
                                                 </form>
-					    @else
-					        <div>Liked</div>
-					    @endcan
+                                            @else
+                                                <div>Liked</div>
+                                            @endcan
                                         </td>
                                         <td class="table-text">
                                         </td>
@@ -58,47 +57,58 @@
             @if (count($playlists) > 0)
                 <div class="panel panel-default">
                     <div class="panel-heading">
-		       Like Playlists 
+                        Like Playlists 
                     </div>
                     <div class="panel-body">
-                        <table class="table table-striped playlist-table">
-                            <thead>
-                                <th>Playlist</th>
-                                <th>Autohr</th>
-                                <th>&nbsp;</th>
-                            </thead>
-                            <tbody>
-                                @foreach ($playlists as $playlist)
-                                    <tr>
-                                        <td class="table-text"><div>{{ $playlist->name }}</div></td>
-                                        <td>
-					    <div class="row">
-						    <div class="col-xs-12 col-md-8">
-                                <form action="{{url('playlist/' . $playlist->id . '/songs')}}" method="POST">
-                                    {{ csrf_field() }}
-                                    {{ method_field('GET') }}
-                                    <button type="submit" id="view-playlist-songs-{{ $playlist->id }}" class="btn btn-primary">
-                                    <i class="fa fa-btn fa-music"></i>View Songs
-                                    </button>
-                                </form>
-						    </div>
-						    <div class="col-xs-12 col-md-4">
-					            @can('like', $playlist)
-                                    <form action="{{url('playlist/' . $playlist->id . '/like')}}" method="POST">
-                                        {{ csrf_field() }}
-                                        {{ method_field('PUT') }}
-                                        <button type="submit" id="like-playlist-{{ $playlist->id }}" class="btn  fa fa-star">Like</button>
-				         		    </form>
-                                @else
-                                    <span>Liked</span>
-                                @endcan
-						    </div>
-					    </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-5">
+                                Playlist
+                            </div>
+                            <div class="col-xs-12 col-md-2">
+                                Autohr
+                            </div>
+                            <div class="col-xs-12 col-md-5">
+                                Actions 
+                            </div>
+                        </div>
+                        @foreach ($playlists as $playlist)
+                            <div class="row">
+                                <div class="col-xs-12 col-md-5">
+                                    {{ $playlist->name }}
+                                </div>
+                                <div class="col-xs-12 col-md-2">
+                                    <a href="{{url('user/' . $playlist->user_id )}}"><span class="fa fa-user">{{ $playlist->user_name}}</span></a>
+                                </div>
+                                <div class="col-xs-12 col-md-5">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-md-10">
+                                            <form action="{{url('playlist/' . $playlist->id . '/songs')}}" method="POST">
+                                                {{ csrf_field() }}
+                                                {{ method_field('GET') }}
+                                                <button type="submit" id="view-playlist-songs-{{ $playlist->id }}" class="btn btn-primary">
+                                                    <i class="fa fa-btn fa-music"></i>View Songs
+                                                </button>
+                                            </form>
+                                        </div>
+                                        <div class="col-xs-12 col-md-2">
+                                            @can('like', $playlist)
+                                                <form action="{{url('playlist/' . $playlist->id . '/like')}}" method="POST">
+                                                    {{ csrf_field() }}
+                                                    {{ method_field('PUT') }}
+                                                    <button type="submit" id="like-playlist-{{ $playlist->id }}" class="btn  fa fa-star"></button>
+                                                </form>
+                                            @else
+                                                <form action="{{url('playlist/' . $playlist->id . '/unlike')}}" method="POST">
+                                                    {{ csrf_field() }}
+                                                    {{ method_field('PUT') }}
+                                                    <button type="submit" id="like-playlist-{{ $playlist->id }}" class="btn btn-warning fa fa-star"></button>
+                                                </form>
+                                            @endcan
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             @endif
