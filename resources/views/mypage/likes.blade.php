@@ -81,7 +81,7 @@
                                 </div>
                                 <div class="col-xs-12 col-md-5">
                                     <div class="row">
-                                        <div class="col-xs-12 col-md-10">
+                                        <div class="col-xs-12 col-md-8">
                                             <form action="{{url('playlist/' . $playlist->id . '/songs')}}" method="POST">
                                                 {{ csrf_field() }}
                                                 {{ method_field('GET') }}
@@ -90,7 +90,7 @@
                                                 </button>
                                             </form>
                                         </div>
-                                        <div class="col-xs-12 col-md-2">
+                                        <div class="col-xs-12 col-md-4">
                                             @can('like', $playlist)
                                                 <form action="{{url('playlist/' . $playlist->id . '/like')}}" method="POST">
                                                     {{ csrf_field() }}

@@ -46,7 +46,8 @@ class MyPageController extends Controller
 
     public function likes (Request $request)
     {
-        $user_id = $request->user()->id;
+        $user = $request->user();
+        $user_id = $user->id;
         $query = "SELECT s.* ";
         $query .= " FROM evaluates as e";
         $query .= " JOIN songs as s ON s.id = e.evaluatable_id";
@@ -63,6 +64,22 @@ class MyPageController extends Controller
         $p_query .= " AND e.evaluatable_type = ?";
 
         $playlists = DB::select($p_query, [$user_id, "playlists"]);
+
+        $youtube_activity_list = array();
+        if ($user->oauth_token) {
+
+            $url = "https://www.googleapis.com/youtube/v3/activities?part=snippet,contentDetails&mine=true&maxResults=10&access_token=" . $user->oauth_token;
+            $json = file_get_contents($url);
+            $jsonResponse = json_decode($json);
+            $youtube_activity_list = $jsonResponse->items;
+
+            // likeのみ
+            foreach ($youtube_activity_list as $key => $y_activiity) {
+                if ($y_activiity->snippet->type != 'like') {
+                    unset($youtube_activity_list[$key]);
+                }
+            }
+        }
 
         return view('mypage.likes', [
                 'songs' => $songs,
@@ -119,7 +136,17 @@ class MyPageController extends Controller
 
         $songs = DB::select($query, [$user_id, $user_id, $user_id]);
 
+        $youtube_list = array();
+        $youtube_list = $this->getYoutbeLikeSongs($user);
+        
+        $songs = array_merge($songs, $youtube_list);
+        return $songs;
+    }
+
+    public function getYoutbeLikeSongs($user)
+    {
         $youtube_activity_list = array();
+        $youtube_list = array();
         if ($user->oauth_token) {
             $url = "https://www.googleapis.com/youtube/v3/activities?part=snippet,contentDetails&mine=true&maxResults=10&access_token=" . $user->oauth_token;
             $json = file_get_contents($url);
@@ -138,11 +165,11 @@ class MyPageController extends Controller
                     $y_activitys->song_key = $y_activiity->contentDetails->like->resourceId->videoId;
                     $y_activitys->type = "youtube_acivity";
                     $y_activitys->user_name = $user->name;
-                    array_push($songs, $y_activitys);
+                    array_push($youtube_list, $y_activitys);
                 }
             }
         }
-        return $songs;
+        return $youtube_list;
     }
 
 }
