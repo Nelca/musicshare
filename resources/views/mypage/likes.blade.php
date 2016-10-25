@@ -41,7 +41,12 @@
                                                     <input type="hidden" name="playlist_id" value="{{ $playlist->id }}">
                                                 </form>
                                             @else
-                                                <div>Liked</div>
+                                                <form action="{{url('song/' . $song->id) . '/unlike'}}" method="POST">
+                                                    {{ csrf_field() }}
+                                                    {{ method_field('PUT') }}
+                                                    <button type="submit" id="like-song-{{ $song->id }}" class="btn btn-warning fa fa-star">
+                                                    </button>
+                                                </form>
                                             @endcan
                                         </td>
                                         <td class="table-text">

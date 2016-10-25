@@ -83,6 +83,10 @@ class SongController extends Controller
                         ->where('evaluatable_id', $song->id)
                         ->get()->first();
         $like->delete();
-        return redirect('/playlist/'. $request->playlist_id . '/songs');
+        if ($request->playlist_id) {
+            return redirect('/playlist/'. $request->playlist_id . '/songs');
+        } else {
+            return redirect('/mypage');
+        }
     }
 }
