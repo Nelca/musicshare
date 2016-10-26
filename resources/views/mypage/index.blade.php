@@ -99,7 +99,12 @@
                                                     <input type="hidden" name="playlist_id" value="{{ $playlist->id }}">
                                                 </form>
 					    @else
-					        <div>Liked</div>
+                            <form action="https://www.googleapis.com/youtube/v3/videos/rate?rating=like&id={{ $song->song_key }}&access_token={{ $user->oauth_token }}" method="POST">
+                                <button type="submit" id="like-song-{{ $song->id }}" class="btn fa fa-star">
+                                    Like
+                                </button>
+                            </form>
+
 					    @endcan
 					    {{ $song->type}}
                                         </td>
