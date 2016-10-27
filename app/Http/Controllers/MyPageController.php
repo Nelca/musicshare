@@ -48,13 +48,8 @@ class MyPageController extends Controller
     {
         $user = $request->user();
         $user_id = $user->id;
-        $query = "SELECT s.* ";
-        $query .= " FROM evaluates as e";
-        $query .= " JOIN songs as s ON s.id = e.evaluatable_id";
-        $query .= " WHERE e.user_id = ?";
-        $query .= " AND e.evaluatable_type = ?";
-
-        $songs = DB::select($query, [$user_id, "songs"]);
+        
+        $songs = getLikedSongs($user_id);
 
         $youtube_list = array();
         $youtube_list = $this->getYoutubeLikeSongs($user);
@@ -158,6 +153,20 @@ class MyPageController extends Controller
             }
         }
         return $youtube_list;
+    }
+
+    public function getLikedSongs ($user_id) 
+    {
+        $query = "SELECT s.* ";
+        $query .= " FROM evaluates as e";
+        $query .= " JOIN songs as s ON s.id = e.evaluatable_id";
+        $query .= " WHERE e.user_id = ?";
+        $query .= " AND e.evaluatable_type = ?";
+
+        $songs = DB::select($query, [$user_id, "songs"]);
+
+        return $songs;
+
     }
 
 }
