@@ -49,7 +49,7 @@ class MyPageController extends Controller
         $user = $request->user();
         $user_id = $user->id;
         
-        $songs = getLikedSongs($user_id);
+        $songs = $this->getLikedSongs($user_id);
 
         $youtube_list = array();
         $youtube_list = $this->getYoutubeLikeSongs($user);
