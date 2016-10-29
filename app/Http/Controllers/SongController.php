@@ -76,10 +76,26 @@ class SongController extends Controller
         if ($request->user()->oauth_token) {
             $token = $request->user()->oauth_token;
             $base_url = "https://www.googleapis.com/youtube/v3/videos/rate?";
-            $query_list = ['rating'=>'liked','id'=>$song->song_key, 'access_token'=>$token];
-            $youtube_url = $base_url . http_build_query($query_list);
-            echo $youtube_url;
-            $response = file_get_contents($youtube_url);
+            $query = array(
+                'rating' => 'liked'
+                , 'id' => $song->song_key
+                , 'access_token' => $token
+            );
+            $query = http_build_query($query, "", "&");
+            $header = array(
+                'Content-Type: application/x-www-form-urlencoded',
+                //'Authorization: Bearer ' . $token
+            );
+            $context = array(
+                'http' => array(
+                    'method' => 'POST',
+                    'header' => implode("\r\n", $header),
+                    'content' => $query
+                )
+            );
+            $context = stream_context_create($context);
+            $response = file_get_contents($base_url, false, $context);
+            var_dump($response);
         }
         return redirect('/playlist/'. $request->playlist_id . '/songs');
     }
