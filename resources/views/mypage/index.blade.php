@@ -39,57 +39,53 @@
                         </div>
                     </form>
                 </div>
-	       <div class="panel panel-default">
-           <div class="panel-heading">
-               <i class="fa fa-users" aria-hidden="true"></i>Follow
-           </div>
-           <div class="panel-body">
-		        <div class="row">
-		            <div class="col-xs-12 col-md-6">
-			        <a href="{{ url('user/' . $user->id . '/follow') }}">{{ count($follow) }}  Follow</a>
+               <div class="panel panel-default">
+                   <div class="panel-heading">
+                       <i class="fa fa-users" aria-hidden="true"></i>Follow
+                   </div>
+                   <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6">
+                                <a href="{{ url('user/' . $user->id . '/follow') }}">{{ count($follow) }}  Follow</a>
                             </div>
-		            <div class="col-xs-12 col-md-6">
-			        <a href="{{ url('user/' . $user->id . '/follower') }}">{{ count($follower) }}  Follower</a>
+                            <div class="col-xs-12 col-md-6">
+                                <a href="{{ url('user/' . $user->id . '/follower') }}">{{ count($follower) }}  Follower</a>
                             </div>
                         </div>
                     </div>
-		</div>
+                </div>
             </div>
-            	    <!-- Current Song -->
+            <!-- Current Song -->
             @if (count($songs) > 0)
                 <div class="panel panel-default">
                     <div class="panel-heading">
-		        TimeLine
+                        TimeLine
                     </div>
-
                     <div class="panel-body">
                         <table class="table table-striped song-table">
                             <thead>
                                 <th>サムネイル</th>
                                 <th>Song</th>
                                 <th>User</th>
-                                <th>URL</th>
-                                <th>&nbsp;</th>
-                                <th style="width: 80px;">&nbsp;</th>
-                                <th>&nbsp;</th>
+                                <th>Like</th>
+                                <th>Type</th>
+                                <th>Delete</th>
                             </thead>
                             <tbody>
                                 @foreach ($songs as $song)
                                     <tr>
-				        <td>
-					    <iframe width="120" height="90" src="https://www.youtube.com/embed/{{ $song->song_key }}" frameborder="0" allowfullscreen></iframe>
-					</td>
-                                        <td class="table-text"><div>{{ $song->name }}</div></td>
+                                        <td>
+                                            <iframe width="120" height="90" src="https://www.youtube.com/embed/{{ $song->song_key }}" frameborder="0" allowfullscreen></iframe>
+                                        </td>
                                         <td class="table-text">
-					    <a class="fa fa-user" href="{{ url('/user/' . 1 ) }}" target="_blank">{{ $song->user_name }}</a>
-					</td>
+                                            <a href="{{ $song->url }}" target="_blank">{{ $song->name }}</a>
+                                        </td>
                                         <td class="table-text">
-					    <a class="fa fa-youtube-play" href="{{ $song->url }}" target="_blank">youtube</a>
-					</td>
-
+                                            <a class="fa fa-user" href="{{ url('/user/' . 1 ) }}" target="_blank">{{ $song->user_name }}</a>
+                                        </td>
                                         <!-- Song Like Button -->
                                         <td>
-					    @can('like', $song)
+                                            @can('like', $song)
                                                 <form action="{{url('song/' . $song->id) . '/like'}}" method="POST">
                                                     {{ csrf_field() }}
                                                     {{ method_field('PUT') }}
@@ -98,17 +94,12 @@
                                                     </button>
                                                     <input type="hidden" name="playlist_id" value="{{ $playlist->id }}">
                                                 </form>
-					    @else
-                            <form action="https://www.googleapis.com/youtube/v3/videos/rate?rating=like&id={{ $song->song_key }}&access_token={{ $user->oauth_token }}" method="POST">
-                                <button type="submit" id="like-song-{{ $song->id }}" class="btn fa fa-star">
-                                    Like
-                                </button>
-                            </form>
-
-					    @endcan
-					    {{ $song->type}}
+                                            @else
+                                                Liked
+                                            @endcan
                                         </td>
                                         <td class="table-text">
+                                            {{ $song->type}}
                                         </td>
 
                                         <!-- Song Delete Button -->
