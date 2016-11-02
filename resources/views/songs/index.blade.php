@@ -56,7 +56,6 @@
                             <thead>
 			        <th>サムネイル</th>
                                 <th>Song</th>
-                                <th>URL</th>
                                 <th>&nbsp;</th>
                                 <th style="width: 80px;">&nbsp;</th>
                                 <th>&nbsp;</th>
@@ -67,11 +66,9 @@
 				        <td>
 					    <iframe width="120" height="90" src="https://www.youtube.com/embed/{{ $song->song_key }}" frameborder="0" allowfullscreen></iframe>
 					</td>
-                                        <td class="table-text"><div>{{ $song->name }}</div></td>
-                                        <td class="table-text">
-					    <a class="fa fa-youtube-play" href="{{ $song->url }}" target="_blank">youtube</a>
-					</td>
-
+                    <td class="table-text">
+					    <a href="{{ $song->url }}" target="_blank">{{ $song->name }}</a>
+                    </td>
                     <!-- Song Like Button -->
                     <td>
                         @can('like', $song)
