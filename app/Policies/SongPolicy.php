@@ -31,9 +31,9 @@ class SongPolicy
         $isLikable = true;
         $evaluates = $song->evaluates;
         foreach ($evaluates as $key => $evaluate) {
-	    if ($user->id == $evaluate->user_id) {
-	        $isLikable = false; 
-	    }
+            if ($user->id == $evaluate->user_id) {
+                $isLikable = false; 
+            }
         } 
         return $isLikable; 
     }

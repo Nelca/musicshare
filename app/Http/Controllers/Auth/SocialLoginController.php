@@ -84,7 +84,7 @@ class SocialLoginController extends Controller
     {
         $youtube_user = Socialite::driver('youtube')->user();
         $user = User::firstOrCreate([
-                'name' => $youtube_user->nickname,
+                    'name' => $youtube_user->nickname,
                 ]);
 
         Auth::login($user);
