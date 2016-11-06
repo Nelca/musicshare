@@ -30,6 +30,14 @@ class SongController extends Controller
                 ]);
     }
 
+    public function mySongs (Request $request)
+    {
+        return view('songs.my-songs', [
+                'songs' => $this->songs->forUser($request->user()),
+                ]);
+    }
+
+
     public function store(Request $request)
     {
         $this->validate($request, [

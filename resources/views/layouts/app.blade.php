@@ -41,6 +41,7 @@
                         <li><a href="{{ url('/mypage/likes') }}"><i class="fa fa-btn fa-star"></i>Likes</a></li>
                         <li><a href="{{ url('/favorites') }}"><i class="fa fa-heart" aria-hidden="true"></i> Favorites</a></li>
                         <li><a href="{{ url('/my-playlists') }}"><i class="fa fa-list-ul" aria-hidden="true"></i> My Lists</a></li>
+                        <li><a href="{{ url('/my-songs') }}"><i class="fa fa-music" aria-hidden="true"></i> My Songs</a></li>
 		    @endif
                     <li><a href="{{ url('/playlists') }}"><i class="fa fa-list-ul" aria-hidden="true"></i> Playlists</a></li>
                     <li><a href="{{ url('/users') }}"><i class="fa fa-users" aria-hidden="true"></i> Users</a></li>
