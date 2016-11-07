@@ -14,7 +14,9 @@
 			</div>
 		        <div class="col-xs-12 col-md-6">
 		            @if (Auth::check())
-                        @if (in_array(Auth::user()->id, $follower))
+                        @if (Auth::user()->id == $user->id)
+                            <div>It's Me!!</div>
+                        @elseif (in_array(Auth::user()->id, $follower))
                             <form action="{{url('unfollow/')}}" method="POST">
                                 {{ csrf_field() }}
                                 {{ method_field('POST') }}

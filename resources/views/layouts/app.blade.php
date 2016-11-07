@@ -36,17 +36,16 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-		    @if (Auth::check())
+                    @if (Auth::check())
                         <li><a href="{{ url('/mypage') }}"><i class="fa fa-btn fa-home"></i>MyPage</a></li>
                         <li><a href="{{ url('/mypage/likes') }}"><i class="fa fa-btn fa-star"></i>Likes</a></li>
                         <li><a href="{{ url('/favorites') }}"><i class="fa fa-heart" aria-hidden="true"></i> Favorites</a></li>
                         <li><a href="{{ url('/my-playlists') }}"><i class="fa fa-list-ul" aria-hidden="true"></i> My Lists</a></li>
                         <li><a href="{{ url('/my-songs') }}"><i class="fa fa-music" aria-hidden="true"></i> My Songs</a></li>
-		    @endif
+		            @endif
                     <li><a href="{{ url('/playlists') }}"><i class="fa fa-list-ul" aria-hidden="true"></i> Playlists</a></li>
                     <li><a href="{{ url('/users') }}"><i class="fa fa-users" aria-hidden="true"></i> Users</a></li>
                 </ul>
-
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
@@ -58,13 +57,13 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
-
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="{{ url('/mypage') }}"><i class="fa fa-btn fa-home"></i>MyPage</a></li>
                                 <li><a href="{{ url('/mypage/likes') }}"><i class="fa fa-btn fa-star"></i>Likes</a></li>
-                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                                 <li><a href="{{ url('/favorites') }}"><i class="fa fa-heart" aria-hidden="true"></i> Favorites</a></li>
                                 <li><a href="{{ url('/my-playlists') }}"><i class="fa fa-list-ul" aria-hidden="true"></i> My Lists</a></li>
+                                <li><a href="{{ url('/my-songs') }}"><i class="fa fa-music" aria-hidden="true"></i> My Songs</a></li>
+                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
                         </li>
                     @endif
