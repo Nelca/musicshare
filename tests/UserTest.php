@@ -13,7 +13,10 @@ class UserTest extends TestCase
      */
     public function testUsers()
     {
-        $this->visit('/users/')->see('User List');
+        $this->visit('/users/')
+            ->see('Playlists')
+            ->see('Favorites')
+            ->see('User List');
     }
 
     public function testUserLink()
@@ -21,5 +24,15 @@ class UserTest extends TestCase
         $this->visit('/users/')
              ->click('minato')
              ->seePageIs('/user/1');
+    }
+
+    public function testUserPage()
+    {
+        $this->visit('/user/1')
+             ->see('Follow')
+             ->see('Follower')
+             ->see('Playlists')
+             ->see('Favorites')
+             ->see('View Songs');
     }
 }
