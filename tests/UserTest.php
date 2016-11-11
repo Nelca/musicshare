@@ -35,4 +35,23 @@ class UserTest extends TestCase
              ->see('Favorites')
              ->see('View Songs');
     }
+
+    public function testFollow()
+    {
+        $this->visit('/user/1')
+             ->click('2 Follow')
+             ->seePageIs('/user/1/follow');
+    }
+
+    public function testFollower()
+    {
+        $this->visit('/user/1')
+             ->click('2 Follower')
+             ->seePageIs('/user/1/follower');
+    }
+
+
+
+
+
 }
