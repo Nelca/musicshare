@@ -50,13 +50,4 @@ class UserTest extends TestCase
              ->seePageIs('/user/1/follower');
     }
 
-    public function testPlaylist()
-    {
-        $this->visit('/user/1')
-             ->click('View Songs')
-             //->click('view-playlist-songs-15')
-             ->seePageIs('/playlist/15/songs');
-    }
-
-
 }
