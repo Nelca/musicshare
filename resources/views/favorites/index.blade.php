@@ -55,7 +55,7 @@
                     <div class="panel-body">
                         <table class="table table-striped favorite-table">
                             <thead>
-			        <th>サムネイル</th>
+                                <th>サムネイル</th>
                                 <th>Favorite</th>
                                 <th>&nbsp;</th>
                                 <th>&nbsp;</th>
@@ -63,11 +63,13 @@
                             <tbody>
                                 @foreach ($favorites as $favorite)
                                     <tr>
-				        <td>
-					    <!--<img src="http://i.ytimg.com/vi/{{ $favorite->song_key }}/default.jpg">-->
-					    <iframe width="120" height="90" src="https://www.youtube.com/embed/{{ $favorite->song_key }}" frameborder="0" allowfullscreen></iframe>
-					</td>
-                                        <td class="table-text"><div>{{ $favorite->name }}</div></td>
+                                        <td>
+                                            <!--<img src="http://i.ytimg.com/vi/{{ $favorite->song_key }}/default.jpg">-->
+                                            <iframe width="120" height="90" src="https://www.youtube.com/embed/{{ $favorite->song_key }}" frameborder="0" allowfullscreen></iframe>
+                                        </td>
+                                        <td class="table-text">
+                                            <a href="https://www.youtube.com/watch?v={{ $favorite->song_key }}" target="_blank">{{ $favorite->name }}</a>
+                                        </td>
                                         <td>
                                         @can('like', $favorite)
                                                 <form action="{{url('favorite/' . $favorite->id) . '/like'}}" method="POST">
