@@ -59,16 +59,16 @@
                 <div class="panel-body">
                     <table class="table table-striped song-table">
                         <thead>
-                <th>サムネイル</th>
+                            <th>サムネイル</th>
                             <th>Song</th>
                             <th>URL</th>
                         </thead>
                         <tbody>
                             @foreach ($youtube_datas as $youtube_data)
                                 <tr>
-                    <td>
-                    <img src="http://i.ytimg.com/vi/{{ $youtube_data->contentDetails->like->resourceId->videoId }}/default.jpg">
-                </td>
+                                    <td>
+                                        <img src="http://i.ytimg.com/vi/{{ $youtube_data->contentDetails->like->resourceId->videoId }}/default.jpg">
+                                    </td>
                                     <td class="table-text"><div>{{ $youtube_data->snippet->title }}</div></td>
                                     <td class="table-text">
                     <a class="fa fa-youtube-play" href="https://www.youtube.com/watch?v={{ $youtube_data->contentDetails->like->resourceId->videoId }}" target="_blank">youtube</a>
@@ -99,25 +99,25 @@
                                         <td class="table-text"><div>{{ $playlist->name }}</div></td>
                                         <!-- Playlist Buttons -->
                                         <td>
-					    <div class="row">
-						    <div class="col-xs-12 col-md-6">
-							<form action="{{url('playlist/' . $playlist->id . '/songs')}}" method="POST">
-							    {{ csrf_field() }}
-							    {{ method_field('GET') }}
-							    <button type="submit" id="view-playlist-songs-{{ $playlist->id }}" class="btn btn-primary">
-								<i class="fa fa-btn fa-music"></i>View Songs
-							    </button>
-							</form>
-						    </div>
-						    <div class="col-xs-12 col-md-6">
-							<form action="{{url('playlist/' . $playlist->id)}}" method="POST">
-							    {{ csrf_field() }}
-							    {{ method_field('DELETE') }}
-							    <button type="submit" id="delete-playlist-{{ $playlist->id }}" class="btn btn-warning fa fa-btn fa-trash">
-							    </button>
-							</form>
-						    </div>
-					    </div>
+                                            <div class="row">
+                                                <div class="col-xs-12 col-md-6">
+                                                <form action="{{url('playlist/' . $playlist->id . '/songs')}}" method="POST">
+                                                    {{ csrf_field() }}
+                                                    {{ method_field('GET') }}
+                                                    <button type="submit" id="view-playlist-songs-{{ $playlist->id }}" class="btn btn-primary">
+                                                    <i class="fa fa-btn fa-music"></i>View Songs
+                                                    </button>
+                                                </form>
+                                                </div>
+                                                <div class="col-xs-12 col-md-6">
+                                                <form action="{{url('playlist/' . $playlist->id)}}" method="POST">
+                                                    {{ csrf_field() }}
+                                                    {{ method_field('DELETE') }}
+                                                    <button type="submit" id="delete-playlist-{{ $playlist->id }}" class="btn btn-warning fa fa-btn fa-trash">
+                                                    </button>
+                                                </form>
+                                                </div>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -137,32 +137,34 @@
                             <thead>
                                 <th>Favorite</th>
                                 <th>&nbsp;</th>
+                                <th>&nbsp;</th>
                             </thead>
                             <tbody>
                                 @foreach ($favorites as $favorite)
                                     <tr>
-                                        <td class="table-text"><div>{{ $favorite->name }}</div></td>
+                                        <td>
+                                            <iframe width="120" height="90" src="https://www.youtube.com/embed/{{ $favorite->song_key }}" frameborder="0" allowfullscreen></iframe>
+                                        </td>
+
+                                        <td class="table-text">
+                                            <a href="https://www.youtube.com/watch?v={{ $favorite->song_key }}" target="_blank">{{ $favorite->name }}</a>
+                                        </td>
                                         <!-- Favorite Buttons -->
                                         <td>
-					    <div class="row">
-						    <div class="col-xs-12 col-md-6">
-							<form action="{{url('favorite/' . $favorite->id . '/songs')}}" method="POST">
-							    {{ csrf_field() }}
-							    {{ method_field('GET') }}
-							    <button type="submit" id="view-favorite-songs-{{ $favorite->id }}" class="btn btn-primary">
-								<i class="fa fa-btn fa-music"></i>View Songs
-							    </button>
-							</form>
-						    </div>
-						    <div class="col-xs-12 col-md-6">
-							<form action="{{url('favorite/' . $favorite->id)}}" method="POST">
-							    {{ csrf_field() }}
-							    {{ method_field('DELETE') }}
-							    <button type="submit" id="delete-favorite-{{ $favorite->id }}" class="btn btn-warning fa fa-btn fa-trash">
-							    </button>
-							</form>
-						    </div>
-					    </div>
+
+                                            @can('like', $favorite)
+                                                <form action="{{url('favorite/' . $favorite->id) . '/like'}}" method="POST">
+                                                    {{ csrf_field() }}
+                                                    {{ method_field('PUT') }}
+                                                    <button type="submit" id="like-favorite-{{ $favorite->id }}" class="btn fa fa-star"></button>
+                                                </form>
+                                            @else
+                                                <form action="{{url('favorite/' . $favorite->id) . '/unlike'}}" method="POST">
+                                                    {{ csrf_field() }}
+                                                    {{ method_field('PUT') }}
+                                                    <button type="submit" id="like-favorite-{{ $favorite->id }}" class="btn btn-warning fa fa-star"></button>
+                                                </form>
+                                            @endcan
                                         </td>
                                     </tr>
                                 @endforeach
