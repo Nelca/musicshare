@@ -3,9 +3,13 @@
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use App\User;
 
 class UserTest extends TestCase
 {
+
+    use DatabaseTransactions;
+
     /**
      * A basic test example.
      *
@@ -21,33 +25,19 @@ class UserTest extends TestCase
 
     public function testUserLink()
     {
+        $user = factory(User::class)->create();
         $this->visit('/users/')
-             ->click('minato')
-             ->seePageIs('/user/1');
+             ->click($user->name)
+             ->seePageIs('/user/' . $user->id);
     }
 
     public function testUserPage()
     {
-        $this->visit('/user/1')
+        $user = factory(User::class)->create();
+        $this->visit('/user/' . $user->id)
              ->see('Follow')
              ->see('Follower')
-             ->see('Playlists')
-             ->see('Favorites')
-             ->see('View Songs');
-    }
-
-    public function testFollow()
-    {
-        $this->visit('/user/1')
-             ->click('2 Follow')
-             ->seePageIs('/user/1/follow');
-    }
-
-    public function testFollower()
-    {
-        $this->visit('/user/1')
-             ->click('2 Follower')
-             ->seePageIs('/user/1/follower');
+             ->see($user->name);
     }
 
 }
