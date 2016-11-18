@@ -38,7 +38,7 @@
                     <div class="panel-heading">
                         Current Playlists
                     </div>
-		    {!! $playlists->render() !!}
+                    {!! $playlists->render() !!}
                     <div class="panel-body">
                         <table class="table table-striped playlist-table">
                             <thead>
@@ -50,9 +50,11 @@
                                 @foreach ($playlists as $playlist)
                                     <tr>
                                         <td class="table-text"><div>{{ $playlist->name }}</div></td>
-					<td>
-					    <a href="{{url('user/' . $playlist->user->id )}}"><span class="fa fa-user">{{ $playlist->user->name}}</span></a>
-					</td>
+                                        <td>
+                                            @if ($playlist->user)
+                                                 <a href="{{url('user/' . $playlist->user->id )}}"><span class="fa fa-user">{{ $playlist->user->name}}</span></a>
+                                            @endif
+                                        </td>
                                         <!-- Playlist Buttons -->
                                         <td>
 					    <div class="row">
