@@ -8,32 +8,32 @@
                    User Info 
                 </div>
                 <div class="panel-body">
-		    <div class="row">
-		        <div class="col-xs-12 col-md-6">
-			    {{ $user->name }}
-			</div>
-		        <div class="col-xs-12 col-md-6">
-		            @if (Auth::check())
-                        @if (Auth::user()->id == $user->id)
-                            <div>It's Me!!</div>
-                        @elseif (in_array(Auth::user()->id, $follower))
-                            <form action="{{url('unfollow/')}}" method="POST">
-                                {{ csrf_field() }}
-                                {{ method_field('POST') }}
-                                <input type="hidden" name="follow_user_id" value="{{ $user->id }}">
-                                <button type="submit" id="delete-playlist-{{ $user->id }}" class="btn btn-info fa fa-btn fa-user-times"></button>
-                            </form>
-                        @else
-                            <form action="{{url('follow/')}}" method="POST">
-                                {{ csrf_field() }}
-                                {{ method_field('POST') }}
-                                <input type="hidden" name="follow_user_id" value="{{ $user->id }}">
-                                <button type="submit" id="delete-playlist-{{ $user->id }}" class="btn fa fa-btn fa-user-plus"></button>
-                            </form>
-                        @endif
-			        @endif
-			    </div>
-		    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            {{ $user->name }}
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            @if (Auth::check())
+                                @if (Auth::user()->id == $user->id)
+                                    <div>It's Me!!</div>
+                                @elseif (in_array(Auth::user()->id, $follower))
+                                    <form action="{{url('unfollow/')}}" method="POST">
+                                        {{ csrf_field() }}
+                                        {{ method_field('POST') }}
+                                        <input type="hidden" name="follow_user_id" value="{{ $user->id }}">
+                                        <button type="submit" id="delete-playlist-{{ $user->id }}" class="btn btn-info fa fa-btn fa-user-times"></button>
+                                    </form>
+                                @else
+                                    <form action="{{url('follow/')}}" method="POST">
+                                        {{ csrf_field() }}
+                                        {{ method_field('POST') }}
+                                        <input type="hidden" name="follow_user_id" value="{{ $user->id }}">
+                                        <button type="submit" id="delete-playlist-{{ $user->id }}" class="btn fa fa-btn fa-user-plus"></button>
+                                    </form>
+                                @endif
+                            @endif
+                        </div>
+                        </div>
         </div>
 	    <div class="panel panel-default">
             <div class="panel-heading">

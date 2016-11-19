@@ -35,9 +35,7 @@ class UserTest extends TestCase
     {
         $user = factory(User::class)->create();
         $this->visit('/user/' . $user->id)
-             ->see('Follow')
-             ->see('Follower')
-             ->see($user->name);
+             ->see("It's Me!!");
     }
 
 }

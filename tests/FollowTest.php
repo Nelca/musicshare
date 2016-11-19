@@ -6,6 +6,8 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class FollowTest extends TestCase
 {
+    use DatabaseTransactions;
+
     /**
      * A basic test example.
      *
@@ -13,6 +15,7 @@ class FollowTest extends TestCase
      */
     public function testExample()
     {
-        $this->assertTrue(true);
+        //$user = factory(User::class)->create();
+        //$this->visit('/users/');
     }
 }

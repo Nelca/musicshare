@@ -7,6 +7,8 @@ use App\User;
 
 class PlaylistTest extends TestCase
 {
+    use DatabaseTransactions;
+
     /**
      * A basic test example.
      *
@@ -17,23 +19,21 @@ class PlaylistTest extends TestCase
         $this->assertTrue(true);
     }
 
-    public function testViewPlaylistsUser()
+    public function testViewPlaylists()
     {
-        //$user = factory(User::class)->create();
-
-        //$this->actingAs($user)
-	    // ->visit('/playlists')
-	    // ->see('Current Playlists');
+        $user = factory(User::class)->create();
+        
+        $this->visit('/playlists/')
+            ->see('New Playlist');
     }
 
     public function testBlankPlaylist()
     {
-        //$user = factory(User::class)->create();
-
-        //$this->actingAs($user)
-	    // ->visit('/playlists')
-	    // ->press('Add Playlist')
-	    // ->see('name field is required');
+        $user = factory(User::class)->create();
+        $playlistId = 12;
+        $this->visit('/playlists/')
+             ->press('view-playlist-songs-' . $playlistId)
+             ->seePageIs('/playlist/' . $playlistId . '/songs');
     }
 
     public function testViewAuthor()
