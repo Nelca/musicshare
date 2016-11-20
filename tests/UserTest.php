@@ -34,8 +34,9 @@ class UserTest extends TestCase
     public function testUserPage()
     {
         $user = factory(User::class)->create();
-        $this->visit('/user/' . $user->id)
-             ->see("It's Me!!");
+        $this->actingAs($user)
+             ->visit('/user/' . $user->id)
+             ->see($user->name);
     }
 
 }
