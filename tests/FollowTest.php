@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use App\User;
 
 class FollowTest extends TestCase
 {
@@ -15,7 +16,11 @@ class FollowTest extends TestCase
      */
     public function testExample()
     {
-        //$user = factory(User::class)->create();
-        //$this->visit('/users/');
+        $user = factory(User::class)->create();
+        $userId = 1;
+        $this->actingAs($user)
+             ->visit('/user/' . $userId)
+             ->press('follow-button-' . $userId)
+             ->see('unfollow-button-' . $userId);
     }
 }
