@@ -34,7 +34,6 @@
                                 <th>User</th>
                                 <th>Like</th>
                                 <th>Type</th>
-                                <th>Delete</th>
                             </thead>
                             <tbody>
                                 @foreach ($songs as $song)
@@ -65,16 +64,9 @@
                                         </td>
                                         <td class="table-text">
                                             {{ $song->type}}
-                                        </td>
-
-                                        <!-- Song Delete Button -->
-                                        <td>
-                                            <form action="{{url('song/' . $song->id)}}" method="POST">
-                                                {{ csrf_field() }}
-                                                {{ method_field('DELETE') }}
-                                                <button type="submit" id="delete-song-{{ $song->id }}" class="btn fa fa-btn fa-trash">
-                                                </button>
-                                            </form>
+                                            @if ($song->type == "song") 
+                                                <a class="fa fa-list-ul" href="{{ url('/playlist/' . $song->playlist_id . '/songs') }}">Playlist</a>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
