@@ -4,6 +4,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\User;
+//use Youtube;
 
 class FavoriteTest extends TestCase
 {
@@ -13,7 +14,7 @@ class FavoriteTest extends TestCase
      *
      * @return void
      */
-    public function testShowFavPage()
+    public function testAddFav()
     {
         $user = factory(User::class)->create();
         $favName = "favoriteTest";
@@ -22,6 +23,34 @@ class FavoriteTest extends TestCase
              ->visit('/favorites')
              ->type($favName, 'name')
              ->type($favUrl, 'url')
+             ->press('Add Favorite')
              ->seePageIs('/favorites');
+    }
+
+    public function testAddFavWithoutName()
+    {
+        $user = factory(User::class)->create();
+
+        $favSongKey = 'ZABXtVxyJwg&t=137s';
+        //$songData = Youtube::getVideoInfo($favSongKey);
+        //$favName = $songData->snippet->title; 
+        $favUrl = "https://www.youtube.com/watch?v=" . $favSongKey;
+
+        $this->actingAs($user)
+             ->visit('/favorites')
+             ->type($favUrl, 'url')
+             ->press('Add Favorite')
+             ->seePageIs('/favorites');
+    }
+
+
+    public function testValidateInput()
+    {
+        $user = factory(User::class)->create();
+        $this->actingAs($user)
+             ->visit('/favorites')
+             ->press('Add Favorite')
+             ->see('url field is required');
+
     }
 }

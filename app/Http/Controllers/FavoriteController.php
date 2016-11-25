@@ -34,19 +34,19 @@ class FavoriteController extends Controller
             'name' => 'max:255',
             'url' => 'required|url',
         ]);
-        
+
+        // urlからkey取得
+        $url = $request->url;
+        $url_query_str = parse_url($url, PHP_URL_QUERY);
+        parse_str($url_query_str, $url_querys);
+        $song_key = "";
+        if (isset($url_querys['v'])) {
+            $song_key = $url_querys['v'];
+        }
+
         if ($request->name) {
             $song_name = $request->name;
         } else {
-            $url = $request->url;
-                // urlからkey取得
-            $url_query_str = parse_url($url, PHP_URL_QUERY);
-            parse_str($url_query_str, $url_querys);
-                $song_key = "";
-            if (isset($url_querys['v'])) {
-                $song_key = $url_querys['v'];
-            }
-
             $song_data = Youtube::getVideoInfo($song_key);
             $song_name = $song_data->snippet->title;
         }
