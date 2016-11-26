@@ -25,6 +25,10 @@ class FavoriteTest extends TestCase
              ->type($favUrl, 'url')
              ->press('Add Favorite')
              ->seePageIs('/favorites');
+
+        $this->actingAs($user)
+             ->visit('/favorites')
+             ->see($favName);
     }
 
     public function testAddFavWithoutName()
@@ -53,4 +57,19 @@ class FavoriteTest extends TestCase
              ->see('url field is required');
 
     }
+
+    public function testDeleteFav()
+    {
+        $user = factory(User::class)->create();
+        $favName = "favoriteTest";
+        $favUrl = "https://www.youtube.com/watch?v=ZABXtVxyJwg&t=137s";
+        $this->actingAs($user)
+             ->visit('/favorites')
+             ->type($favName, 'name')
+             ->type($favUrl, 'url')
+             ->press('Add Favorite')
+             ->visit('/favorites')
+             ->see('delete complete');
+
+   }
 }
