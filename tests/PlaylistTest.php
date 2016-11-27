@@ -26,11 +26,18 @@ class PlaylistTest extends TestCase
              ->seePageIs('/playlist/' . $playlistId . '/songs');
     }
 
-    public function testViewAuthor()
+    public function testAddPlaylist()
     {
-        //$this->visit('/playlists')
-	    // ->click('minato')
-	    // ->seePageIs('/user/1');
+        $user = factory(User::class)->create();
+        $playlistName = "test list";
+        $this->actingAs($user)
+             ->visit('/playlists')
+             ->type($playlistName, 'name')
+             ->press('Add Playlist')
+             ->seePageIs('/playlists');
+        $this->actingAs($user)
+             ->visit('/playlists')
+             ->see($playlistName);
     }
 
 

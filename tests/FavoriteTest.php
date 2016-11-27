@@ -69,6 +69,7 @@ class FavoriteTest extends TestCase
              ->type($favUrl, 'url')
              ->press('Add Favorite')
              ->visit('/favorites')
+             ->press('delete-favorite-')
              ->see('delete complete');
 
    }
