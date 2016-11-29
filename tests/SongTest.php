@@ -3,18 +3,27 @@
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use App\User;
 
 class SongTest extends TestCase
 {
+    use DatabaseTransactions;
     /**
      * A basic test example.
      *
      * @return void
      */
-    public function testExample()
+    public function testAddSongWithName()
     {
-        $this->visit('/playlists')
+        $songName = "song test";
+        $songUrl = "https://www.youtube.com/watch?v=ZABXtVxyJwg&t=137s";
+        $user = factory(User::class)->create();
+        $this->actingAs($user)
+             ->visit('/playlists')
              ->press('View Songs')
-             ->seePageIs('/playlist/12/songs');
+             ->type($songUrl, 'url')
+             ->type($songName, 'name')
+             ->press('Add Song')
+             ->see($songName);
     }
 }

@@ -58,6 +58,11 @@ class SongController extends Controller
 
         $song_data = Youtube::getVideoInfo($song_key);
         $song_name = $song_data->snippet->title;
+        if ($request->name) {
+            $song_name = $request->name;
+        } else {
+            $song_name = $song_data->snippet->title;
+        }
 
         $song = new Song;
         $song->url = $url;
