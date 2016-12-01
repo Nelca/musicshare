@@ -28,7 +28,7 @@ class SongTest extends TestCase
              ->see($songName);
     }
 
-    public function testAddSongWithName()
+    public function testAddSongWithoutName()
     {
         $user = factory(User::class)->create();
 
@@ -43,5 +43,19 @@ class SongTest extends TestCase
              ->type($songUrl, 'url')
              ->press('Add Song');
 
+    }
+
+    public function testSongLike()
+    {
+        $user = factory(User::class)->create();
+        $this->actingAs($user)
+             ->visit('/playlist/12/songs')
+             ->press('like-song-28')
+             ->seeInDatabase('evaluates',[
+                 'user_id' => $user->id
+                 , 'evaluation' => 1
+                 , 'evaluatable_id' => 28
+                 , 'evaluatable_type' => 'songs'
+             ]);
     }
 }
