@@ -42,10 +42,9 @@ class SongTest extends TestCase
              ->press('View Songs')
              ->type($songUrl, 'url')
              ->press('Add Song');
-
     }
 
-    public function testSongLike()
+    public function testSongLikeUnlike()
     {
         $user = factory(User::class)->create();
         $this->actingAs($user)
@@ -57,5 +56,11 @@ class SongTest extends TestCase
                  , 'evaluatable_id' => 28
                  , 'evaluatable_type' => 'songs'
              ]);
+             
+        $this->actingAs($user)
+             ->visit('/playlist/12/songs')
+             ->press('liked-song-28')
+             ->seePageIs('/playlist/12/songs');
+
     }
 }

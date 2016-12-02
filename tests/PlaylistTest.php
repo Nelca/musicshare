@@ -40,5 +40,20 @@ class PlaylistTest extends TestCase
              ->see($playlistName);
     }
 
+    public function testPlalylistLikeUnlike () 
+    {
+        $user = factory(User::class)->create();
+        $playlistId = 12;
+        $this->actingAs($user)
+             ->visit('/playlists')
+             ->press('like-playlist-' . $playlistId)
+             ->seeInDatabase('evaluates',[
+                 'user_id' => $user->id
+                 , 'evaluation' => 1
+                 , 'evaluatable_id' => $playlistId 
+                 , 'evaluatable_type' => 'playlists'
+             ]);
+    }
+
 
 }
