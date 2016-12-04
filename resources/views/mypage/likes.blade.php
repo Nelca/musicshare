@@ -4,12 +4,12 @@
     <div class="container">
         <div class="col-sm-offset-2 col-sm-8">
             <!-- Like Songs -->
-            @if (count($songs) > 0)
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-		       Like Songs
-                    </div>
-                    <div class="panel-body">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Like Songs
+                </div>
+                <div class="panel-body">
+                    @if (count($songs) > 0)
                         <table class="table table-striped song-table">
                             <thead>
                                 <th>サムネイル</th>
@@ -55,16 +55,18 @@
                                 @endforeach
                             </tbody>
                         </table>
-                    </div>
+                    @else
+                        <div>There is nothing yet.</div>
+                    @endif
                 </div>
-            @endif
+            </div>
 	    <!-- Like Playlists -->
-            @if (count($playlists) > 0)
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Like Playlists 
-                    </div>
-                    <div class="panel-body">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Like Playlists 
+                </div>
+                <div class="panel-body">
+                    @if (count($playlists) > 0)
                         <div class="row">
                             <div class="col-xs-12 col-md-5">
                                 Playlist
@@ -114,9 +116,11 @@
                                 </div>
                             </div>
                         @endforeach
-                    </div>
+                    @else
+                        <div>There is nothing yet.</div>
+                    @endif
                 </div>
-            @endif
+            </div>
         </div>
     </div>
 @endsection

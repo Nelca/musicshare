@@ -8,9 +8,8 @@ use App\User;
 class MypageTest extends TestCase
 {
     use DatabaseTransactions;
+
     /**
-     * A basic test example.
-     *
      * @return void
      */
     public function testMypageTop()
@@ -20,5 +19,13 @@ class MypageTest extends TestCase
             ->visit('/mypage')
             ->see('Follow');
  
+    }
+
+    public function testLikePageWithoutLikes()
+    {
+        $user = factory(User::class)->create();
+        $this->actingAs($user)
+            ->visit('/mypage/likes')
+            ->see('There is nothing yet.');
     }
 }
