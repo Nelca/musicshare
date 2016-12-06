@@ -55,5 +55,13 @@ class PlaylistTest extends TestCase
              ]);
     }
 
+    public function testMyPlaylists()
+    {
+        $user = factory(User::class)->create();
+        $this->actingAs($user)
+            ->visit('my-playlists')
+            ->see('There is nothing yet.');
+    }
+
 
 }

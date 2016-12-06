@@ -33,11 +33,11 @@
             </div>
 
             <!-- Current Playlist -->
-            @if (count($playlists) > 0)
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Current Playlists
-                    </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Current Playlists
+                </div>
+                @if (count($playlists) > 0)
                     {!! $playlists->render() !!}
                     <div class="panel-body">
                         <table class="table table-striped playlist-table">
@@ -109,9 +109,13 @@
                             </tbody>
                         </table>
                     </div>
-		    {!! $playlists->render() !!}
-		</div>
-            @endif
+                    {!! $playlists->render() !!}
+                @else
+                    <div>
+                        There is nothing yet.
+                    </div>
+                @endif
+            </div>
         </div>
     </div>
 @endsection

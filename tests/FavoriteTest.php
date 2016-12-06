@@ -9,6 +9,15 @@ use App\User;
 class FavoriteTest extends TestCase
 {
     use DatabaseTransactions;
+
+    public function testDefaultPage()
+    {
+        $user = factory(User::class)->create();
+        $this->actingAs($user)
+            ->visit('favorites')
+            ->see('There is nothing yet.');
+        
+    }
     /**
      * A basic test example.
      *

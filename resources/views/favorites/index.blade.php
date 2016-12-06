@@ -46,12 +46,11 @@
             </div>
 
             <!-- Current Favorite -->
-            @if (count($favorites) > 0)
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Current Favorites
-                    </div>
-
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Current Favorites
+                </div>
+                @if (count($favorites) > 0)
                     <div class="panel-body">
                         <table class="table table-striped favorite-table">
                             <thead>
@@ -98,8 +97,12 @@
                             </tbody>
                         </table>
                     </div>
-                </div>
-            @endif
+                @else
+                    <div>
+                        There is nothing yet.
+                    </div>
+                @endif
+            </div>
         </div>
     </div>
 @endsection
