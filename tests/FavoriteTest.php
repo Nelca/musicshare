@@ -16,7 +16,6 @@ class FavoriteTest extends TestCase
         $this->actingAs($user)
             ->visit('favorites')
             ->see('There is nothing yet.');
-        
     }
     /**
      * A basic test example.

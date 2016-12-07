@@ -12,8 +12,8 @@ class PlaylistTest extends TestCase
     public function testViewPlaylists()
     {
         $user = factory(User::class)->create();
-        
-        $this->visit('/playlists/')
+        $this->actingAs($user)
+            ->visit('/playlists/')
             ->see('New Playlist');
     }
 
