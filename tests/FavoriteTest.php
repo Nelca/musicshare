@@ -32,10 +32,7 @@ class FavoriteTest extends TestCase
              ->type($favName, 'name')
              ->type($favUrl, 'url')
              ->press('Add Favorite')
-             ->seePageIs('/favorites');
-
-        $this->actingAs($user)
-             ->visit('/favorites')
+             ->seePageIs('/favorites')
              ->see($favName);
     }
 

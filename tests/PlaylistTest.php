@@ -4,6 +4,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\User;
+use App\Playlist;
 
 class PlaylistTest extends TestCase
 {
@@ -17,33 +18,41 @@ class PlaylistTest extends TestCase
             ->see('New Playlist');
     }
 
-    public function testBlankPlaylist()
+    public function testAddPlaylist()
     {
         $user = factory(User::class)->create();
-        $playlistId = 12;
+        $playlist = new Playlist;
+        $playlist->name = "test list";
+        $this->actingAs($user)
+             ->visit('/playlists')
+             ->type($playlist->name, 'name')
+             ->press('Add Playlist')
+             ->seePageIs('/playlists')
+             ->see($playlist->name);
+
+        $playlist = Playlist::where('name', $playlist->name)->first();
+        return $playlist;
+    }
+
+    /*
+    * @depends testAddPlaylist
+    */
+    public function testBlankPlaylist(Playlist $playlist)
+    {
+        $user = factory(User::class)->create();
+        $playlistId = $playlist->id;
         $this->visit('/playlists/')
              ->press('view-playlist-songs-' . $playlistId)
              ->seePageIs('/playlist/' . $playlistId . '/songs');
     }
 
-    public function testAddPlaylist()
+    /*
+    * @depends testAddPlaylist
+    */
+    public function testPlalylistLikeUnlike (Playlist $playlist) 
     {
         $user = factory(User::class)->create();
-        $playlistName = "test list";
-        $this->actingAs($user)
-             ->visit('/playlists')
-             ->type($playlistName, 'name')
-             ->press('Add Playlist')
-             ->seePageIs('/playlists');
-        $this->actingAs($user)
-             ->visit('/playlists')
-             ->see($playlistName);
-    }
-
-    public function testPlalylistLikeUnlike () 
-    {
-        $user = factory(User::class)->create();
-        $playlistId = 12;
+        $playlistId = $playlist->id;
         $this->actingAs($user)
              ->visit('/playlists')
              ->press('like-playlist-' . $playlistId)
