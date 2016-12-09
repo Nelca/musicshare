@@ -31,13 +31,15 @@ class PlaylistTest extends TestCase
              ->see($playlist->name);
 
         $playlist = Playlist::where('name', $playlist->name)->first();
+        $this->afterTestBlankPlaylist($playlist);
+        $this->afterTestPlalylistLikeUnlike($playlist);
         return $playlist;
     }
 
     /*
     * @depends testAddPlaylist
     */
-    public function testBlankPlaylist(Playlist $playlist)
+    public function afterTestBlankPlaylist(Playlist $playlist)
     {
         $user = factory(User::class)->create();
         $playlistId = $playlist->id;
@@ -49,7 +51,7 @@ class PlaylistTest extends TestCase
     /*
     * @depends testAddPlaylist
     */
-    public function testPlalylistLikeUnlike (Playlist $playlist) 
+    public function afterTestPlalylistLikeUnlike (Playlist $playlist) 
     {
         $user = factory(User::class)->create();
         $playlistId = $playlist->id;
