@@ -10,6 +10,7 @@ use App\Song;
 
 class SongTest extends TestCase
 {
+    use DatabaseTransactions;
     /**
      * A basic test example.
      *
@@ -18,7 +19,7 @@ class SongTest extends TestCase
     public function testAddSongWithName()
     {
         $songName = "song test";
-        $songUrl = "https://www.youtube.com/watch?v=ZABXtVxyJwg&t=137s";
+        $songUrl = "https://www.youtube.com/watch?v=ZABXtVxyJwg";
         $user = factory(User::class)->create();
         $this->actingAs($user)
              ->visit('/playlists')
@@ -33,7 +34,7 @@ class SongTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $songKey = 'ZABXtVxyJwg&t=137s';
+        $songKey = 'ZABXtVxyJwg';
         //$songData = Youtube::getVideoInfo($songKey);
         //$songName = $songData->snippet->title; 
         $songUrl = "https://www.youtube.com/watch?v=" . $songKey;
@@ -50,18 +51,20 @@ class SongTest extends TestCase
         $user = factory(User::class)->create();
         $uid = $user->id;
 
-        $playlist = Playlist::create([
+        $playlist = $user->playlists()->create([
             'name' => 'test_playlist'
-            , 'user_id' => $uid 
         ]);
         $pid = $playlist->id;
 
-        $song = Song::create([
-            'playlist_id' => $pid
-            , 'name' => 'test_song'
-            , 'url' => 'https://www.youtube.com/watch?v=3FzNpto-jnU'
-        ]);
-        $sid = $song->id;
+        $songName = 'test_song';
+        $song = new Song;
+        $song->url = 'https://www.youtube.com/watch?v=3FzNpto-jnU';
+        $song->name = $songName;
+
+        $playlist->songs()->save($song);
+
+        $savedSong = Song::where('name', $songName)->first();
+        $sid = $savedSong->id;
 
        $this->actingAs($user)
              ->visit('/playlist/' . $pid . '/songs')
@@ -77,6 +80,5 @@ class SongTest extends TestCase
              ->visit('/playlist/' . $pid . '/songs')
              ->press('liked-song-' . $sid)
              ->seePageIs('/playlist/' . $pid . '/songs');
-
     }
 }
