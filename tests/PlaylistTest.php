@@ -18,6 +18,17 @@ class PlaylistTest extends TestCase
             ->see('New Playlist');
     }
 
+    public function testValidatePlaylist()
+    {
+        $user = factory(User::class)->create();
+        $playlist = new Playlist;
+        $this->actingAs($user)
+             ->visit('/playlists')
+             ->press('Add Playlist')
+             ->see('The name field is required.');
+    }
+
+
     public function testAddPlaylist()
     {
         $user = factory(User::class)->create();
@@ -66,12 +77,25 @@ class PlaylistTest extends TestCase
              ]);
     }
 
-    public function testMyPlaylists()
+    public function testBlankMyPlaylists()
     {
         $user = factory(User::class)->create();
         $this->actingAs($user)
             ->visit('my-playlists')
             ->see('There is nothing yet.');
+    }
+
+    public function testMyPlaylists()
+    {
+        $user = factory(User::class)->create();
+        $playlist = new Playlist;
+        $playlist->name = "test list";
+        $this->actingAs($user)
+            ->visit('/playlists')
+            ->type($playlist->name, 'name')
+            ->press('Add Playlist')
+            ->visit('my-playlists')
+            ->see($playlist->name);
     }
 
 
