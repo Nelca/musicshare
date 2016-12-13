@@ -85,6 +85,16 @@ class PlaylistTest extends TestCase
             ->see('There is nothing yet.');
     }
 
+
+    public function testValidateMyPlaylists()
+    {
+        $user = factory(User::class)->create();
+        $this->actingAs($user)
+            ->visit('my-playlists')
+            ->press('Add Playlist')
+            ->see('The name field is required.');
+    }
+
     public function testMyPlaylists()
     {
         $user = factory(User::class)->create();
