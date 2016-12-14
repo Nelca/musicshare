@@ -94,14 +94,13 @@ class PlaylistTest extends TestCase
             ->press('Add Playlist')
             ->see('The name field is required.');
     }
-
     public function testMyPlaylists()
     {
         $user = factory(User::class)->create();
         $playlist = new Playlist;
         $playlist->name = "test list";
         $this->actingAs($user)
-            ->visit('/playlists')
+            ->visit('/my-playlists')
             ->type($playlist->name, 'name')
             ->press('Add Playlist')
             ->visit('my-playlists')
