@@ -52,8 +52,8 @@ class MypageTest extends TestCase
         $sid = $savedSong->id;
 
         $this->actingAs($user)
-            ->visit('/playlistis')
-            ->press('like-playlist-')
+            ->visit('/playlists')
+            ->press('like-playlist-' . $pid)
             ->visit('/mypage/likes')
             ->see($playlist->name);
 
