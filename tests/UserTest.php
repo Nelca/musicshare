@@ -39,15 +39,16 @@ class UserTest extends TestCase
              ->see($user->name);
     }
 
-    public function testFollowUnFollow()
+    public function testFollow()
     {
         $user = factory(User::class)->create();
         $followUserId = 1;
         $this->actingAs($user)
              ->visit('/user/' . $followUserId)
              ->press('follow-button-' . $followUserId)
-             ->see('unfollow-button-' . $followUserId)
-             ->press('unfollow-button-' . $followUserId)
-             ->see('follow-button-' . $followUserId);
+             ->seeInDatabase('follows',[
+                 'user_id' => $user->id
+                 , 'follow_user_id' => $followUserId
+             ]);
     }
 }
