@@ -39,6 +39,22 @@ class UserTest extends TestCase
              ->see($user->name);
     }
 
+    public function testFollowiView()
+    {
+        $user = factory(User::class)->create();
+        $followUserId = 1;
+        $this->actingAs($user)
+             ->visit('/user/' . $followUserId)
+             ->press('follow-button-' . $followUserId)
+             ->seeInDatabase('follows',[
+                 'user_id' => $user->id
+                 , 'follow_user_id' => $followUserId
+             ])
+             ->visit('/user/' . $user->id)
+             ->click('1 Follow')
+             ->see('minato');
+    }
+
     public function testFollow()
     {
         $user = factory(User::class)->create();
