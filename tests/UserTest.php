@@ -39,10 +39,12 @@ class UserTest extends TestCase
              ->see($user->name);
     }
 
-    public function testFollowiView()
+    public function testFollowView()
     {
         $user = factory(User::class)->create();
-        $followUserId = 1;
+        $followUser = User::orderBy('created_at', 'asc')->first();
+        $followUserId = $followUser->id;
+        $followUserName = $followUser->name;
         $this->actingAs($user)
              ->visit('/user/' . $followUserId)
              ->press('follow-button-' . $followUserId)
@@ -52,7 +54,26 @@ class UserTest extends TestCase
              ])
              ->visit('/user/' . $user->id)
              ->click('1 Follow')
-             ->see('minato');
+             ->see($followUserName);
+    }
+
+
+    public function testFollowerView()
+    {
+        $user = factory(User::class)->create();
+        $followUser = User::orderBy('created_at', 'asc')->first();
+        $followUserId = $followUser->id;
+        $followUserName = $followUser->name;
+        $this->actingAs($user)
+             ->visit('/user/' . $followUserId)
+             ->press('follow-button-' . $followUserId)
+             ->seeInDatabase('follows',[
+                 'user_id' => $user->id
+                 , 'follow_user_id' => $followUserId
+             ])
+             ->visit('/user/' . $followUserId)
+             ->click('1 Follower')
+             ->see($user->name);
     }
 
     public function testFollow()

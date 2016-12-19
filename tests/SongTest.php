@@ -81,4 +81,12 @@ class SongTest extends TestCase
              ->press('liked-song-' . $sid)
              ->seePageIs('/playlist/' . $pid . '/songs');
     }
+
+    public function testMySongPageWithoutSong()
+    {
+        $user = factory(User::class)->create();
+        $this->actingAs($user)
+            ->visit('/my-songs')
+            ->see('There is nothing yet.');
+    }
 }

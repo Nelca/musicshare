@@ -72,6 +72,10 @@
                         </table>
                     </div>
                 </div>
+            @else
+                <div>
+                    There is nothing yet.
+                </div>
             @endif
         </div>
     </div>
