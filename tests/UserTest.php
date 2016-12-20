@@ -31,6 +31,25 @@ class UserTest extends TestCase
              ->seePageIs('/user/' . $user->id);
     }
 
+    public function testUsersPageWithPlFav()
+    {
+        $user = factory(User::class)->create();
+        $playlistName = "testPlayList";
+        $favName = "favoriteTest";
+        $favUrl = "https://www.youtube.com/watch?v=ZABXtVxyJwg&t=137s";
+        $this->actingAs($user)
+             ->visit('/playlists')
+             ->type($playlistName, 'name')
+             ->press('Add Playlist')
+             ->visit('/favorites')
+             ->type($favName, 'name')
+             ->type($favUrl, 'url')
+             ->press('Add Favorite')
+             ->visit('/users/')
+             ->see('has-playlist-'. $user->id . '-1')
+             ->see('has-favorite-'. $user->id . '-1');
+    }
+
     public function testUserPage()
     {
         $user = factory(User::class)->create();

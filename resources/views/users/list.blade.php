@@ -21,17 +21,17 @@
                                 @foreach ($users as $user)
                                     <tr>
                                         <td class="table-text">
-					    <a href="{{url('user/' . $user->id )}}"> <i class="fa fa-user" aria-hidden="true"></i> {{ $user->name }}</a>
-					</td>
+                                            <a href="{{url('user/' . $user->id )}}"> <i class="fa fa-user" aria-hidden="true"></i> {{ $user->name }}</a>
+                                        </td>
                                         <!-- Playlist Buttons -->
-                                        <td>{{ count($user->playlists)}} <i class="fa fa-list-ul" aria-hidden="true"></i> Playlists</td>
-                                        <td>{{ count($user->favorites)}} <i class="fa fa-heart" aria-hidden="true"></i> Favorites</td>
+                                        <td id="has-playlist-{{$user->id}}-{{ count($user->playlists)}}">{{ count($user->playlists)}} <i class="fa fa-list-ul" aria-hidden="true"></i> Playlists</td>
+                                        <td id="has-favorite-{{$user->id}}-{{ count($user->favorites)}}">{{ count($user->favorites)}} <i class="fa fa-heart" aria-hidden="true"></i> Favorites</td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
-		</div>
+                </div>
             @endif
         </div>
     </div>
