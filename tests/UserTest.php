@@ -76,16 +76,22 @@ class UserTest extends TestCase
              ->see($user->name);
     }
 
-    public function testFollow()
+    public function testUserPageWithPlFav()
     {
         $user = factory(User::class)->create();
-        $followUserId = 1;
+        $playlistName = "testPlayList";
+        $favName = "favoriteTest";
+        $favUrl = "https://www.youtube.com/watch?v=ZABXtVxyJwg&t=137s";
         $this->actingAs($user)
-             ->visit('/user/' . $followUserId)
-             ->press('follow-button-' . $followUserId)
-             ->seeInDatabase('follows',[
-                 'user_id' => $user->id
-                 , 'follow_user_id' => $followUserId
-             ]);
+             ->visit('/playlists')
+             ->type($playlistName, 'name')
+             ->press('Add Playlist')
+             ->visit('/favorites')
+             ->type($favName, 'name')
+             ->type($favUrl, 'url')
+             ->press('Add Favorite')
+             ->visit('/user/' . $user->id)
+             ->see($playlistName)
+             ->see($favName);
     }
 }
