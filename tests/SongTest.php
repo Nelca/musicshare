@@ -38,12 +38,14 @@ class SongTest extends TestCase
         //$songData = Youtube::getVideoInfo($songKey);
         //$songName = $songData->snippet->title; 
         $songUrl = "https://www.youtube.com/watch?v=" . $songKey;
+        $songName = 'Keep Movin (FULL ALBUM 2011)';
 
         $this->actingAs($user)
              ->visit('/playlists')
              ->press('View Songs')
              ->type($songUrl, 'url')
-             ->press('Add Song');
+             ->press('Add Song')
+             ->see($songName);
     }
 
     public function testSongLikeUnlike()
@@ -83,6 +85,14 @@ class SongTest extends TestCase
     }
 
     public function testMySongPageWithoutSong()
+    {
+        $user = factory(User::class)->create();
+        $this->actingAs($user)
+            ->visit('/my-songs')
+            ->see('There is nothing yet.');
+    }
+
+    public function testMySongPageWithSong()
     {
         $user = factory(User::class)->create();
         $this->actingAs($user)

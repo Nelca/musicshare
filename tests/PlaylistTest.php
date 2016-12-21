@@ -39,7 +39,8 @@ class PlaylistTest extends TestCase
              ->type($playlist->name, 'name')
              ->press('Add Playlist')
              ->seePageIs('/playlists')
-             ->see($playlist->name);
+             ->see($playlist->name)
+             ->see($user->name);
 
         $playlist = Playlist::where('name', $playlist->name)->first();
         $this->afterTestBlankPlaylist($playlist);
@@ -103,6 +104,7 @@ class PlaylistTest extends TestCase
             ->visit('/my-playlists')
             ->type($playlist->name, 'name')
             ->press('Add Playlist')
+            ->seePageIs('/playlists')
             ->visit('my-playlists')
             ->see($playlist->name);
     }
