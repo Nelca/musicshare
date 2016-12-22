@@ -45,6 +45,7 @@ class PlaylistTest extends TestCase
         $playlist = Playlist::where('name', $playlist->name)->first();
         $this->afterTestBlankPlaylist($playlist);
         $this->afterTestPlalylistLikeUnlike($playlist);
+        $this->afterDeletePlaylist($playlist);
         return $playlist;
     }
 
@@ -75,8 +76,10 @@ class PlaylistTest extends TestCase
                  , 'evaluation' => 1
                  , 'evaluatable_id' => $playlistId 
                  , 'evaluatable_type' => 'playlists'
-             ]);
-    }
+             ])
+             ->press('liked-playlist-' . $playlistId)
+             ->see('like-playlist-' . $playlistId);
+   }
 
     public function testBlankMyPlaylists()
     {
@@ -109,5 +112,15 @@ class PlaylistTest extends TestCase
             ->see($playlist->name);
     }
 
-
+    public function afterDeletePlaylist(Playlist $playlist)
+    {
+        $user = factory(User::class)->create();
+        $this->actingAs($user)
+            ->visit('/playlists')
+            ->type($playlist->name, 'name')
+            ->press('Add Playlist')
+            ->seePageIs('/playlists')
+            ->press('delete-playlist-' . $playlist->id)
+            ->seePageIs('/playlists');
+    }
 }

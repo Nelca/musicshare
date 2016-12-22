@@ -78,7 +78,7 @@
                                     <form action="{{url('playlist/' . $playlist->id . '/unlike')}}" method="POST">
                                         {{ csrf_field() }}
                                         {{ method_field('PUT') }}
-                                        <button type="submit" id="like-playlist-{{ $playlist->id }}" class="btn btn-warning fa fa-star"></button>
+                                        <button type="submit" id="liked-playlist-{{ $playlist->id }}" class="btn btn-warning fa fa-star"></button>
                                     </form>
                                 @endcan
 						    </div>
