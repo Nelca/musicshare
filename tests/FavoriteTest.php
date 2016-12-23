@@ -62,21 +62,4 @@ class FavoriteTest extends TestCase
              ->see('url field is required');
 
     }
-
-    public function testDeleteFav()
-    {
-        $user = factory(User::class)->create();
-        $favName = "favoriteTest";
-        $favUrl = "https://www.youtube.com/watch?v=ZABXtVxyJwg&t=137s";
-        $this->actingAs($user)
-             ->visit('/favorites')
-             ->type($favName, 'name')
-             ->type($favUrl, 'url')
-             ->press('Add Favorite')
-             ->seePageIs('/favorites');
-             //->visit('/favorites')
-             //->press('delete-favorite-')
-             //->see('delete complete');
-
-   }
 }
