@@ -8,6 +8,11 @@ Find some playlists and playlist creator.
 So you are find some good songs.
 
 ## Install
+
 ## Settings
+
+DB setting
+add and modify .env
+
 ## Functions
 
