@@ -132,23 +132,28 @@ class MyPageController extends Controller
         $youtube_list = array();
         if ($user->oauth_token) {
             $url = "https://www.googleapis.com/youtube/v3/activities?part=snippet,contentDetails&mine=true&maxResults=10&access_token=" . $user->oauth_token;
-            $json = file_get_contents($url);
+            $context = stream_context_create(array(
+                'http' => array('ignore_errors' => true)
+            ));
+            $json = file_get_contents($url, false , $context);
             $jsonResponse = json_decode($json);
-            $youtube_activity_list = $jsonResponse->items;
+            if ($jsonResponse->error->code != "401") {
+                $youtube_activity_list = $jsonResponse->items;
 
-            // likeのみ
-            foreach ($youtube_activity_list as $key => $y_activiity) {
-                if ($y_activiity->snippet->type != 'like') {
-                    unset($youtube_activity_list[$key]);
-                } else {
-                    $y_activitys = new \stdClass();
-                    $y_activitys->id = $y_activiity->id;
-                    $y_activitys->name = $y_activiity->snippet->title;
-                    $y_activitys->url = "https://www.youtube.com/watch?v=" . $y_activiity->contentDetails->like->resourceId->videoId;
-                    $y_activitys->song_key = $y_activiity->contentDetails->like->resourceId->videoId;
-                    $y_activitys->type = "youtube_acivity";
-                    $y_activitys->user_name = $user->name;
-                    array_push($youtube_list, $y_activitys);
+                // likeのみ
+                foreach ($youtube_activity_list as $key => $y_activiity) {
+                    if ($y_activiity->snippet->type != 'like') {
+                        unset($youtube_activity_list[$key]);
+                    } else {
+                        $y_activitys = new \stdClass();
+                        $y_activitys->id = $y_activiity->id;
+                        $y_activitys->name = $y_activiity->snippet->title;
+                        $y_activitys->url = "https://www.youtube.com/watch?v=" . $y_activiity->contentDetails->like->resourceId->videoId;
+                        $y_activitys->song_key = $y_activiity->contentDetails->like->resourceId->videoId;
+                        $y_activitys->type = "youtube_acivity";
+                        $y_activitys->user_name = $user->name;
+                        array_push($youtube_list, $y_activitys);
+                    }
                 }
             }
         }
