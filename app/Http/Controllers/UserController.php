@@ -32,12 +32,19 @@ class UserController extends Controller
             $url .= "&channelId=" . $user->channel_id;
             $url .= "&maxResults=10";
             $url .= "&access_token=" . $login_user->oauth_token;
-            $json = file_get_contents($url);
-            $jsonResponse = json_decode($json);
-            $youtube_activity_list = $jsonResponse->items;
+
+            $context = stream_context_create(array(
+                'http' => array('ignore_errors' => true)
+            ));
+
+            $json = file_get_contents($url, false, $context);
+            $jsonResponse = json_decode($json, true);
+            if (isset($jsonResponse["items"])) {
+                $youtube_activity_list = $jsonResponse["items"];
+            }
             // likeのみ
             foreach ($youtube_activity_list as $key => $y_activiity) {
-                if ($y_activiity->snippet->type != 'like') {
+                if ($y_activiity["snippet"]["type"] != 'like') {
                     unset($youtube_activity_list[$key]);
                 }
             }
