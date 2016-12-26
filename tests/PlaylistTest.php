@@ -10,6 +10,12 @@ class PlaylistTest extends TestCase
 {
     use DatabaseTransactions;
 
+    public function tesetNonLoginUser()
+    {
+        $this->visit('/my-playlists')
+            ->seePageIs('login');
+    }
+
     public function testViewPlaylists()
     {
         $user = factory(User::class)->create();

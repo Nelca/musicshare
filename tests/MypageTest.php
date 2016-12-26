@@ -11,6 +11,18 @@ class MypageTest extends TestCase
 {
     use DatabaseTransactions;
 
+    public function testNoLoginMypage()
+    {
+        $this->visit('/mypage')
+            ->seePageIs('/login');
+    }
+
+    public function testNoLoginMypageLike()
+    {
+        $this->visit('/mypage/likes')
+            ->seePageIs('/login');
+    }
+
     /**
      * @return void
      */

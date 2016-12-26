@@ -10,6 +10,12 @@ class FavoriteTest extends TestCase
 {
     use DatabaseTransactions;
 
+    public function testNoLoginUser()
+    {
+        $this->visit('/favorites')
+            ->seePageIs('/login');
+    }
+
     public function testDefaultPage()
     {
         $user = factory(User::class)->create();

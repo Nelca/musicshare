@@ -11,6 +11,13 @@ use App\Song;
 class SongTest extends TestCase
 {
     use DatabaseTransactions;
+
+    public function testNoLoginUser()
+    {
+        $this->visit('/my-songs')
+            ->seePageIs('/login');
+    }
+
     /**
      * A basic test example.
      *
