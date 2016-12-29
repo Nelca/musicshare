@@ -9,11 +9,6 @@ class FollowTest extends TestCase
 {
     use DatabaseTransactions;
 
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
     public function testExample()
     {
         $user = factory(User::class)->create();
@@ -23,4 +18,42 @@ class FollowTest extends TestCase
              ->press('follow-button-' . $userId)
              ->see('unfollow-button-' . $userId);
     }
+
+    public function testFollowView()
+    {
+        $user = factory(User::class)->create();
+        $followUser = User::orderBy('created_at', 'asc')->first();
+        $followUserId = $followUser->id;
+        $followUserName = $followUser->name;
+        $this->actingAs($user)
+             ->visit('/user/' . $followUserId)
+             ->press('follow-button-' . $followUserId)
+             ->seeInDatabase('follows',[
+                 'user_id' => $user->id
+                 , 'follow_user_id' => $followUserId
+             ])
+             ->visit('/user/' . $user->id)
+             ->click('1 Follow')
+             ->see($followUserName);
+    }
+
+
+    public function testFollowerView()
+    {
+        $user = factory(User::class)->create();
+        $followUser = User::orderBy('created_at', 'asc')->first();
+        $followUserId = $followUser->id;
+        $followUserName = $followUser->name;
+        $this->actingAs($user)
+             ->visit('/user/' . $followUserId)
+             ->press('follow-button-' . $followUserId)
+             ->seeInDatabase('follows',[
+                 'user_id' => $user->id
+                 , 'follow_user_id' => $followUserId
+             ])
+             ->visit('/user/' . $followUserId)
+             ->click('1 Follower')
+             ->see($user->name);
+    }
+
 }

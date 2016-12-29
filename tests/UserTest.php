@@ -29,6 +29,7 @@ class UserTest extends TestCase
         $this->visit('/users/')
              ->click($user->name)
              ->seePageIs('/user/' . $user->id);
+             ->see($user->name);
     }
 
     public function testUsersPageWithPlFav()
@@ -48,51 +49,6 @@ class UserTest extends TestCase
              ->visit('/users/')
              ->see('has-playlist-'. $user->id . '-1')
              ->see('has-favorite-'. $user->id . '-1');
-    }
-
-    public function testUserPage()
-    {
-        $user = factory(User::class)->create();
-        $this->actingAs($user)
-             ->visit('/user/' . $user->id)
-             ->see($user->name);
-    }
-
-    public function testFollowView()
-    {
-        $user = factory(User::class)->create();
-        $followUser = User::orderBy('created_at', 'asc')->first();
-        $followUserId = $followUser->id;
-        $followUserName = $followUser->name;
-        $this->actingAs($user)
-             ->visit('/user/' . $followUserId)
-             ->press('follow-button-' . $followUserId)
-             ->seeInDatabase('follows',[
-                 'user_id' => $user->id
-                 , 'follow_user_id' => $followUserId
-             ])
-             ->visit('/user/' . $user->id)
-             ->click('1 Follow')
-             ->see($followUserName);
-    }
-
-
-    public function testFollowerView()
-    {
-        $user = factory(User::class)->create();
-        $followUser = User::orderBy('created_at', 'asc')->first();
-        $followUserId = $followUser->id;
-        $followUserName = $followUser->name;
-        $this->actingAs($user)
-             ->visit('/user/' . $followUserId)
-             ->press('follow-button-' . $followUserId)
-             ->seeInDatabase('follows',[
-                 'user_id' => $user->id
-                 , 'follow_user_id' => $followUserId
-             ])
-             ->visit('/user/' . $followUserId)
-             ->click('1 Follower')
-             ->see($user->name);
     }
 
     public function testUserPageWithPlFav()

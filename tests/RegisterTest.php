@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use App\User;
 
 class RegisterTest extends TestCase
 {
@@ -45,5 +46,14 @@ class RegisterTest extends TestCase
              ->see('The password confirmation does not match.');
     }
 
-
+    public function testSameMailError()
+    {
+        $registedUser = User::orderBy('created_at', 'asc')->first();
+        $checkMail = $registedUser->email;
+        $this->visit('/register')
+            ->type('Test User', 'name')
+            ->type($checkMail, 'email')
+            ->press('Register')
+            ->see('The email has already been taken.');
+    }
 }

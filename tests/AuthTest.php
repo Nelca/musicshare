@@ -62,6 +62,8 @@ class AuthTest extends TestCase
             ->seeInDatabase('users',[
                 'name' => $this->testUserName
                 , 'email' => $this->testUserEmail
+                // cant't check because escaped.
+                //, 'password' => $this->testUserEncodedPass
             ]);
     }
 }

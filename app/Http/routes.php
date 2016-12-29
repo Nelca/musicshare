@@ -23,12 +23,12 @@ Route::post('auth/login', 'Auth\AuthController@postLogin');
 Route::get('/logout', 'Auth\AuthController@getLogout');
 Route::get('auth/logout', 'Auth\AuthController@getLogout');
 
-Route::get('/auth/github', 'Auth\SocialLoginController@githubLogin');
-Route::get('/github/callback', 'Auth\SocialLoginController@githubCallback');
-Route::get('/auth/twitter', 'Auth\SocialLoginController@twitterLogin');
-Route::get('/twitter/callback', 'Auth\SocialLoginController@twitterCallback');
-Route::get('/auth/google', 'Auth\SocialLoginController@googleLogin');
-Route::get('/google/callback', 'Auth\SocialLoginController@googleCallback');
+//Route::get('/auth/github', 'Auth\SocialLoginController@githubLogin');
+//Route::get('/github/callback', 'Auth\SocialLoginController@githubCallback');
+//Route::get('/auth/twitter', 'Auth\SocialLoginController@twitterLogin');
+//Route::get('/twitter/callback', 'Auth\SocialLoginController@twitterCallback');
+//Route::get('/auth/google', 'Auth\SocialLoginController@googleLogin');
+//Route::get('/google/callback', 'Auth\SocialLoginController@googleCallback');
 Route::get('/auth/youtube', 'Auth\SocialLoginController@youtubeLogin');
 Route::get('/youtube/callback', 'Auth\SocialLoginController@youtubeCallback');
 

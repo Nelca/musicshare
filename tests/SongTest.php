@@ -18,25 +18,34 @@ class SongTest extends TestCase
             ->seePageIs('/login');
     }
 
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
+    public function testAddSongValidate()
+    {
+        $user = factory(User::class)->create();
+        $this->actingAs($user)
+            ->visit('/playlists')
+            ->press('View Songs')
+            ->see('New Song')
+            ->press('Add Song')
+            ->see('The url field is required.');
+    }
+
     public function testAddSongWithName()
     {
         $songName = "song test";
         $songUrl = "https://www.youtube.com/watch?v=ZABXtVxyJwg";
         $user = factory(User::class)->create();
         $this->actingAs($user)
-             ->visit('/playlists')
-             ->press('View Songs')
-             ->type($songUrl, 'url')
-             ->type($songName, 'name')
-             ->press('Add Song')
-             ->see($songName);
+            ->visit('/playlists')
+            ->press('View Songs')
+            ->type($songUrl, 'url')
+            ->type($songName, 'name')
+            ->press('Add Song')
+            ->see($songName);
     }
 
+    /*
+    * ToDo Use Youtube facede to get song name.
+    */
     public function testAddSongWithoutName()
     {
         $user = factory(User::class)->create();
@@ -48,11 +57,11 @@ class SongTest extends TestCase
         $songName = 'Keep Movin (FULL ALBUM 2011)';
 
         $this->actingAs($user)
-             ->visit('/playlists')
-             ->press('View Songs')
-             ->type($songUrl, 'url')
-             ->press('Add Song')
-             ->see($songName);
+            ->visit('/playlists')
+            ->press('View Songs')
+            ->type($songUrl, 'url')
+            ->press('Add Song')
+            ->see($songName);
     }
 
     public function testSongLikeUnlike()

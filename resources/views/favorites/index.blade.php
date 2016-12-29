@@ -80,7 +80,7 @@
                                             <form action="{{url('favorite/' . $favorite->id) . '/unlike'}}" method="POST">
                                                 {{ csrf_field() }}
                                                 {{ method_field('PUT') }}
-                                                <button type="submit" id="like-favorite-{{ $favorite->id }}" class="btn btn-warning fa fa-star"></button>
+                                                <button type="submit" id="liked-favorite-{{ $favorite->id }}" class="btn btn-warning fa fa-star"></button>
                                             </form>
                                         @endcan
                                         <td>
