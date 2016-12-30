@@ -67,7 +67,7 @@
                 </div>
                 <div class="panel-body">
                     @if (count($playlists) > 0)
-                        <div class="row">
+                        <div class="row panel-body">
                             <div class="col-xs-12 col-md-5">
                                 Playlist
                             </div>
@@ -79,7 +79,7 @@
                             </div>
                         </div>
                         @foreach ($playlists as $playlist)
-                            <div class="row">
+                            <div class="row panel-body">
                                 <div class="col-xs-12 col-md-5">
                                     {{ $playlist->name }}
                                 </div>
