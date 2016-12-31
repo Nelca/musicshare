@@ -70,6 +70,8 @@ Route::group(['middleware' => 'auth'], function(){
 
     Route::get('/mypage', 'MyPageController@index');
     Route::get('/mypage/likes', 'MyPageController@likes');
+    Route::get('/mypage/edit/{user}', 'MyPageController@editView');
+    Route::post('/mypage/edit/{user}', 'MyPageController@editUpdate');
 });
 
 Route::group(['prefix' => 'api', 'namespace' => 'Api'], function(){

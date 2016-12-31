@@ -181,4 +181,29 @@ class MyPageController extends Controller
 
     }
 
+    public function editView(User $user)
+    {
+        return view('mypage.edit', [
+                    'user' => $user,
+                    'isUpdate' => false,
+                ]);
+    }
+
+    public function editUpdate(Request $request, User $user)
+    {
+        $this->validate($request, [
+            'name' => 'required|max:255',
+            'email' => 'required|email',
+        ]);
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->save();
+
+        return view('mypage.edit', [
+                    'user' => $user,
+                    'isUpdate' => true,
+                ]);
+    }
+
 }
