@@ -75,4 +75,27 @@ class MypageTest extends TestCase
             ->visit('/mypage/likes')
             ->see($songName);
     }
+
+    public function testNoLoginEditProfile()
+    {
+        $this->visit('/mypage/edit/1')
+            ->seePageIs('/login');
+    }
+
+    public function testEditProfile()
+    {
+        $editedName = 'editedName';
+        $editedEmail = 'editedEmail@email.jp';
+        $user = factory(User::class)->create();
+        $this->actingAs($user)
+            ->visit('/mypage/edit/' . $user->id)
+            ->type($editedName, 'name')
+            ->type($editedEmail, 'email')
+            ->press('Edit')
+            ->seeInDatabase('users',[
+                 'id' => $user->id
+                 , 'name' => $editedName
+                 , 'email' => $editedEmail
+             ]);
+    }
 }

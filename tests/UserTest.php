@@ -28,7 +28,7 @@ class UserTest extends TestCase
         $user = factory(User::class)->create();
         $this->visit('/users/')
              ->click($user->name)
-             ->seePageIs('/user/' . $user->id);
+             ->seePageIs('/user/' . $user->id)
              ->see($user->name);
     }
 
