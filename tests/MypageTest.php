@@ -78,7 +78,7 @@ class MypageTest extends TestCase
 
     public function testNoLoginEditProfile()
     {
-        $this->visit('/mypage/edit/1')
+        $this->visit('/mypage/edit')
             ->seePageIs('/login');
     }
 
@@ -88,7 +88,7 @@ class MypageTest extends TestCase
         $editedEmail = 'editedEmail@email.jp';
         $user = factory(User::class)->create();
         $this->actingAs($user)
-            ->visit('/mypage/edit/' . $user->id)
+            ->visit('/mypage/edit')
             ->type($editedName, 'name')
             ->type($editedEmail, 'email')
             ->press('Edit')

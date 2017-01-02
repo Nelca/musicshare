@@ -7,6 +7,7 @@ use App\Http\Requests;
 use DB;
 use App\User;
 use Illuminate\Http\Response;
+use Auth;
 
 class MyPageController extends Controller
 {
@@ -181,16 +182,18 @@ class MyPageController extends Controller
 
     }
 
-    public function editView(User $user)
+    public function editView()
     {
+        $user = Auth::user();
         return view('mypage.edit', [
                     'user' => $user,
                     'isUpdate' => false,
                 ]);
     }
 
-    public function editUpdate(Request $request, User $user)
+    public function editUpdate(Request $request)
     {
+        $user = Auth::user();
         $this->validate($request, [
             'name' => 'required|max:255',
             'email' => 'required|email',

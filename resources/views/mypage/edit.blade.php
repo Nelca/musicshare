@@ -10,7 +10,7 @@
                     @if ($isUpdate)
                         <div>Update success!!</div>
                     @endif
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/mypage/edit/' . $user->id) }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/mypage/edit') }}">
                         {!! csrf_field() !!}
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label class="col-md-4 control-label">Name</label>
