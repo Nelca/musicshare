@@ -8,7 +8,7 @@
                 <div class="panel-heading">Edit {{$user->name}} profile.</div>
                 <div class="panel-body">
                     @if ($isUpdate)
-                        <div>Update success!!</div>
+                        <div class="alert-success">Update success!!</div>
                     @endif
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/mypage/edit') }}">
                         {!! csrf_field() !!}
