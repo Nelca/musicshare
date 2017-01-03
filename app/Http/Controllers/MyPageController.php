@@ -99,7 +99,7 @@ class MyPageController extends Controller
     public function getSongs ($user)
     {
         $user_id = $user->id;
-        $query = " SELECT s.id, s.name, s.url, s.song_key, 'song' as type, u.name as user_name, s.updated_at as updated_at, p.id as playlist_id ";
+        $query = " SELECT s.id, s.name, s.url, s.song_key, 'song' as type, u.name as user_name, s.updated_at as updated_at, p.id as playlist_id, p.name as playlist_name ";
         $query .= " from songs as s ";
         $query .= " inner join playlists as p ON s.playlist_id = p.id ";
         $query .= " inner join users as u on u.id = p.user_id ";
@@ -108,7 +108,7 @@ class MyPageController extends Controller
         $query .= " inner join follows as f on u2.id = f.follow_user_id ";
         $query .= " WHERE f.user_id = ?)";
         $query .= " UNION ALL ";
-        $query .= " select fav.id, fav.name, fav.url, fav.song_key, 'favorite' as type, u3.name as user_name, fav.updated_at as updated_at, 0 as playlist_id ";
+        $query .= " select fav.id, fav.name, fav.url, fav.song_key, 'favorite' as type, u3.name as user_name, fav.updated_at as updated_at, 0 as playlist_id, '' as  playlist_name";
         $query .= " from favorites as fav ";
         $query .= " inner join users as u3 on u3.id = fav.user_id";
         $query .= " where u3.id IN (";
@@ -116,7 +116,7 @@ class MyPageController extends Controller
         $query .= " inner join follows as f2 on u4.id = f2.follow_user_id ";
         $query .= " WHERE f2.user_id = ?)";
         $query .= " UNION ALL ";
-        $query .= " SELECT s.id, s.name, s.url, s.song_key, 'follow' as type, u5.name as user_name, e.updated_at as updated_at , 0 as playlist_id ";
+        $query .= " SELECT s.id, s.name, s.url, s.song_key, 'follow' as type, u5.name as user_name, e.updated_at as updated_at , 0 as playlist_id , '' as  playlist_name";
         $query .= " FROM evaluates as e";
         $query .= " JOIN songs as s ON s.id = e.evaluatable_id";
         $query .= " JOIN users as u5 ON e.user_id = u5.id";

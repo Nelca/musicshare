@@ -63,7 +63,7 @@
                                         <td class="table-text">
                                             {{ $song->type}}
                                             @if ($song->type == "song") 
-                                                <a class="fa fa-list-ul" href="{{ url('/playlist/' . $song->playlist_id . '/songs') }}">Playlist</a>
+                                                <a class="fa fa-list-ul" href="{{ url('/playlist/' . $song->playlist_id . '/songs') }}">{{ $song->playlist_name }}</a>
                                             @endif
                                         </td>
                                     </tr>
