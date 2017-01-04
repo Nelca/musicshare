@@ -90,11 +90,11 @@
                                 @foreach ($youtube_datas as $youtube_data)
                                 <tr>
                                     <td>
-                                        <img src="http://i.ytimg.com/vi/{{ $youtube_data->contentDetails->like->resourceId->videoId }}/default.jpg">
+                                        <img src="http://i.ytimg.com/vi/{{ $youtube_data->song_key }}/default.jpg">
                                     </td>
-                                    <td class="table-text"><div>{{ $youtube_data->snippet->title }}</div></td>
+                                    <td class="table-text"><div>{{ $youtube_data->name }}</div></td>
                                     <td class="table-text">
-                                        <a class="fa fa-youtube-play" href="https://www.youtube.com/watch?v={{ $youtube_data->contentDetails->like->resourceId->videoId }}" target="_blank">youtube</a>
+                                        <a class="fa fa-youtube-play" href="https://www.youtube.com/watch?v={{ $youtube_data->song_key }}" target="_blank">youtube</a>
                                     </td>
                                 </tr>
                                 @endforeach
