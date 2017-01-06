@@ -14,40 +14,19 @@ use Auth;
 class UserController extends Controller
 {
     //
-    public function __construct(UserRepository $users, PlaylistRepository $playlists)
+    public function __construct(UserRepository $users)
     {
-	$this->users = $users;
-	$this->playlists = $playlists;
+        $this->users = $users;
     }
 
     public function index(Request $request, User $user)
     {
-        $follow_users = $this->getFollowUserIds($user->id);
-        $follower_users = $this->getFollowerUserIds($user->id);
+        $follow_users = $this->users->getFollowUserIds($user->id);
+        $follower_users = $this->users->getFollowerUserIds($user->id);
         $youtube_activity_list = array();
         $login_user = Auth::user();
         if ($login_user && $login_user->oauth_token && $user->channel_id) {
-            $url = "https://www.googleapis.com/youtube/v3/activities?";
-            $url .= "part=snippet,contentDetails";
-            $url .= "&channelId=" . $user->channel_id;
-            $url .= "&maxResults=10";
-            $url .= "&access_token=" . $login_user->oauth_token;
-
-            $context = stream_context_create(array(
-                'http' => array('ignore_errors' => true)
-            ));
-
-            $json = file_get_contents($url, false, $context);
-            $jsonResponse = json_decode($json, true);
-            if (isset($jsonResponse["items"])) {
-                $youtube_activity_list = $jsonResponse["items"];
-            }
-            // likeのみ
-            foreach ($youtube_activity_list as $key => $y_activiity) {
-                if ($y_activiity["snippet"]["type"] != 'like') {
-                    unset($youtube_activity_list[$key]);
-                }
-            }
+            $youtube_activity_list = $this->getYoutubeActivity($user, $login_user);
         }
 
         return view('users.index', [
@@ -62,54 +41,32 @@ class UserController extends Controller
 
     public function userList (Request $request)
     {
+        $users = $this->users->getAllUsers();
+
         return view('users.list', [
-            'users' => User::all(),
+            'users' => $users,
         ]);
 
     }
 
     public function follow  (Request $request, User $user)
     {
-        $follow_users = DB::table('users as u')
-	                    ->join('follows as f', 'u.id', '=', 'f.follow_user_id')
-			    ->select('u.*')
-			    ->where('f.user_id', '=' , $user->id)
-			    ->get('u.id');
+        $follow_users =  $this->users->getFollow($user->id);
+
         return view('users.follow', [
-	    'follows' => $follow_users,
-	    'is_follow' => true,
-	]);
+            'follows' => $follow_users,
+            'is_follow' => true,
+        ]);
     }
 
     public function follower  (Request $request, User $user)
     {
-        $follow_users = DB::table('users as u')
-	                    ->join('follows as f', 'u.id', '=', 'f.user_id')
-			    ->select('u.*')
-			    ->where('f.follow_user_id', '=' , $user->id)
-			    ->get('u.id');
+        $follower_users =  $this->users->getFollower($user->id);
+
         return view('users.follow', [
-	    'follows' => $follow_users,
-	    'is_follow' => false,
-	]);
-    }
-
-    public function getFollowUserIds ($user_id)
-    {
-        $follow_users = DB::table('users as u')
-	                    ->join('follows as f', 'u.id', '=', 'f.follow_user_id')
-			    ->where('f.user_id', '=' , $user_id)
-			    ->lists('u.id');
-        return $follow_users;
-    }
-
-    public function getFollowerUserIds ($user_id)
-    {
-        $follower_users = DB::table('users as u')
-	                    ->join('follows as f', 'u.id', '=', 'f.user_id')
-			    ->where('f.follow_user_id', '=' , $user_id)
-			    ->lists('u.id');
-        return $follower_users;
+            'follows' => $follower_users,
+            'is_follow' => false,
+        ]);
     }
 
 }
