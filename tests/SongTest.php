@@ -115,4 +115,26 @@ class SongTest extends TestCase
             ->visit('/my-songs')
             ->see('There is nothing yet.');
     }
+
+    public function testDeleteSong()
+    {
+        $user = factory(User::class)->create();
+
+        $songUrl = "https://www.youtube.com/watch?v=ZABXtVxyJwg";
+        $playlist = $user->playlists()->create([
+            'name' => 'test_playlist'
+        ]);
+        $pid = $playlist->id;
+        $song = $playlist->songs()->create([
+            'name' => 'test_song'
+            , 'playlist_id' => $pid
+            , 'url' => $songUrl
+        ]);
+
+        $this->actingAs($user)
+            ->visit('/playlist/' . $pid . '/songs')
+            ->press('delete-song-' . $song->id)
+            ->seePageIs('/playlist/' . $pid . '/songs');
+
+    }
 }
