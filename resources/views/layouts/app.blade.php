@@ -63,7 +63,7 @@
                                 <li><a href="{{ url('/favorites') }}"><i class="fa fa-heart" aria-hidden="true"></i> Favorites</a></li>
                                 <li><a href="{{ url('/my-playlists') }}"><i class="fa fa-list-ul" aria-hidden="true"></i> My Lists</a></li>
                                 <li><a href="{{ url('/my-songs') }}"><i class="fa fa-music" aria-hidden="true"></i> My Songs</a></li>
-                                <li><a href="{{ url('/mypage/edit') }}"><i class="fa " aria-hidden="true"></i> Edit Profiile</a></li>
+                                <li><a href="{{ url('/mypage/edit') }}"><i class="fa fa-cog" aria-hidden="true"></i> Edit Profiile</a></li>
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
                         </li>
