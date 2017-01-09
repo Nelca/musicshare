@@ -86,12 +86,14 @@
                                 <span>{{ count($playlist->evaluates) }}<span class="fa fa-star"></span></span>
 						    </div>
 						    <div class="col-xs-12 col-md-3">
-							<form action="{{url('playlist/' . $playlist->id)}}" method="POST">
-							    {{ csrf_field() }}
-							    {{ method_field('DELETE') }}
-							    <button type="submit" id="delete-playlist-{{ $playlist->id }}" class="btn fa fa-btn fa-trash">
-							    </button>
-							</form>
+                                @can('destroy', $playlist)
+                                    <form action="{{url('playlist/' . $playlist->id)}}" method="POST">
+                                        {{ csrf_field() }}
+                                        {{ method_field('DELETE') }}
+                                        <button type="submit" id="delete-playlist-{{ $playlist->id }}" class="btn fa fa-btn fa-trash">
+                                        </button>
+                                    </form>
+                                @endcan
 						    </div>
 						    <!--<div class="col-xs-12 col-md-6">
 							<form action="{{url('playlist/' . $playlist->id)}}" method="POST">
