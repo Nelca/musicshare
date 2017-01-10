@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class DropUniqueMailUsers extends Migration
+class AddUserIdToSongTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,9 +12,8 @@ class DropUniqueMailUsers extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
-            $table->dropUnique('users_email_unique');
+        Schema::table('songs', function (Blueprint $table) {
+            $table->integer('user_id');
         });
     }
 
@@ -25,8 +24,6 @@ class DropUniqueMailUsers extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
-        });
+        //
     }
 }

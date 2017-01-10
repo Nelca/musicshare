@@ -60,6 +60,7 @@ class SongController extends Controller
         $song->url = $url;
         $song->song_key =  $song_key;
         $song->name = $song_name;
+        $song->user_id = $request->user()->id;
 
         $playlist = Playlist::find($playlist_id);
         $playlist->songs()->save($song);

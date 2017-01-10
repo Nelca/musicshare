@@ -94,14 +94,16 @@
                                         </td>
                                         <!-- Song Delete Button -->
                                         <td>
-                                            <form action="{{url('song/' . $song->id)}}" method="POST">
-                                                {{ csrf_field() }}
-                                                {{ method_field('DELETE') }}
+                                            @can('destroy', $song)
+                                                <form action="{{url('song/' . $song->id)}}" method="POST">
+                                                    {{ csrf_field() }}
+                                                    {{ method_field('DELETE') }}
 
-                                                <button type="submit" id="delete-song-{{ $song->id }}" class="btn fa fa-btn fa-trash">
-                                                </button>
-                                                <input type="hidden" name="playlist_id" value="{{ $playlist->id }}">
-                                            </form>
+                                                    <button type="submit" id="delete-song-{{ $song->id }}" class="btn fa fa-btn fa-trash">
+                                                    </button>
+                                                    <input type="hidden" name="playlist_id" value="{{ $playlist->id }}">
+                                                </form>
+                                            @endcan
                                         </td>
                                     </tr>
                                 @endforeach

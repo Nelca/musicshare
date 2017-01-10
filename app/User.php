@@ -6,6 +6,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Favorite;
 use App\Playlist;
 use App\Follow;
+use App\Song;
 
 class User extends Authenticatable
 {
@@ -35,5 +36,10 @@ class User extends Authenticatable
     public function playlists()
     {
         return $this->hasMany(Playlist::class);
+    }
+
+    public function songs()
+    {
+        return $this->hasMany(Song::class);
     }
 }

@@ -21,9 +21,9 @@ class SongPolicy
         // 
     }
 
-    public function destroy(Playlist $playlist, Song $song)
+    public function destroy(User $user, Song $song)
     {
-        return $playlist->id === $song->playlist-id;
+        return $user->id === $song->user_id;
     }
 
     public function like(User $user, Song $song)
