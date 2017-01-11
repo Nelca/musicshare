@@ -40,6 +40,7 @@ class PlaylistTest extends TestCase
         $user = factory(User::class)->create();
         $playlist = new Playlist;
         $playlist->name = "test list";
+        $playlist->user_id = $user->id;
         $this->actingAs($user)
              ->visit('/playlists')
              ->type($playlist->name, 'name')
@@ -51,7 +52,7 @@ class PlaylistTest extends TestCase
         $playlist = Playlist::where('name', $playlist->name)->first();
         $this->afterTestBlankPlaylist($playlist);
         $this->afterTestPlalylistLikeUnlike($playlist);
-        $this->afterDeletePlaylist($playlist);
+        $this->afterDeletePlaylist($playlist, $user);
         return $playlist;
     }
 
@@ -118,14 +119,10 @@ class PlaylistTest extends TestCase
             ->see($playlist->name);
     }
 
-    public function afterDeletePlaylist(Playlist $playlist)
+    public function afterDeletePlaylist(Playlist $playlist, User $user)
     {
-        $user = factory(User::class)->create();
         $this->actingAs($user)
             ->visit('/playlists')
-            ->type($playlist->name, 'name')
-            ->press('Add Playlist')
-            ->seePageIs('/playlists')
             ->press('delete-playlist-' . $playlist->id)
             ->seePageIs('/playlists');
     }

@@ -125,10 +125,12 @@ class SongTest extends TestCase
             'name' => 'test_playlist'
         ]);
         $pid = $playlist->id;
+        $songName = 'test_song';
         $song = $playlist->songs()->create([
-            'name' => 'test_song'
+            'name' => $songName
             , 'playlist_id' => $pid
             , 'url' => $songUrl
+            , 'user_id' => $user->id 
         ]);
 
         $this->actingAs($user)
