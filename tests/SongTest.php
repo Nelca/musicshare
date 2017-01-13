@@ -121,22 +121,36 @@ class SongTest extends TestCase
         $user = factory(User::class)->create();
 
         $songUrl = "https://www.youtube.com/watch?v=ZABXtVxyJwg";
+        $song_key = "ZABXtVxyJwg";
+
         $playlist = $user->playlists()->create([
             'name' => 'test_playlist'
         ]);
         $pid = $playlist->id;
-        $songName = 'test_song';
-        $song = $playlist->songs()->create([
-            'name' => $songName
-            , 'playlist_id' => $pid
-            , 'url' => $songUrl
-            , 'user_id' => $user->id 
-        ]);
+        $songName = 'test_song' . '_' . $user->id;
+
+        $song = new Song;
+        $song->url = $songUrl;
+        $song->song_key =  $song_key;
+        $song->name = $songName;
+        $song->user_id = $user->id;
+
+        $playlist = Playlist::find($pid);
+        $playlist->songs()->save($song);
+
+        $createdSong = Song::where('name', $songName)->first();
 
         $this->actingAs($user)
             ->visit('/playlist/' . $pid . '/songs')
+            ->seeInDatabase('songs',[
+                 'id' => $createdSong->id
+                 , 'name' => $songName
+                 , 'url' => $songUrl
+                 , 'playlist_id' => $pid
+                 , 'user_id' => $user->id 
+             ])
             ->press('delete-song-' . $song->id)
             ->seePageIs('/playlist/' . $pid . '/songs');
-
     }
+
 }
