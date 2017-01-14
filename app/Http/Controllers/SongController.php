@@ -67,6 +67,12 @@ class SongController extends Controller
         return redirect('/playlist/'. $playlist_id . '/songs');
     }
 
+    public function destroyMySong(Request $request, Song $song)
+    {
+        $song->delete();
+        return redirect('/my-songs');
+    }
+
     public function destroy(Request $request, Song $song)
     {
         $song->delete();

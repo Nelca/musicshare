@@ -23,6 +23,7 @@ class PlaylistController extends Controller
     {
         return view('playlists.index', [
                     'playlists' => $this->playlists->all(),
+                    'isMyPlaylistPage' => false,
                 ]);
     }
 
@@ -30,6 +31,7 @@ class PlaylistController extends Controller
     {
         return view('playlists.index', [
                     'playlists' => $this->playlists->forUser($request->user()),
+                    'isMyPlaylistPage' => true,
                 ]);
     }
 
@@ -43,14 +45,23 @@ class PlaylistController extends Controller
                 'name' => $request->name,
                 ]);
 
-        return redirect('/playlists');
+        if ($request->isMyPlaylistPage) {
+            return redirect('/my-playlists');
+        } else {
+            return redirect('/playlists');
+        }
     }
 
     public function destroy(Request $request, Playlist $playlist)
     {
         $playlist->delete();
 
-        return redirect('/playlists');
+        if ($request->isMyPlaylistPage) {
+            return redirect('/my-playlists');
+        } else {
+            return redirect('/playlists');
+        }
+        
     }
 
     public function update (Request $request, Playlist $playlist)

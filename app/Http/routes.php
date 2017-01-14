@@ -61,6 +61,7 @@ Route::group(['middleware' => 'auth'], function(){
 
     Route::post('/song', 'SongController@store');
     Route::delete('/song/{song}', 'SongController@destroy');
+    Route::delete('/my-songs', 'SongController@destroyMySong');
     Route::put('/song/{song}/like', 'SongController@like');
     Route::put('/song/{song}/unlike', 'SongController@unLike');
     Route::get('/my-songs', 'SongController@mySongs');

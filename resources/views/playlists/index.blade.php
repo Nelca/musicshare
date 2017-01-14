@@ -13,6 +13,7 @@
                     <!-- New Task Form -->
                     <form action="{{ url('playlist') }}" method="POST" class="form-horizontal">
                         {{ csrf_field() }}
+                        <input type="hidden" name="isMyPlaylistPage" value="{{$isMyPlaylistPage}}">
                         <!-- Playlist Name -->
                         <div class="form-group">
                             <label for="favorie-name" class="col-sm-3 control-label">Playlist</label>
@@ -88,8 +89,10 @@
 						    <div class="col-xs-12 col-md-3">
                                 @can('destroy', $playlist)
                                     <form action="{{url('playlist/' . $playlist->id)}}" method="POST">
+
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
+                                        <input type="hidden" name="isMyPlaylistPage" value="{{$isMyPlaylistPage}}">
                                         <button type="submit" id="delete-playlist-{{ $playlist->id }}" class="btn fa fa-btn fa-trash">
                                         </button>
                                     </form>
