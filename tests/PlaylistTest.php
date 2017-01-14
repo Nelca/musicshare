@@ -114,8 +114,7 @@ class PlaylistTest extends TestCase
             ->visit('/my-playlists')
             ->type($playlist->name, 'name')
             ->press('Add Playlist')
-            ->seePageIs('/playlists')
-            ->visit('my-playlists')
+            ->seePageIs('/my-playlists')
             ->see($playlist->name);
     }
 
