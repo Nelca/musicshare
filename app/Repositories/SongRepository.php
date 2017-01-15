@@ -24,13 +24,9 @@ class SongRepository
     public function forUser(User $user)
     {
         $user_id = $user->id;
-        $query = "SELECT s.*, p.name as playlist_name ";
-        $query .= " FROM songs as s";
-        $query .= " JOIN playlists as p ON s.playlist_id = p.id";
-        $query .= " WHERE p.user_id = ?";
-
-        $songs = DB::select($query, [$user_id]);
-
+        $songs = Song::where('songs.user_id', '=', $user_id)
+                    ->leftJoin( 'playlists', 'songs.playlist_id', '=', 'playlists.id' )
+                    ->get([ 'songs.*', 'playlists.name as playlist_name' ]);;
         return $songs;
     }
 
