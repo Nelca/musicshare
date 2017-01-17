@@ -54,7 +54,7 @@
     @if (count($youtube_datas) > 0)
         <div class="panel panel-default">
                 <div class="panel-heading">
-            youtube activity
+                    youtube activity
                 </div>
                 <div class="panel-body">
                     <table class="table table-striped song-table">
@@ -110,12 +110,16 @@
                                                 </form>
                                                 </div>
                                                 <div class="col-xs-12 col-md-6">
-                                                <form action="{{url('playlist/' . $playlist->id)}}" method="POST">
-                                                    {{ csrf_field() }}
-                                                    {{ method_field('DELETE') }}
-                                                    <button type="submit" id="delete-playlist-{{ $playlist->id }}" class="btn btn-warning fa fa-btn fa-trash">
-                                                    </button>
-                                                </form>
+                                                    <i class="fa fa-btn fa-music"></i>{{ count($playlist->songs)}} Songs
+                                                    
+                                                    @if (Auth::user()->id == $user->id)
+                                                        <form action="{{url('playlist/' . $playlist->id)}}" method="POST">
+                                                            {{ csrf_field() }}
+                                                            {{ method_field('DELETE') }}
+                                                            <button type="submit" id="delete-playlist-{{ $playlist->id }}" class="btn btn-warning fa fa-btn fa-trash">
+                                                            </button>
+                                                        </form>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </td>

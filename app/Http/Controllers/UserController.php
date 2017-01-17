@@ -26,7 +26,8 @@ class UserController extends Controller
         $youtube_activity_list = array();
         $login_user = Auth::user();
         if ($login_user && $login_user->oauth_token && $user->channel_id) {
-            $youtube_activity_list = $this->getYoutubeActivity($user, $login_user);
+            // ToDo modify view
+            //$youtube_activity_list = $this->users->getYoutubeActivity($user, $login_user);
         }
 
         return view('users.index', [

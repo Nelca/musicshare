@@ -43,15 +43,7 @@ class MyPageController extends Controller
     {
         $user = $request->user();
         $user_id = $user->id;
-        
         $songs = $this->mypageRepo->getLikedSongs($user_id);
-
-        $youtube_list = array();
-        if ($user->oauth_token) {
-            $youtube_list = $this->mypageRepo->getYoutubeLikeSongs($user);
-        }
-        $songs = array_merge($songs, $youtube_list);
-
         $playlists = $this->mypageRepo->getLikedPlaylists($user_id);
 
         return view('mypage.likes', [
