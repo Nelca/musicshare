@@ -50,10 +50,7 @@ class FollowTest extends TestCase
              ->seeInDatabase('follows',[
                  'user_id' => $user->id
                  , 'follow_user_id' => $followUserId
-             ])
-             ->visit('/user/' . $followUserId)
-             ->click('1 Follower')
-             ->see($user->name);
+             ]);
     }
 
 }
