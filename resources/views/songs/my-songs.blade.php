@@ -35,15 +35,12 @@
                                                     {{ csrf_field() }}
                                                     {{ method_field('PUT') }}
                                                     <button type="submit" id="like-song-{{ $song->id }}" class="btn fa fa-star"></button>
-                                                    <input type="hidden" name="playlist_id" value="{{ $song->playlist_id }}">
                                                 </form>
                                             @else
                                                 <form action="{{url('song/' . $song->id) . '/unlike'}}" method="POST">
                                                     {{ csrf_field() }}
                                                     {{ method_field('PUT') }}
-                                                    <button type="submit" id="like-song-{{ $song->id }}" class="btn btn-warning fa fa-star">
-                                                    </button>
-                                                    <input type="hidden" name="playlist_id" value="{{ $song->playlist_id }}">
+                                                    <button type="submit" id="like-song-{{ $song->id }}" class="btn btn-warning fa fa-star"></button>
                                                 </form>
                                             @endcan
                                         </td>

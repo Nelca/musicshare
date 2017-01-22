@@ -88,7 +88,12 @@ class SongController extends Controller
         if ($request->user()->oauth_token) {
             $this->songs->rateVideo($request->user(), $song, "like");
         }
-        return redirect('/playlist/'. $request->playlist_id . '/songs');
+ 
+        if ($request->playlist_id) {
+            return redirect('/playlist/'. $request->playlist_id . '/songs');
+        } else {
+            return redirect('/my-songs');
+        }
     }
 
     public function unLike(Request $request, Song $song)
@@ -105,7 +110,7 @@ class SongController extends Controller
         if ($request->playlist_id) {
             return redirect('/playlist/'. $request->playlist_id . '/songs');
         } else {
-            return redirect('/mypage');
+            return redirect('/my-songs');
         }
     }
 }

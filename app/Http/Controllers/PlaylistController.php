@@ -77,7 +77,12 @@ class PlaylistController extends Controller
         $like->user_id = $request->user()->id;
         $like->evaluation = 1;
         $playlist->evaluates()->save($like);
-        return redirect('/playlists');
+ 
+        if ($request->isMyPlaylistPage) {
+            return redirect('/my-playlists');
+        } else {
+            return redirect('/playlists');
+        }
     }
 
     public function unLike(Request $request, Playlist $playlist)
@@ -87,7 +92,12 @@ class PlaylistController extends Controller
                         ->where('evaluatable_id', $playlist->id)
                         ->get()->first();
         $like->delete();
-        return redirect('/playlists');
+  
+        if ($request->isMyPlaylistPage) {
+            return redirect('/my-playlists');
+        } else {
+            return redirect('/playlists');
+        }
     }
 
 }
