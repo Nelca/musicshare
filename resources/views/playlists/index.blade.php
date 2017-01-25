@@ -58,58 +58,50 @@
                                         </td>
                                         <!-- Playlist Buttons -->
                                         <td>
-					    <div class="row">
-						    <div class="col-xs-12 col-md-3">
-							<form action="{{url('playlist/' . $playlist->id . '/songs')}}" method="POST">
-							    {{ csrf_field() }}
-							    {{ method_field('GET') }}
-							    <button type="submit" id="view-playlist-songs-{{ $playlist->id }}" class="btn btn-primary">
-								<i class="fa fa-btn fa-music"></i>View Songs
-							    </button>
-							</form>
-						    </div>
-						    <div class="col-xs-12 col-md-3">
-                                @can('like', $playlist)
-                                    <form action="{{url('playlist/' . $playlist->id . '/like')}}" method="POST">
-                                        {{ csrf_field() }}
-                                        {{ method_field('PUT') }}
-                                        <input type="hidden" name="isMyPlaylistPage" value="{{$isMyPlaylistPage}}">
-                                        <button type="submit" id="like-playlist-{{ $playlist->id }}" class="btn fa fa-star"></button>
-                                    </form>
-                                @else
-                                    <form action="{{url('playlist/' . $playlist->id . '/unlike')}}" method="POST">
-                                        {{ csrf_field() }}
-                                        {{ method_field('PUT') }}
-                                        <input type="hidden" name="isMyPlaylistPage" value="{{$isMyPlaylistPage}}">
-                                        <button type="submit" id="liked-playlist-{{ $playlist->id }}" class="btn btn-warning fa fa-star"></button>
-                                    </form>
-                                @endcan
-						    </div>
-						    <div class="col-xs-12 col-md-3">
-                                <span>{{ count($playlist->evaluates) }}<span class="fa fa-star"></span></span>
-						    </div>
-						    <div class="col-xs-12 col-md-3">
-                                @can('destroy', $playlist)
-                                    <form action="{{url('playlist/' . $playlist->id)}}" method="POST">
+                                            <div class="row">
+                                                <div class="col-xs-12 col-md-3">
+                                                    <form action="{{url('playlist/' . $playlist->id . '/songs')}}" method="POST">
+                                                        {{ csrf_field() }}
+                                                        {{ method_field('GET') }}
+                                                        <button type="submit" id="view-playlist-songs-{{ $playlist->id }}" class="btn btn-primary">
+                                                        <i class="fa fa-btn fa-music"></i>View Songs
+                                                        </button>
+                                                    </form>
+                                                    <i class="fa fa-btn fa-music"></i>{{ count($playlist->songs)}} Songs
+                                                </div>
+                                                <div class="col-xs-12 col-md-3">
+                                                    @can('like', $playlist)
+                                                        <form action="{{url('playlist/' . $playlist->id . '/like')}}" method="POST">
+                                                            {{ csrf_field() }}
+                                                            {{ method_field('PUT') }}
+                                                            <input type="hidden" name="isMyPlaylistPage" value="{{$isMyPlaylistPage}}">
+                                                            <button type="submit" id="like-playlist-{{ $playlist->id }}" class="btn fa fa-star"></button>
+                                                        </form>
+                                                    @else
+                                                        <form action="{{url('playlist/' . $playlist->id . '/unlike')}}" method="POST">
+                                                            {{ csrf_field() }}
+                                                            {{ method_field('PUT') }}
+                                                            <input type="hidden" name="isMyPlaylistPage" value="{{$isMyPlaylistPage}}">
+                                                            <button type="submit" id="liked-playlist-{{ $playlist->id }}" class="btn btn-warning fa fa-star"></button>
+                                                        </form>
+                                                    @endcan
+                                                </div>
+                                                <div class="col-xs-12 col-md-3">
+                                                    <span>{{ count($playlist->evaluates) }}<span class="fa fa-star"></span></span>
+                                                </div>
+                                                <div class="col-xs-12 col-md-3">
+                                                    @can('destroy', $playlist)
+                                                        <form action="{{url('playlist/' . $playlist->id)}}" method="POST">
 
-                                        {{ csrf_field() }}
-                                        {{ method_field('DELETE') }}
-                                        <input type="hidden" name="isMyPlaylistPage" value="{{$isMyPlaylistPage}}">
-                                        <button type="submit" id="delete-playlist-{{ $playlist->id }}" class="btn fa fa-btn fa-trash">
-                                        </button>
-                                    </form>
-                                @endcan
-						    </div>
-						    <!--<div class="col-xs-12 col-md-6">
-							<form action="{{url('playlist/' . $playlist->id)}}" method="POST">
-							    {{ csrf_field() }}
-							    {{ method_field('PUT') }}
-							    <input type="text" name="name" placeholder="update list name">
-							    <button type="submit" id="update-playlist-{{ $playlist->id }}" class="btn fa fa-btn fa-pencil">
-							    </button>
-							</form>
-						    </div>-->
-					    </div>
+                                                            {{ csrf_field() }}
+                                                            {{ method_field('DELETE') }}
+                                                            <input type="hidden" name="isMyPlaylistPage" value="{{$isMyPlaylistPage}}">
+                                                            <button type="submit" id="delete-playlist-{{ $playlist->id }}" class="btn fa fa-btn fa-trash">
+                                                            </button>
+                                                        </form>
+                                                    @endcan
+                                                </div>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach
