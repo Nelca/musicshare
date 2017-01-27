@@ -10,10 +10,14 @@
                <div class="panel-body">
                     <div class="row">
                         <div class="col-xs-12 col-md-6">
-                            <a href="{{ url('user/' . $user->id . '/follow') }}">{{ count($follow) }}  Follow</a>
+                            <a href="{{ url('user/' . $user->id . '/follow') }}">
+                                <i class="fa fa-users" aria-hidden="true"></i>&nbsp;{{ count($follow) }}  Follow
+                            </a>
                         </div>
                         <div class="col-xs-12 col-md-6">
-                            <a href="{{ url('user/' . $user->id . '/follower') }}">{{ count($follower) }}  Follower</a>
+                            <a href="{{ url('user/' . $user->id . '/follower') }}">
+                                <i class="fa fa-users" aria-hidden="true"></i>&nbsp;{{ count($follower) }}  Follower
+                            </a>
                         </div>
                     </div>
                 </div>
