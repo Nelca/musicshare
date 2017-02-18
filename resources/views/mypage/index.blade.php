@@ -3,25 +3,7 @@
 @section('content')
     <div class="container">
         <div class="col-sm-offset-2 col-sm-8">
-            <div class="panel panel-default">
-               <div class="panel-heading">
-                   <i class="fa fa-users" aria-hidden="true"></i>Follow
-               </div>
-               <div class="panel-body">
-                    <div class="row">
-                        <div class="col-xs-12 col-md-6">
-                            <a href="{{ url('user/' . $user->id . '/follow') }}">
-                                <i class="fa fa-users" aria-hidden="true"></i>&nbsp;{{ count($follow) }}  Follow
-                            </a>
-                        </div>
-                        <div class="col-xs-12 col-md-6">
-                            <a href="{{ url('user/' . $user->id . '/follower') }}">
-                                <i class="fa fa-users" aria-hidden="true"></i>&nbsp;{{ count($follower) }}  Follower
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
             <!-- Current Song -->
             @if (count($songs) > 0)
                 <div class="panel panel-default">
