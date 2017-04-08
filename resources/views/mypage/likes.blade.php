@@ -67,7 +67,7 @@
                 </div>
                 <div class="panel-body">
                     @if (count($playlists) > 0)
-                        <div class="row panel-body">
+                        <div class="row panel-body pd_10px">
                             <div class="col-xs-12 col-md-5">
                                 Playlist
                             </div>
