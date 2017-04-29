@@ -87,7 +87,7 @@
                                                     @endcan
                                                 </div>
                                                 <div class="col-xs-12 col-md-3">
-                                                    <span>{{ count($playlist->evaluates) }}<span class="fa fa-star"></span></span>
+                                                    <span class="fa fa-star"></span><span>{{ count($playlist->evaluates) }}</span>likes
                                                 </div>
                                                 <div class="col-xs-12 col-md-3">
                                                     @can('destroy', $playlist)
