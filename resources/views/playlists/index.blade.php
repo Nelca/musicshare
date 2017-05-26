@@ -45,7 +45,7 @@
                             <thead>
                                 <th>Playlist</th>
                                 <th>Author</th>
-                                <th>&nbsp;</th>
+                                <th>Songs and Likes</th>
                             </thead>
                             <tbody>
                                 @foreach ($playlists as $playlist)
