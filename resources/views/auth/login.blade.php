@@ -59,7 +59,7 @@
                     </form>
                 </div>
                 <div class="panel panel-default">
-                    <div class="panel-heading">Create your account</div>
+                    <div class="panel-heading">Create your account!!</div>
                     <div class="panel-body">
                 <div class="col-md-8 col-md-offset-2">
                     <a type="button" class="btn btn-primary" href="{{ url('/register') }}">
