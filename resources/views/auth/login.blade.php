@@ -11,12 +11,6 @@
                 <a type="button" class="btn btn-primary" href="/auth/youtube">
                     <i class="fa fa-btn fa-youtube-square"></i>Youtube Login
                 </a>
-                <!--<a type="button" class="btn btn-primary" href="/auth/twitter">
-                    <i class="fa fa-btn fa-twitter-square"></i>Twitter Login
-                </a>
-                <a type="button" class="btn btn-primary" href="/auth/github">
-                    <i class="fa fa-btn fa-github-square"></i>Github Login
-                </a>-->
 		    </div>
 		</div>
                 <div class="panel-heading">Login</div>
@@ -63,6 +57,14 @@
                             </div>
                         </div>
                     </form>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">Create your account</div>
+                    <div class="panel-body">
+                <div class="col-md-8 col-md-offset-2">
+                    <a type="button" class="btn btn-primary" href="{{ url('/register') }}">
+                       Create Account 
+                    </a>
                 </div>
             </div>
         </div>
