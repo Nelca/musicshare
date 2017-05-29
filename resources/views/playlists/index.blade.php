@@ -64,10 +64,9 @@
                                                         {{ csrf_field() }}
                                                         {{ method_field('GET') }}
                                                         <button type="submit" id="view-playlist-songs-{{ $playlist->id }}" class="btn btn-primary">
-                                                        <i class="fa fa-btn fa-music"></i>View Songs
+                                                        <i class="fa fa-btn fa-music"></i>{{ count($playlist->songs)}} Songs
                                                         </button>
                                                     </form>
-                                                    <i class="fa fa-btn fa-music"></i>{{ count($playlist->songs)}} Songs
                                                 </div>
                                                 <div class="col-xs-12 col-md-3">
                                                     @can('like', $playlist)
