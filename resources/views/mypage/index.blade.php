@@ -13,23 +13,23 @@
                     <div class="panel-body">
                         <table class="table table-striped song-table">
                             <thead>
+                                <th>User</th>
                                 <th>サムネイル</th>
                                 <th>Song</th>
-                                <th>User</th>
                                 <th>Like</th>
                                 <th>Type</th>
                             </thead>
                             <tbody>
                                 @foreach ($songs as $song)
                                     <tr>
+                                        <td class="table-text">
+                                            <a class="fa fa-user" href="{{ url('/user/' . 1 ) }}" target="_blank">{{ $song->user_name }}</a>
+                                        </td>
                                         <td>
                                             <iframe width="120" height="90" src="https://www.youtube.com/embed/{{ $song->song_key }}" frameborder="0" allowfullscreen></iframe>
                                         </td>
                                         <td class="table-text">
                                             <a href="{{ $song->url }}" target="_blank">{{ $song->name }}</a>
-                                        </td>
-                                        <td class="table-text">
-                                            <a class="fa fa-user" href="{{ url('/user/' . 1 ) }}" target="_blank">{{ $song->user_name }}</a>
                                         </td>
                                         <!-- Song Like Button -->
                                         <td>
