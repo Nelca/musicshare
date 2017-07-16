@@ -30,6 +30,13 @@ class SongController extends Controller
                 ]);
     }
 
+    public function songList(Request $request)
+    {
+        return view('songs.list', [
+                'songs' => $this->songs->allSongs(),
+                ]);
+    }
+
     public function mySongs (Request $request)
     {
         return view('songs.my-songs', [

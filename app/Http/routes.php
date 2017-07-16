@@ -39,6 +39,7 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 Route::get('/playlists', 'PlaylistController@index');
 Route::get('/playlist/{playlist}/songs', 'SongController@index');
+Route::get('/songs', 'SongController@songList');
 Route::get('/users', 'UserController@userList');
 Route::get('/user/{user}', 'UserController@index');
 Route::get('/user/{user}/follow', 'UserController@follow');

@@ -21,6 +21,11 @@ class SongRepository
                     ->get();
     }
 
+    public function allSongs()
+    {
+        return Song::all()->take(5);
+    }
+
     public function forUser(User $user)
     {
         $user_id = $user->id;
